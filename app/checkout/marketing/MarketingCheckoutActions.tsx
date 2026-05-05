@@ -91,7 +91,11 @@ export default function MarketingCheckoutActions({
       }
       setResult(payload.data);
       toast.success(payload.data.message);
-      if (payload.data.nextUrl) window.location.href = payload.data.nextUrl;
+      if (payload.data.nextUrl) {
+        window.setTimeout(() => {
+          window.location.href = payload.data?.nextUrl ?? "/seller/onboarding";
+        }, 1200);
+      }
     } catch {
       setError("Unable to start checkout. Please try again.");
     } finally {
@@ -160,6 +164,7 @@ export default function MarketingCheckoutActions({
           <p className="font-semibold">{packageName} order reserved</p>
           <p>{result.message}</p>
           {result.reference && <p className="metric-numeral mt-2">Reference: {result.reference}</p>}
+          {result.nextUrl && <p className="mt-2 font-semibold">Redirecting to the AI audit so the listing gate can be completed.</p>}
           {method === "bank_transfer" && (
             <div className="mt-3 border-t border-[rgba(45,74,62,0.16)] pt-3">
               <p className="font-semibold">Manual payment instruction</p>

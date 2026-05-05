@@ -10,6 +10,21 @@ const packages = {
 
 const paymentMethods = new Set(["stripe", "bank_transfer", "jazzcash", "easypaisa"]);
 
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 56);
+}
+
+function clusterFromCity(city: string | null | undefined) {
+  const normalized = String(city ?? "").trim().toLowerCase();
+  if (["sialkot", "faisalabad", "lahore", "karachi", "gujranwala"].includes(normalized)) return normalized;
+  return "other";
+}
+
 export async function POST(request: Request) {
   try {
     const body = await readJson<Record<string, unknown>>(request);
@@ -33,9 +48,9 @@ export async function POST(request: Request) {
 
     const reference = `ORIGINO-${packageKey.toUpperCase()}-${Date.now().toString().slice(-6)}`;
     const selectedPackage = packages[packageKey as keyof typeof packages];
-    const { data: application } = await supabase
+    const { data: application } = await adminSupabase
       .from("applications")
-      .select("id, admin_notes")
+      .select("id, company_name, city, product_category, admin_notes")
       .eq("profile_id", auth.user.id)
       .order("submitted_at", { ascending: false })
       .limit(1)
@@ -53,12 +68,56 @@ export async function POST(request: Request) {
       if (applicationUpdateError) return fail(applicationUpdateError.message, 500);
     }
 
-    const { data: supplier, error: supplierError } = await adminSupabase
+    let { data: supplier, error: supplierError } = await adminSupabase
       .from("suppliers")
       .select("id")
       .eq("profile_id", auth.user.id)
       .maybeSingle();
     if (supplierError) return fail(supplierError.message, 500);
+
+    if (!supplier?.id) {
+      if (!application?.id) {
+        return fail("Complete seller registration or audit setup before reserving a marketing package.", 409);
+      }
+
+      const baseSlug = slugify(application.company_name || profile.full_name || profile.email || "seller");
+      const slug = `${baseSlug || "seller"}-${auth.user.id.slice(0, 8)}`;
+      const { data: createdSupplier, error: createSupplierError } = await adminSupabase
+        .from("suppliers")
+        .insert({
+          profile_id: auth.user.id,
+          company_name: application.company_name || profile.full_name || "Pending supplier",
+          company_name_ur: null,
+          slug,
+          description: "Pending ORIGINO audit and admin approval before public marketplace visibility.",
+          description_ur: null,
+          city: application.city || "Pakistan",
+          cluster: clusterFromCity(application.city),
+          category: application.product_category || "General Trade",
+          sub_categories: [],
+          verification_tier: "unverified",
+          audit_score: null,
+          established_year: null,
+          employee_count: null,
+          export_countries: [],
+          certifications: [],
+          hero_image_url: null,
+          logo_url: null,
+          video_url: null,
+          moq_usd: null,
+          lead_time_days: null,
+          payment_terms: [],
+          response_rate: 0,
+          response_time_hours: null,
+          health_score: 0,
+          is_active: false,
+          is_featured: false,
+        })
+        .select("id")
+        .single();
+      if (createSupplierError) return fail(createSupplierError.message, 500);
+      supplier = createdSupplier;
+    }
 
     if (supplier?.id) {
       const paidAt = paymentMethod === "bank_transfer" ? null : null;
@@ -66,22 +125,22 @@ export async function POST(request: Request) {
       const { data: marketingOrder, error: marketingOrderError } = await adminSupabase
         .from("marketing_service_orders")
         .insert({
-        supplier_id: supplier.id,
-        tier: packageKey as "basic" | "growth" | "premium",
-        price_usd: selectedPackage.priceUsd,
-        status: "pending",
-        payment_method: paymentMethod as "stripe" | "jazzcash" | "easypaisa" | "bank_transfer",
-        local_payment_reference: reference,
-        paid_at: paidAt,
-        sla_due_at: slaDueAt,
-        sla_status: "on_track",
-        assigned_to: null,
-        delay_notes:
-          paymentMethod === "bank_transfer"
-            ? "Awaiting manual bank transfer confirmation."
-            : "Provider route reserved; activate live checkout after merchant approval.",
-        starts_at: null,
-        expires_at: null,
+          supplier_id: supplier.id,
+          tier: packageKey as "basic" | "growth" | "premium",
+          price_usd: selectedPackage.priceUsd,
+          status: "pending",
+          payment_method: paymentMethod as "stripe" | "jazzcash" | "easypaisa" | "bank_transfer",
+          local_payment_reference: reference,
+          paid_at: paidAt,
+          sla_due_at: slaDueAt,
+          sla_status: "on_track",
+          assigned_to: null,
+          delay_notes:
+            paymentMethod === "bank_transfer"
+              ? "Awaiting manual bank transfer confirmation."
+              : "Provider route reserved; activate live checkout after merchant approval.",
+          starts_at: null,
+          expires_at: null,
         })
         .select("id")
         .single();
@@ -109,6 +168,7 @@ export async function POST(request: Request) {
         status: "provider_pending",
         reference,
         message: "Stripe checkout is ready in the flow, but live provider keys are parked until approval is complete.",
+        nextUrl: `/seller/onboarding?package=${packageKey}&checkout=reserved&reference=${encodeURIComponent(reference)}`,
       });
     }
 
@@ -119,6 +179,7 @@ export async function POST(request: Request) {
         status: "provider_pending",
         reference,
         message: `${paymentMethod === "jazzcash" ? "JazzCash" : "EasyPaisa"} checkout is reserved. Live wallet submission will activate after merchant approval.`,
+        nextUrl: `/seller/onboarding?package=${packageKey}&checkout=reserved&reference=${encodeURIComponent(reference)}`,
       });
     }
 
@@ -128,6 +189,7 @@ export async function POST(request: Request) {
       status: "pending_manual_confirmation",
       reference,
       message: "Bank transfer reference created. ORIGINO admin can confirm payment and start the marketing order.",
+      nextUrl: `/seller/onboarding?package=${packageKey}&checkout=reserved&reference=${encodeURIComponent(reference)}`,
     }, 201);
   } catch {
     return fail("Unable to prepare marketing checkout", 500);
