@@ -176,13 +176,13 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/marketplace">{t.browseMarketplace}</Link>
-              <Link className="btn-pill min-h-[52px] border-[rgba(36,34,31,0.22)] bg-white/32 px-8 text-[var(--ink)] backdrop-blur-md hover:border-[var(--ink)]" href="/register?role=seller&redirect=/seller/onboarding">{t.listCompany}</Link>
+              <Link className="btn-pill min-h-[52px] border-[rgba(36,34,31,0.22)] bg-white/55 px-8 text-[var(--ink)] backdrop-blur-sm hover:border-[var(--ink)]" href="/audit">{t.auditCta}</Link>
             </div>
           </div>
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-3 blur-in [animation-delay:180ms]">
-            <div className="rounded-[999px] border border-white/55 bg-white/36 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.10)] backdrop-blur-lg"><p className="metric-numeral text-2xl text-[var(--ink)]">{certified}</p><p className="text-sm text-[#24221f]/60">{t.verified}</p></div>
-            <div className="rounded-[999px] border border-white/55 bg-white/36 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.10)] backdrop-blur-lg"><p className="metric-numeral text-2xl text-[var(--ink)]">5h</p><p className="text-sm text-[#24221f]/60">{t.fastestReply}</p></div>
-            <div className="rounded-[999px] border border-white/55 bg-white/36 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.10)] backdrop-blur-lg"><p className="metric-numeral text-2xl text-[var(--ink)]">GSP+</p><p className="text-sm text-[#24221f]/60">{t.euReady}</p></div>
+            <div className="rounded-[999px] border border-white/55 bg-white/50 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.08)] backdrop-blur-sm"><p className="metric-numeral text-2xl text-[var(--ink)]">{certified}</p><p className="text-sm text-[#24221f]/60">{t.verified}</p></div>
+            <div className="rounded-[999px] border border-white/55 bg-white/50 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.08)] backdrop-blur-sm"><p className="metric-numeral text-2xl text-[var(--ink)]">5h</p><p className="text-sm text-[#24221f]/60">{t.fastestReply}</p></div>
+            <div className="rounded-[999px] border border-white/55 bg-white/50 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.08)] backdrop-blur-sm"><p className="metric-numeral text-2xl text-[var(--ink)]">GSP+</p><p className="text-sm text-[#24221f]/60">{t.euReady}</p></div>
           </div>
           <div className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-[var(--ink)]/70 md:flex">
             <span>Scroll</span>
@@ -294,7 +294,10 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
             <p className="metric-numeral">60-79 / {t.conditional}</p>
             <p className="metric-numeral">0-59 / {t.roadmap}</p>
           </div>
-          <Link className="btn-pill btn-pill-forest mt-6 inline-flex min-h-[44px] items-center" href="/register?role=seller&redirect=/seller/onboarding">{t.auditCta}</Link>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link className="btn-pill btn-pill-forest inline-flex min-h-[44px] items-center" href="/audit">{t.auditCta}</Link>
+            <Link className="btn-pill btn-pill-outline inline-flex min-h-[44px] items-center" href="/marketing-packages">View Marketing Packages</Link>
+          </div>
         </div>
         <div className="panel-soft p-6 hover-lift">
           <p className="badge-patch mb-3">{sectionText(rfq, eyebrowKey, "Buyer Sourcing")}</p>
@@ -303,6 +306,34 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
           <div className="mt-6 flex flex-wrap gap-3">
             <Link className="btn-pill btn-pill-forest min-h-[44px]" href="/register?role=buyer&redirect=/buyer/rfq/new">{t.rfqCta}</Link>
             <Link className="btn-pill btn-pill-outline min-h-[44px]" href="/compare">{t.compareCta}</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="container-editorial pb-14">
+        <div className="panel-soft grid gap-8 p-6 md:grid-cols-[1fr_0.95fr] md:p-8">
+          <div>
+            <p className="badge-patch tier-certified mb-4">Seller Packages</p>
+            <h2 className="text-3xl md:text-4xl">Export-readiness services sellers can buy</h2>
+            <p className="mt-4 text-[#5a5a54]">
+              Basic, Growth, and Premium are ORIGINO's paid seller products: brand audit, logo work, photography, catalog and website assets, social setup, and buyer-network campaigns after the audit gate.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {[
+              ["Basic", "$299", "3 weeks"],
+              ["Growth", "$799", "6 weeks"],
+              ["Premium", "$1,999", "10 weeks"],
+            ].map(([name, price, delivery]) => (
+              <Link className="dashboard-card p-5 hover-lift" href="/marketing-packages" key={name}>
+                <p className="text-xs uppercase tracking-[0.16em] text-[#8a8178]">{name}</p>
+                <p className="metric-numeral mt-3 text-3xl">{price}</p>
+                <p className="mt-1 text-sm text-[#5a5a54]">{delivery}</p>
+              </Link>
+            ))}
+          </div>
+          <div className="md:col-span-2">
+            <Link className="btn-pill btn-pill-forest min-h-[44px]" href="/marketing-packages">View Marketing Packages</Link>
           </div>
         </div>
       </section>

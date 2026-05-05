@@ -61,13 +61,13 @@ export default function MarketingPackagesPage() {
       <section className="container-editorial pb-16">
         <div className="max-w-3xl">
           <p className="badge-patch tier-certified mb-5">Seller Growth Services</p>
-          <h1 className="text-5xl md:text-7xl">Marketing Packages</h1>
+          <h1 className="text-5xl md:text-7xl">Turn your factory into a buyer-ready export brand.</h1>
           <p className="mt-5 text-lg leading-8 text-[#5a5a54]">
-            Basic, Growth, and Premium packages help Pakistani manufacturers become export-ready after the ORIGINO audit identifies their approval path.
+            Basic, Growth, and Premium are the main paid services for Pakistani manufacturers who need export-grade branding, photography, catalogues, websites, and buyer-introduction support. The audit still protects marketplace quality; these packages make the seller ready to pass it.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="btn-pill btn-pill-forest min-h-[44px]" href="/register?role=seller&redirect=/seller/onboarding">
-              Start AI Audit
+            <Link className="btn-pill btn-pill-forest min-h-[44px]" href="/audit">
+              Start AI Audit First
             </Link>
             <Link className="btn-pill btn-pill-outline min-h-[44px]" href="/login?redirect=/seller/marketing">
               Seller Sign In
@@ -77,7 +77,7 @@ export default function MarketingPackagesPage() {
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {packages.map((tier) => (
-            <article className={`dashboard-card flex flex-col p-6 ${tier.featured ? "border-[#2d4a3e] bg-[#e8f0ec]" : ""}`} key={tier.name}>
+            <article id={tier.name.toLowerCase()} className={`dashboard-card flex flex-col p-6 ${tier.featured ? "border-[#2d4a3e] bg-[#e8f0ec]" : ""}`} key={tier.name}>
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h2 className="text-3xl">{tier.name}</h2>
@@ -96,7 +96,7 @@ export default function MarketingPackagesPage() {
                 className="btn-pill btn-pill-forest mt-6 min-h-[44px] justify-center"
                 href={`/register?role=seller&package=${tier.name.toLowerCase()}&redirect=${encodeURIComponent(`/checkout/marketing?package=${tier.name.toLowerCase()}`)}`}
               >
-                Buy {tier.name}
+                Buy {tier.name} Package
               </Link>
             </article>
           ))}

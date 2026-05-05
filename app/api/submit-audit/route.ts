@@ -1,12 +1,25 @@
 import { created, fail, readJson } from "@/lib/api-response";
 import { runAudit } from "@/lib/audit-engine";
 import { createSupabaseServiceClient } from "@/lib/supabase";
+import { createSupabaseServerClient } from "@/lib/supabase-server";
 
 function textValue(data: Record<string, unknown>, keys: string[], fallback: string | null = null) {
   for (const key of keys) {
     const value = data[key];
     if (typeof value === "string" && value.trim()) return value.trim();
     if (typeof value === "number") return String(value);
+  }
+  return fallback;
+}
+
+function listTextValue(data: Record<string, unknown>, keys: string[], fallback: string | null = null) {
+  for (const key of keys) {
+    const value = data[key];
+    if (Array.isArray(value)) {
+      const items = value.filter((item): item is string => typeof item === "string" && item.trim().length > 0).map((item) => item.trim());
+      if (items.length) return items.join(", ");
+    }
+    if (typeof value === "string" && value.trim()) return value.trim();
   }
   return fallback;
 }
@@ -33,11 +46,22 @@ export async function POST(request: Request) {
 
     const result = await runAudit(data);
     const recordId = `audit-${Date.now()}`;
+    let profileId = typeof data.profileId === "string" && data.profileId ? data.profileId : null;
 
-    if (process.env.NEXT_PUBLIC_USE_MOCK_DATA === "false" && typeof data.profileId === "string" && data.profileId) {
+    if (!profileId && process.env.NEXT_PUBLIC_USE_MOCK_DATA === "false") {
+      try {
+        const supabase = createSupabaseServerClient();
+        const { data: auth } = await supabase.auth.getUser();
+        profileId = auth.user?.id ?? null;
+      } catch {
+        profileId = null;
+      }
+    }
+
+    if (process.env.NEXT_PUBLIC_USE_MOCK_DATA === "false" && profileId) {
       const supabase = createSupabaseServiceClient();
-      await supabase.from("applications").insert({
-        profile_id: data.profileId,
+      const { error } = await supabase.from("applications").insert({
+        profile_id: profileId,
         full_name: textValue(data, ["fullName", "name", "ownerName"]),
         email: textValue(data, ["email"]),
         phone: textValue(data, ["phone"]),
@@ -47,15 +71,15 @@ export async function POST(request: Request) {
         product_category: textValue(data, ["category", "productCategory"]),
         years_in_business: numberValue(data, ["yearsInBusiness", "years"]),
         product_description: textValue(data, ["productDescription", "description"]),
-        certifications: textValue(data, ["certifications"]),
+        certifications: listTextValue(data, ["certifications"]),
         has_exported: boolValue(data, ["hasExported"]),
-        export_countries: textValue(data, ["exportCountries"]),
+        export_countries: listTextValue(data, ["exportCountries"]),
         has_logo: boolValue(data, ["hasLogo"]),
         has_website: boolValue(data, ["website", "hasWebsite"]),
         has_social: boolValue(data, ["hasSocial", "instagram", "linkedin"]),
         has_photography: boolValue(data, ["hasPhotography"]),
         has_packaging: boolValue(data, ["hasPackaging"]),
-        target_markets: textValue(data, ["targetMarkets", "targetMarket"]),
+        target_markets: listTextValue(data, ["targetMarkets", "targetMarket"]),
         production_capacity: textValue(data, ["capacity", "productionCapacity"]),
         hs_code: textValue(data, ["hsCode"]),
         status: result.status === "not_ready" ? "more_info" : result.status === "conditional" ? "reviewing" : "approved",
@@ -70,6 +94,7 @@ export async function POST(request: Request) {
         sanctions_checked_at: null,
         reviewed_at: null,
       });
+      if (error) return fail(error.message, 500);
     }
 
     return created({

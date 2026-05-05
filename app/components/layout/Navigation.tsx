@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/marketplace", labelKey: "nav.marketplace" },
   { href: "/clusters", labelKey: "nav.clusters" },
   { href: "/compare", labelKey: "nav.compare" },
+  { href: "/audit", labelKey: "nav.audit" },
   { href: "/marketing-packages", labelKey: "nav.packages" },
   {
     labelKey: "nav.resources",
@@ -47,7 +48,7 @@ export default function Navigation() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
-      <div className="glass relative mx-auto flex h-[70px] w-full max-w-[1280px] items-center justify-between rounded-[18px] px-5 md:px-8">
+      <div className="glass relative mx-auto flex h-[68px] w-full max-w-[1280px] items-center justify-between rounded-[18px] px-5 md:px-8">
         <nav className="hidden max-w-[42%] items-center gap-1 md:flex">
           {leftNavLinks.map((link) => link.children ? (
             <div className="relative" key={link.labelKey} ref={menuRef} onMouseEnter={() => setDropdown(true)}>
