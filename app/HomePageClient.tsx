@@ -18,14 +18,6 @@ type HomePageClientProps = {
 const HERO_IMAGE =
   "https://images.pexels.com/photos/28806603/pexels-photo-28806603.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
-const CLUSTER_IMAGE_FALLBACKS: Record<string, string> = {
-  sialkot: "https://images.pexels.com/photos/27383631/pexels-photo-27383631.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  faisalabad: "https://images.pexels.com/photos/3738088/pexels-photo-3738088.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  lahore: "https://images.pexels.com/photos/1094767/pexels-photo-1094767.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  karachi: "https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  gujranwala: "https://images.pexels.com/photos/18469652/pexels-photo-18469652.jpeg?auto=compress&cs=tinysrgb&w=1200",
-};
-
 const copy = {
   en: {
     browseMarketplace: "Browse Marketplace",
@@ -135,16 +127,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
   const activeSuppliers = effectiveSuppliers.filter((supplier) => supplier.is_active);
   const certified = activeSuppliers.filter((supplier) => supplier.verification_tier === "origino_certified" || supplier.verification_tier === "site_visited").length;
   const featured = activeSuppliers.filter((supplier) => supplier.is_featured).slice(0, 3);
-  const clusterImages = clusters.reduce<Record<string, string>>((acc, cluster) => {
-    acc[cluster.slug] =
-      activeSuppliers.find((supplier) => supplier.cluster === cluster.slug)?.hero_image_url ||
-      products.find((product) => activeSuppliers.some((supplier) => supplier.id === product.supplier_id && supplier.cluster === cluster.slug))?.images?.[0] ||
-      CLUSTER_IMAGE_FALLBACKS[cluster.slug] ||
-      HERO_IMAGE;
-    return acc;
-  }, {});
   const hero = getSection(pageSections, "hero");
-  const clusterSection = getSection(pageSections, "clusters");
   const featuredSection = getSection(pageSections, "featured_suppliers");
   const audit = getSection(pageSections, "audit");
   const waitlist = getSection(pageSections, "waitlist");
@@ -210,28 +193,18 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         </div>
       </section>
 
-      <section className="container-editorial py-20">
-        <div className="mb-10 flex items-end justify-between gap-4">
-          <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#4f5b3a]">Manufacturing Hubs</p>
-            <h2 className="text-4xl md:text-5xl">{sectionText(clusterSection, titleKey, "Manufacturing Clusters")}</h2>
+      <section className="container-editorial py-12">
+        <div className="panel-soft flex flex-col gap-5 px-6 py-6 md:flex-row md:items-center md:justify-between md:px-8">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#6c7652]">Source by region</p>
+            <p className="mt-2 text-lg leading-8 text-[#5f5a53]">
+              Filter suppliers by Sialkot, Faisalabad, Lahore, Karachi, or Gujranwala inside the marketplace.
+            </p>
           </div>
-          <Link className="hidden items-center gap-2 text-sm font-semibold text-[#4f5b3a] transition hover:text-[#2a3320] sm:inline-flex" href="/clusters">{t.viewAll}</Link>
-        </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {clusters.map((cluster) => (
-            <Link key={cluster.slug} href={`/clusters/${cluster.slug}`} className="group relative block overflow-hidden rounded-[28px] hover-lift">
-              <div className="aspect-[3/4] overflow-hidden rounded-[28px]">
-                <img className="img-zoom h-full w-full object-cover" src={clusterImages[cluster.slug]} alt={`${cluster.city} manufacturing cluster`} />
-              </div>
-              <div className="absolute inset-0 rounded-[28px] bg-[linear-gradient(to_top,rgba(26,26,26,0.78),rgba(26,26,26,0.22),rgba(26,26,26,0.05))]" />
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#d8cfc4]">{cluster.primaryCategories[0]}</p>
-                <h3 className="text-2xl text-white">{cluster.city}</h3>
-                <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/70">{cluster.tagline}</p>
-              </div>
-            </Link>
-          ))}
+          <div className="flex flex-wrap gap-3">
+            <Link className="btn-pill btn-pill-forest min-h-[48px]" href="/marketplace">Open Marketplace</Link>
+            <Link className="btn-pill btn-pill-outline min-h-[48px]" href="/clusters">{t.viewAll} Clusters</Link>
+          </div>
         </div>
       </section>
 
