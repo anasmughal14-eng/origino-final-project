@@ -8,7 +8,6 @@ import { useLanguage } from "@/app/components/shared/LanguageProvider";
 
 const navLinks = [
   { href: "/marketplace", labelKey: "nav.marketplace" },
-  { href: "/clusters", labelKey: "nav.clusters" },
   { href: "/compare", labelKey: "nav.compare" },
   { href: "/audit", labelKey: "nav.audit" },
   { href: "/marketing-packages", labelKey: "nav.packages" },

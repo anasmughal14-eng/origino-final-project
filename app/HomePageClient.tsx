@@ -155,8 +155,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
               {sectionText(hero, descriptionKey, "ORIGINO connects global buyers with export-ready suppliers across Pakistan.")}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/marketplace">{t.browseMarketplace}</Link>
-              <Link className="btn-pill min-h-[52px] border-[rgba(36,34,31,0.22)] bg-white/55 px-8 text-[var(--ink)] backdrop-blur-sm hover:border-[var(--ink)]" href="/audit">{t.auditCta}</Link>
+              <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/audit">{t.auditCta}</Link>
             </div>
           </div>
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-3 blur-in [animation-delay:180ms]">
@@ -190,21 +189,6 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
           <div><div className="metric-numeral text-3xl">{products.length}</div><p className="text-sm text-[#5a5a54]">{t.products}</p></div>
           <div><div className="metric-numeral text-3xl">{certified}</div><p className="text-sm text-[#5a5a54]">{t.verifiedLeaders}</p></div>
           <div><div className="metric-numeral text-3xl">{clusters.length}</div><p className="text-sm text-[#5a5a54]">{t.cityClusters}</p></div>
-        </div>
-      </section>
-
-      <section className="container-editorial py-12">
-        <div className="panel-soft flex flex-col gap-5 px-6 py-6 md:flex-row md:items-center md:justify-between md:px-8">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#6c7652]">Source by region</p>
-            <p className="mt-2 text-lg leading-8 text-[#5f5a53]">
-              Filter suppliers by Sialkot, Faisalabad, Lahore, Karachi, or Gujranwala inside the marketplace.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link className="btn-pill btn-pill-forest min-h-[48px]" href="/marketplace">Open Marketplace</Link>
-            <Link className="btn-pill btn-pill-outline min-h-[48px]" href="/clusters">{t.viewAll} Clusters</Link>
-          </div>
         </div>
       </section>
 
