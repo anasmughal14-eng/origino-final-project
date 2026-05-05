@@ -35,6 +35,8 @@ export default function Navigation() {
   const { lang, setLang, t } = useLanguage();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
+  const [mobileToolsOpen, setMobileToolsOpen] = useState(false);
+  const [mobileLanguageOpen, setMobileLanguageOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -106,7 +108,17 @@ export default function Navigation() {
           <Link className="btn-pill btn-pill-forest min-h-[44px] min-w-[94px] whitespace-nowrap px-5 py-2 text-xs" href="/login">{t("nav.signIn")}</Link>
         </div>
         {!mobileOpen && (
-          <button className="ml-auto flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl text-[#6b6560] md:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu"><Menu /></button>
+          <button
+            className="ml-auto flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl text-[#6b6560] md:hidden"
+            onClick={() => {
+              setMobileToolsOpen(false);
+              setMobileLanguageOpen(false);
+              setMobileOpen(true);
+            }}
+            aria-label="Open menu"
+          >
+            <Menu />
+          </button>
         )}
         {mobileOpen && (
           <div className="md:hidden">
@@ -131,16 +143,45 @@ export default function Navigation() {
                 </Link>
               ))}
             </nav>
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              {mobileResourceLinks.map((link) => (
-                <Link className="rounded-full border border-[rgba(36,34,31,0.12)] bg-white/25 px-3 py-2 text-xs uppercase tracking-[0.12em] text-[#5d564f]" key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
-                  {t(link.labelKey)}
-                </Link>
-              ))}
+            <div className="mt-4 border-t border-[rgba(36,34,31,0.1)] pt-3">
+              <button
+                className="nav-link flex min-h-[44px] w-full items-center justify-between rounded-xl px-3 py-2 text-[#4d4944] hover:bg-white/35"
+                onClick={() => setMobileToolsOpen((value) => !value)}
+                aria-expanded={mobileToolsOpen}
+              >
+                {t("nav.tools")}
+                <ChevronDown className={`transition-transform ${mobileToolsOpen ? "rotate-180" : ""}`} size={15} />
+              </button>
+              {mobileToolsOpen && (
+                <div className="mt-2 grid gap-1 rounded-[22px] border border-white/45 bg-white/22 p-2 backdrop-blur-xl">
+                  {mobileResourceLinks.map((link) => (
+                    <Link
+                      className="nav-link min-h-[42px] rounded-xl px-3 py-2 text-[#5d564f] hover:bg-white/35"
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {t(link.labelKey)}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              <button className="btn-pill btn-pill-outline min-h-[44px] bg-white/20" onClick={() => setLang("en")} aria-pressed={lang === "en"}>EN</button>
-              <button className="btn-pill btn-pill-outline min-h-[44px] bg-white/20" onClick={() => setLang("ur")} aria-pressed={lang === "ur"}>{t("lang.urdu")}</button>
+            <div className="mt-2">
+              <button
+                className="nav-link flex min-h-[44px] w-full items-center justify-between rounded-xl px-3 py-2 text-[#4d4944] hover:bg-white/35"
+                onClick={() => setMobileLanguageOpen((value) => !value)}
+                aria-expanded={mobileLanguageOpen}
+              >
+                {t("nav.languageSelection")}
+                <span className="text-xs normal-case tracking-normal text-[#6d675f]">{lang === "ur" ? t("lang.urdu") : "EN"}</span>
+              </button>
+              {mobileLanguageOpen && (
+                <div className="mt-2 grid grid-cols-2 gap-2 rounded-[22px] border border-white/45 bg-white/22 p-2 backdrop-blur-xl">
+                  <button className="btn-pill btn-pill-outline min-h-[44px] bg-white/20" onClick={() => setLang("en")} aria-pressed={lang === "en"}>EN</button>
+                  <button className="btn-pill btn-pill-outline min-h-[44px] bg-white/20" onClick={() => setLang("ur")} aria-pressed={lang === "ur"}>{t("lang.urdu")}</button>
+                </div>
+              )}
             </div>
           </div>
         )}

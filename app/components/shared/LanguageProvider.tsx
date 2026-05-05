@@ -27,6 +27,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.journal": "Journal",
     "nav.awards": "Awards",
     "nav.signIn": "Sign In",
+    "nav.languageSelection": "Language selection",
     "lang.urdu": "اردو",
     "footer.tagline": "Curated Pakistani Manufacturing",
     "footer.body": "Good work exists here. ORIGINO gives it a clearer way to be seen.",
