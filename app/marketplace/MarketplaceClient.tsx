@@ -76,20 +76,20 @@ export default function MarketplaceClient({ suppliers, initialFilters = {} }: { 
     <div className="container-editorial pb-16 pt-36">
       <div className="flex flex-col gap-4 border-b border-[rgba(26,26,24,0.12)] pb-8 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="badge-patch mb-4">Faceted Search</p>
+          <p className="badge-patch mb-4">Selected manufacturers</p>
           <h1 className="text-5xl">Marketplace</h1>
-          <p className="mt-3 max-w-2xl text-[#5a5a54]">Filter export-ready Pakistani suppliers by cluster, category, verification, MOQ, and certification evidence.</p>
+          <p className="mt-3 max-w-2xl text-[#5a5a54]">A shorter list of Pakistani manufacturers, filtered by evidence, category, city, MOQ, and certification.</p>
         </div>
         <div className="text-start md:text-end">
           <p className="metric-numeral text-4xl">{filtered.length}</p>
-          <p className="text-sm text-[#5a5a54]">matching suppliers</p>
+          <p className="text-sm text-[#5a5a54]">shown</p>
         </div>
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[300px_1fr]">
         <aside className="marketplace-filters panel-soft relative z-10 h-max space-y-4 p-5 lg:sticky lg:top-28">
           <label className="block text-xs uppercase tracking-[0.16em] text-[#8a8a82]">Search</label>
-          <input className="input-editorial min-h-[44px] bg-[#fdfbf8]" placeholder="Search suppliers" value={query} onChange={(event) => { setQuery(event.target.value); setVisible(pageSize); }} />
+          <input className="input-editorial min-h-[44px] bg-[#fdfbf8]" placeholder="Search by work, city, or evidence" value={query} onChange={(event) => { setQuery(event.target.value); setVisible(pageSize); }} />
 
           <label className="block text-xs uppercase tracking-[0.16em] text-[#8a8a82]">Category</label>
           <select className="input-editorial min-h-[44px] bg-[#fdfbf8]" value={category} onChange={(event) => updateFilter(setCategory, event.target.value)}>{categories.map((item) => <option key={item}>{item}</option>)}</select>
@@ -113,7 +113,7 @@ export default function MarketplaceClient({ suppliers, initialFilters = {} }: { 
         </aside>
 
         <section>
-          {shown.length === 0 && <div className="panel-soft p-8 text-center">No suppliers match these filters.</div>}
+          {shown.length === 0 && <div className="panel-soft p-8 text-center">Nothing considered fits these filters yet.</div>}
           <div className="space-y-4">
             {shown.map((supplier) => (
               <Link key={supplier.id} href={`/suppliers/${supplier.slug}`} className="group grid overflow-hidden rounded-[28px] border border-[rgba(26,26,24,0.09)] bg-[#fdfbf8] shadow-[0_18px_70px_rgba(0,0,0,0.04)] transition hover:-translate-y-1 hover:border-[rgba(79,91,58,0.32)] hover:shadow-[0_20px_70px_rgba(0,0,0,0.08)] md:grid-cols-[240px_1fr]">

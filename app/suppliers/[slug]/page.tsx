@@ -36,8 +36,8 @@ export default async function SupplierPage({ params }: { params: { slug: string 
         <section>
           <div className="border-b border-[rgba(26,26,24,0.12)] pb-8">
             <p className="badge-patch">{supplier.city} / {supplier.category}</p>
-            <h2 className="mt-5 text-4xl">Factory Evidence</h2>
-            <p className="mt-4 text-lg leading-8 text-[#5a5a54]">Verified export readiness for buyers sourcing from Pakistan, with profile evidence ready for Supabase document vault records.</p>
+            <h2 className="mt-5 text-4xl">Evidence</h2>
+            <p className="mt-4 text-lg leading-8 text-[#5a5a54]">Documents, response behaviour, audit score, and trade terms in one place.</p>
             <div className="mt-6 flex flex-wrap gap-2">{supplier.certifications.map((cert) => <span className="badge-patch" key={cert}>{cert}</span>)}</div>
           </div>
           <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -49,7 +49,7 @@ export default async function SupplierPage({ params }: { params: { slug: string 
 
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             <div className="border border-[rgba(26,26,24,0.14)] p-5">
-              <h2 className="text-2xl">Export Readiness</h2>
+              <h2 className="text-2xl">Export readiness</h2>
               <p className="mt-3 text-sm leading-6 text-[#5a5a54]">Ships to {supplier.export_countries.join(", ")} with {supplier.payment_terms.join(", ")} terms.</p>
             </div>
             <div className="border border-[rgba(26,26,24,0.14)] p-5">
@@ -64,10 +64,10 @@ export default async function SupplierPage({ params }: { params: { slug: string 
           </div>
         </section>
         <aside className="panel-soft h-fit p-5">
-          <h2 className="text-2xl">Contact Supplier</h2>
-          <p className="mt-2 text-sm text-[#5a5a54]">Typical response: {supplier.response_time_hours} hours.</p>
+          <h2 className="text-2xl">Send an inquiry</h2>
+          <p className="mt-2 text-sm text-[#5a5a54]">Usually answers in {supplier.response_time_hours} hours.</p>
           <div className="mt-5"><InquiryForm supplierId={supplier.id} /></div>
-          <Link href={`/register?role=buyer&redirect=${encodeURIComponent(`/buyer/quotes?supplier=${supplier.id}`)}`} className="btn-pill btn-pill-outline mt-5 min-h-[44px] w-full">Request Quote</Link>
+          <Link href={`/register?role=buyer&redirect=${encodeURIComponent(`/buyer/quotes?supplier=${supplier.id}`)}`} className="btn-pill btn-pill-outline mt-5 min-h-[44px] w-full">Request a quote</Link>
         </aside>
       </div>
     </div>

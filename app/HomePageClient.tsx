@@ -20,8 +20,6 @@ const HERO_IMAGE =
 
 const copy = {
   en: {
-    browseMarketplace: "Browse Marketplace",
-    listCompany: "List Your Company",
     suppliers: "Suppliers",
     products: "Products",
     verifiedLeaders: "Verified leaders",
@@ -32,29 +30,29 @@ const copy = {
     viewAll: "View All",
     browseAll: "Browse All",
     featuredSuppliers: "Featured Suppliers",
-    trustBody: "Every serious supplier journey starts with audit scoring, document checks, sanctions screening, and visible verification tiers.",
+    trustBody: "Manufacturing already exists. What is missing is careful presentation, visible evidence, and a reason to be chosen.",
     trustSanctions: "OFAC / UN / EU screened",
     trustDocs: "Document vault ready",
     trustEscrow: "Escrow and inspection workflows",
-    auditBody: "Sellers are not pushed straight into the marketplace. They pass through a six-step readiness audit covering brand identity, digital presence, export history, product readiness, operations, and compliance.",
+    auditBody: "Not everything should be listed. Before a manufacturer is shown, ORIGINO looks at brand identity, digital presence, export history, product readiness, operations, and compliance.",
     auditCta: "Start AI Audit",
     auditScore: "80+ required for approval",
     conditional: "60-79 enters package-assisted improvement",
     roadmap: "Below 60 receives a readiness roadmap",
-    rfqBody: "Buyers can search verified suppliers immediately or register to send an RFQ, request samples, compare suppliers, and move into quote negotiation.",
+    rfqBody: "Buyers see fewer names, with more context. Search, compare, ask for samples, and move into quote negotiation only when the fit is clear.",
     rfqCta: "Create Buyer RFQ",
     compareCta: "Compare Suppliers",
-    toolsBody: "ORIGINO is built around the checks international buyers already run: documentation, landed cost, verification, and supplier responsiveness.",
+    toolsBody: "The useful checks stay close to the listing: documentation, landed cost, verification, and response discipline.",
     docs: "Pakistan export guides",
     docsEyebrow: "Documentation",
-    docsBody: "Form-E, GSP+, Certificate of Origin, CE, Halal, FDA, and phytosanitary documents.",
+    docsBody: "Form-E, GSP+, Certificate of Origin, CE, Halal, FDA, and phytosanitary guides.",
     cost: "Landed cost calculator",
     costingEyebrow: "Costing",
-    costBody: "Estimate freight, insurance, customs duty, VAT, and Pakistan GSP+ savings.",
+    costBody: "Estimate freight, insurance, duty, VAT, and Pakistan GSP+ savings.",
     compare: "Supplier comparison",
     sourcingEyebrow: "Sourcing",
-    compareBody: "Compare verification, certifications, response rate, MOQ, lead time, and cluster fit.",
-    updatesBody: "Join the waitlist for supplier drops, documentation guides, buyer-seller meets, and new verified exporters entering the marketplace.",
+    compareBody: "Read verification, certifications, response rate, MOQ, lead time, and cluster fit side by side.",
+    updatesBody: "Receive quiet updates when new manufacturers, guides, and buyer-seller meetings are ready.",
     response: "Response",
     moq: "MOQ",
   },
@@ -149,10 +147,10 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
               {sectionText(hero, eyebrowKey, "Pakistan Export Marketplace")}
             </p>
             <h1 className="max-w-4xl text-6xl leading-[0.96] text-[var(--ink)] md:text-8xl">
-              {sectionText(hero, titleKey, "Source from verified Pakistani manufacturers.")}
+              {sectionText(hero, titleKey, "Made well. Seen better.")}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-[#24221f]/75 md:text-xl">
-              {sectionText(hero, descriptionKey, "ORIGINO connects global buyers with export-ready suppliers across Pakistan.")}
+              {sectionText(hero, descriptionKey, "A curated way to find Pakistani manufacturers with evidence, restraint, and export readiness.")}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/audit">{t.auditCta}</Link>
@@ -197,7 +195,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#4f5b3a]">{sectionText(featuredSection, eyebrowKey, t.featuredSuppliers)}</p>
-            <h2 className="text-4xl md:text-5xl">{sectionText(featuredSection, titleKey, "Buyer-ready exporters")}</h2>
+            <h2 className="text-4xl md:text-5xl">{sectionText(featuredSection, titleKey, "Manufacturers worth reading.")}</h2>
           </div>
           <Link className="hidden items-center gap-2 text-sm font-semibold text-[#4f5b3a] transition hover:text-[#2a3320] sm:inline-flex" href="/marketplace">{t.browseAll}</Link>
         </div>
@@ -224,7 +222,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
           <div className="panel-soft p-6 md:p-10">
             <p className="badge-patch mb-5">{sectionText(audit, eyebrowKey, "AI Audit")}</p>
-            <h2 className="max-w-2xl text-4xl md:text-6xl">{sectionText(audit, titleKey, "A strict gate before any supplier is listed.")}</h2>
+            <h2 className="max-w-2xl text-4xl md:text-6xl">{sectionText(audit, titleKey, "Chosen before shown.")}</h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-[#5a5a54]">{t.auditBody}</p>
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               {[
@@ -248,7 +246,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
             <p className="badge-patch tier-certified mb-5">Seller Packages</p>
             <h2 className="text-4xl">Marketing services sellers can buy quickly.</h2>
             <p className="mt-4 text-sm leading-7 text-[#5a5a54]">
-              Basic, Growth, and Premium package the exact export-readiness work from the specification: brand audit, logo, photography, catalog, website, and buyer introductions.
+              Basic, Growth, and Premium help a manufacturer become legible: identity, photography, catalogue, website, and buyer introductions.
             </p>
             <div className="mt-6 space-y-3">
               {[
@@ -271,8 +269,8 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
       <section className="container-editorial py-16">
         <div className="grid gap-8 rounded-[28px] border border-[rgba(44,44,44,0.08)] bg-white/80 p-6 shadow-[0_18px_70px_rgba(0,0,0,0.05)] md:grid-cols-[1fr_0.9fr] md:items-center md:p-8">
           <div>
-            <p className="badge-patch mb-4">{sectionText(waitlist, eyebrowKey, "Buyer Updates")}</p>
-            <h2 className="text-3xl">{sectionText(waitlist, titleKey, "Get early sourcing updates")}</h2>
+            <p className="badge-patch mb-4">{sectionText(waitlist, eyebrowKey, "Notes")}</p>
+            <h2 className="text-3xl">{sectionText(waitlist, titleKey, "When something is ready, we send it.")}</h2>
             <p className="mt-4 max-w-2xl text-[#5a5a54]">{t.updatesBody}</p>
           </div>
           <div>

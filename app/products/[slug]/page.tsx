@@ -27,7 +27,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
       </section>
       <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
         <section>
-          <p className="badge-patch">Technical Sheet</p>
+          <p className="badge-patch">Product record</p>
           <h2 className="mt-5 text-4xl">Specifications</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <div className="border border-[rgba(26,26,24,0.14)] p-4">

@@ -154,17 +154,17 @@ export default function AuditTool({ compact = false }: { compact?: boolean }) {
           <div className="mb-10 grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
             <div>
               <p className="section-kicker">AI Audit Engine</p>
-              <h1 className="mt-5 text-5xl md:text-7xl">Export readiness audit.</h1>
+              <h1 className="mt-5 text-5xl md:text-7xl">Before anything is shown.</h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--ink-muted)]">
-                This is the strict ORIGINO seller gate from the original spec: brand, digital presence, export history, product readiness, operations, and compliance are scored out of 100 before a supplier can be listed.
+                The audit reads the manufacturer before the listing does. Brand, digital presence, export history, product readiness, operations, and compliance are scored out of 100.
               </p>
             </div>
             <div className="panel-soft p-6">
-              <h2 className="text-3xl">Decision rules</h2>
+              <h2 className="text-3xl">How the gate works</h2>
               <div className="mt-5 grid gap-3 text-sm">
-                <div className="rounded-full border border-[rgba(84,98,64,0.14)] px-4 py-3"><strong>80-100:</strong> Approved for admin verification visit</div>
-                <div className="rounded-full border border-[rgba(184,145,58,0.22)] px-4 py-3"><strong>60-79:</strong> Conditional, marketing support required</div>
-                <div className="rounded-full border border-[rgba(201,133,103,0.24)] px-4 py-3"><strong>0-59:</strong> Not ready, roadmap shown first</div>
+                <div className="rounded-full border border-[rgba(84,98,64,0.14)] px-4 py-3"><strong>80-100:</strong> Ready for admin verification</div>
+                <div className="rounded-full border border-[rgba(184,145,58,0.22)] px-4 py-3"><strong>60-79:</strong> Improve with support</div>
+                <div className="rounded-full border border-[rgba(201,133,103,0.24)] px-4 py-3"><strong>0-59:</strong> Roadmap before listing</div>
               </div>
             </div>
           </div>
