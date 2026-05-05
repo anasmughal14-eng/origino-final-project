@@ -8,25 +8,25 @@ import { useLanguage } from "@/app/components/shared/LanguageProvider";
 
 const navLinks = [
   { href: "/marketplace", labelKey: "nav.marketplace" },
-  { href: "/compare", labelKey: "nav.compare" },
   { href: "/audit", labelKey: "nav.audit" },
   { href: "/marketing-packages", labelKey: "nav.packages" },
   {
-    labelKey: "nav.resources",
+    labelKey: "nav.tools",
     children: [
-      { href: "/export-docs", labelKey: "nav.exportGuides" },
+      { href: "/compare", labelKey: "nav.compare" },
       { href: "/landed-cost", labelKey: "nav.costCalculator" },
+      { href: "/export-docs", labelKey: "nav.exportGuides" },
       { href: "/logistics", labelKey: "nav.logistics" },
       { href: "/community", labelKey: "nav.community" },
       { href: "/blog", labelKey: "nav.journal" },
       { href: "/resources", labelKey: "nav.resources" },
     ],
   },
-  { href: "/awards", labelKey: "nav.awards" },
+  { href: "/about", labelKey: "nav.ourStory" },
 ];
 
-const leftNavLinks = navLinks.slice(0, 4);
-const rightNavLinks = navLinks.slice(4);
+const leftNavLinks = navLinks.slice(0, 3);
+const rightNavLinks = navLinks.slice(3);
 const mobilePrimaryLinks = navLinks.filter((link) => !link.children);
 const mobileResourceLinks = navLinks.find((link) => link.children)?.children ?? [];
 
