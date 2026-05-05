@@ -51,6 +51,7 @@ const copy = {
     gateEyebrow: "ORIGINO",
     gateTitle: "What brings you here?",
     gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
+    select: "Select",
     buyerGateTitle: "I am sourcing",
     buyerGateBody: "Find selected Pakistani manufacturers, compare evidence, and begin clear inquiries.",
     sellerGateTitle: "I manufacture",
@@ -122,6 +123,7 @@ const copy = {
     gateEyebrow: "ORIGINO",
     gateTitle: "What brings you here?",
     gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
+    select: "Select",
     buyerGateTitle: "I am sourcing",
     buyerGateBody: "Find selected Pakistani manufacturers, compare evidence, and begin clear inquiries.",
     sellerGateTitle: "I manufacture",
@@ -222,14 +224,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
             <div className="absolute inset-x-0 bottom-0 h-56 bg-[linear-gradient(to_top,rgba(247,242,235,0.98),transparent)]" />
           </div>
           <div className="relative z-10 mx-auto w-full max-w-5xl rounded-[34px] border border-white/55 bg-[rgba(255,250,242,0.58)] p-5 shadow-[0_30px_110px_rgba(64,52,38,0.14)] backdrop-blur-2xl md:p-8">
-            <p className="badge-patch mb-5">{t.gateEyebrow}</p>
-            <h1 className="max-w-2xl text-[clamp(3rem,8vw,6.4rem)] leading-[0.95] text-[var(--ink)]">
-              {t.gateTitle}
-            </h1>
-            <p className="mt-5 max-w-xl text-base leading-7 text-[#24221f]/68 md:text-lg md:leading-8">
-              {t.gateBody}
-            </p>
-            <div className="mt-10 grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2">
               <button
                 type="button"
                 onClick={() => chooseAudience("buyer")}
@@ -238,7 +233,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
                 <span className="badge-patch mb-10">Buyer</span>
                 <span className="block font-serif text-4xl leading-tight text-[var(--ink)]">{t.buyerGateTitle}</span>
                 <span className="mt-4 block max-w-md text-sm leading-6 text-[#24221f]/62">{t.buyerGateBody}</span>
-                <span className="btn-pill btn-pill-forest mt-8 inline-flex min-h-[46px] px-6 text-sm">{t.openMarketplace}</span>
+                <span className="btn-pill btn-pill-forest mt-8 inline-flex min-h-[46px] px-6 text-sm">{t.select}</span>
               </button>
               <button
                 type="button"
@@ -248,7 +243,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
                 <span className="badge-patch mb-10">Seller</span>
                 <span className="block font-serif text-4xl leading-tight text-[var(--ink)]">{t.sellerGateTitle}</span>
                 <span className="mt-4 block max-w-md text-sm leading-6 text-[#24221f]/62">{t.sellerGateBody}</span>
-                <span className="btn-pill btn-pill-forest mt-8 inline-flex min-h-[46px] px-6 text-sm">{t.auditCta}</span>
+                <span className="btn-pill btn-pill-forest mt-8 inline-flex min-h-[46px] px-6 text-sm">{t.select}</span>
               </button>
             </div>
           </div>
