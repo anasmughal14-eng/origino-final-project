@@ -87,7 +87,7 @@ export default function MarketplaceClient({ suppliers, initialFilters = {} }: { 
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[300px_1fr]">
-        <aside className="panel-soft sticky top-28 h-max space-y-4 p-5">
+        <aside className="marketplace-filters panel-soft relative z-10 h-max space-y-4 p-5 lg:sticky lg:top-28">
           <label className="block text-xs uppercase tracking-[0.16em] text-[#8a8a82]">Search</label>
           <input className="input-editorial min-h-[44px] bg-[#fdfbf8]" placeholder="Search suppliers" value={query} onChange={(event) => { setQuery(event.target.value); setVisible(pageSize); }} />
 
