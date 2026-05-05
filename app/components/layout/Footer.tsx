@@ -52,6 +52,83 @@ const footerSections: FooterSection[] = [
   },
 ];
 
+const buyerFooterSections: FooterSection[] = [
+  {
+    headingKey: "nav.marketplace",
+    links: [
+      { href: "/marketplace", labelKey: "footer.browseSuppliers" },
+      { href: "/suppliers", label: "Supplier Directory" },
+      { href: "/logistics", labelKey: "footer.logisticsPartners" },
+      { href: "/status", labelKey: "footer.platformStatus" },
+    ],
+  },
+  {
+    headingKey: "nav.tools",
+    links: [
+      { href: "/compare", labelKey: "nav.compare" },
+      { href: "/landed-cost", labelKey: "footer.landedCost" },
+      { href: "/community", labelKey: "footer.tradeCommunity" },
+      { href: "/resources", labelKey: "footer.resourceLibrary" },
+    ],
+  },
+  {
+    headingKey: "nav.resources",
+    links: [
+      { href: "/export-docs", labelKey: "footer.exportDocumentation" },
+      { href: "/blog", labelKey: "nav.journal" },
+      { href: "/awards", labelKey: "awards.title" },
+    ],
+  },
+  {
+    headingKey: "footer.company",
+    links: [
+      { href: "/about", labelKey: "footer.ourStory" },
+      { href: "/buyers", labelKey: "footer.buyers" },
+      { href: "/legal/privacy", labelKey: "footer.privacy" },
+      { href: "/legal/terms", labelKey: "footer.terms" },
+    ],
+  },
+];
+
+const sellerFooterSections: FooterSection[] = [
+  {
+    headingKey: "nav.audit",
+    links: [
+      { href: "/audit", labelKey: "nav.audit" },
+      { href: "/register?role=seller", label: "Start Seller Path" },
+      { href: "/seller/onboarding", label: "Onboarding" },
+      { href: "/status", labelKey: "footer.platformStatus" },
+    ],
+  },
+  {
+    headingKey: "nav.packages",
+    links: [
+      { href: "/marketing-packages", labelKey: "footer.marketingPackages" },
+      { href: "/checkout/marketing?package=basic", label: "Basic Package" },
+      { href: "/checkout/marketing?package=growth", label: "Growth Package" },
+      { href: "/checkout/marketing?package=premium", label: "Premium Package" },
+    ],
+  },
+  {
+    headingKey: "nav.exportGuides",
+    links: [
+      { href: "/export-docs", labelKey: "footer.exportDocumentation" },
+      { href: "/export-docs/form-e-pakistan", label: "Form-E Guide" },
+      { href: "/export-docs/gsp-plus-certificate", label: "GSP+ Guide" },
+      { href: "/seller/export-docs", label: "Seller Checklist" },
+    ],
+  },
+  {
+    headingKey: "footer.company",
+    links: [
+      { href: "/about", labelKey: "footer.ourStory" },
+      { href: "/manufacturers", labelKey: "footer.manufacturers" },
+      { href: "/legal/privacy", labelKey: "footer.privacy" },
+      { href: "/legal/terms", labelKey: "footer.terms" },
+    ],
+  },
+];
+
 export default function Footer() {
   const { t } = useLanguage();
   const pathname = usePathname();
@@ -75,6 +152,8 @@ export default function Footer() {
     return null;
   }
 
+  const activeFooterSections = audience === "buyer" ? buyerFooterSections : audience === "seller" ? sellerFooterSections : footerSections;
+
   return (
     <footer className="border-t border-[rgba(44,44,44,0.08)] bg-[var(--cream)] text-[var(--ink)]">
       <div className="container-editorial">
@@ -95,7 +174,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="col-span-1 grid grid-cols-2 gap-8 md:col-span-2 md:grid-cols-4">
-              {footerSections.map((section) => (
+              {activeFooterSections.map((section) => (
                 <div key={section.headingKey}>
                   <h4 className="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-[var(--ink)]">{t(section.headingKey)}</h4>
                   <ul className="space-y-2.5">
