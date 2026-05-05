@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/app/components/shared/LanguageProvider";
 
 type FooterLink = { href: string; labelKey?: string; label?: string };
@@ -52,6 +54,27 @@ const footerSections: FooterSection[] = [
 
 export default function Footer() {
   const { t } = useLanguage();
+  const pathname = usePathname();
+  const [audience, setAudience] = useState<"buyer" | "seller" | null | undefined>(undefined);
+
+  useEffect(() => {
+    function syncAudience() {
+      const savedAudience = window.localStorage.getItem("origino_audience");
+      setAudience(savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : null);
+    }
+    syncAudience();
+    window.addEventListener("storage", syncAudience);
+    window.addEventListener("origino:audience-change", syncAudience);
+    return () => {
+      window.removeEventListener("storage", syncAudience);
+      window.removeEventListener("origino:audience-change", syncAudience);
+    };
+  }, []);
+
+  if (pathname === "/" && audience !== "buyer" && audience !== "seller") {
+    return null;
+  }
+
   return (
     <footer className="border-t border-[rgba(44,44,44,0.08)] bg-[var(--cream)] text-[var(--ink)]">
       <div className="container-editorial">
