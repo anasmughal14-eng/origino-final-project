@@ -96,7 +96,7 @@ const sellerFooterSections: FooterSection[] = [
     links: [
       { href: "/audit", labelKey: "nav.audit" },
       { href: "/register?role=seller", label: "Start Seller Path" },
-      { href: "/seller/onboarding", label: "Onboarding" },
+      { href: "/register?role=seller&redirect=/seller/onboarding", label: "Onboarding" },
       { href: "/status", labelKey: "footer.platformStatus" },
     ],
   },
@@ -115,7 +115,7 @@ const sellerFooterSections: FooterSection[] = [
       { href: "/export-docs", labelKey: "footer.exportDocumentation" },
       { href: "/export-docs/form-e-pakistan", label: "Form-E Guide" },
       { href: "/export-docs/gsp-plus-certificate", label: "GSP+ Guide" },
-      { href: "/seller/export-docs", label: "Seller Checklist" },
+      { href: "/register?role=seller&redirect=/seller/export-docs", label: "Seller Checklist" },
     ],
   },
   {
