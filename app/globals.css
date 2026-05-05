@@ -252,6 +252,18 @@ h1,h2,h3,h4,h5,h6 {
   box-shadow: 0 14px 40px rgba(64, 52, 38, 0.08);
 }
 
+.mobile-nav-glass {
+  background:
+    linear-gradient(135deg, rgba(255, 253, 249, 0.66), rgba(246, 231, 211, 0.54)),
+    rgba(255, 250, 242, 0.58);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  border: 1px solid rgba(255, 255, 255, 0.50);
+  box-shadow: 0 26px 80px rgba(70, 58, 42, 0.16);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
 .glass-dark {
   background: rgba(255, 253, 250, 0.36);
   backdrop-filter: blur(8px) saturate(1.02);
