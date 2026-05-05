@@ -30,6 +30,7 @@ const copy = {
     viewAll: "View All",
     browseAll: "Browse All",
     featuredSuppliers: "Featured Suppliers",
+    clarityBody: "ORIGINO selects Pakistani manufacturers, reviews their export readiness, and presents them with documents, verification signals, and sourcing context. It exists because good manufacturing is often present, but poorly seen.",
     trustBody: "Manufacturing already exists. What is missing is careful presentation, visible evidence, and a reason to be chosen.",
     trustSanctions: "OFAC / UN / EU screened",
     trustDocs: "Document vault ready",
@@ -69,6 +70,7 @@ const copy = {
     viewAll: "سب دیکھیں",
     browseAll: "سب دیکھیں",
     featuredSuppliers: "نمایاں سپلائرز",
+    clarityBody: "ORIGINO منتخب پاکستانی مینوفیکچررز کی export readiness، دستاویزات، verification signals، اور sourcing context کو واضح کرتا ہے۔ اچھی manufacturing موجود ہے؛ مسئلہ اکثر visibility کا ہوتا ہے۔",
     trustBody: "ہر سنجیدہ سپلائر کا سفر آڈٹ اسکور، دستاویزات کی جانچ، پابندیوں کی اسکریننگ، اور واضح تصدیقی درجات سے شروع ہوتا ہے۔",
     trustSanctions: "OFAC / UN / EU اسکریننگ",
     trustDocs: "دستاویز والٹ تیار",
@@ -144,17 +146,20 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         <div className="container-editorial relative z-10 py-32 text-[var(--ink)]">
           <div className="max-w-3xl blur-in">
             <p className="mb-8 inline-flex rounded-full bg-white/45 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink)] backdrop-blur-md">
-              {sectionText(hero, eyebrowKey, "Pakistan Export Marketplace")}
+              {sectionText(hero, eyebrowKey, "Curated Sourcing From Pakistan")}
             </p>
             <h1 className="max-w-4xl text-6xl leading-[0.96] text-[var(--ink)] md:text-8xl">
-              {sectionText(hero, titleKey, "Made well. Seen better.")}
+              {sectionText(hero, titleKey, "Selected Pakistani manufacturers, seen with proof.")}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-[#24221f]/75 md:text-xl">
-              {sectionText(hero, descriptionKey, "A curated way to find Pakistani manufacturers with evidence, restraint, and export readiness.")}
+              {sectionText(hero, descriptionKey, "For global buyers who need fewer names, clearer evidence, and export-ready work from Pakistan.")}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/audit">{t.auditCta}</Link>
             </div>
+            <p className="mt-7 max-w-2xl text-base leading-7 text-[#24221f]/68 md:text-lg md:leading-8">
+              {t.clarityBody}
+            </p>
           </div>
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-3 blur-in [animation-delay:180ms]">
             <div className="rounded-[999px] border border-white/55 bg-white/50 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.08)] backdrop-blur-sm"><p className="metric-numeral text-2xl text-[var(--ink)]">{certified}</p><p className="text-sm text-[#24221f]/60">{t.verified}</p></div>
