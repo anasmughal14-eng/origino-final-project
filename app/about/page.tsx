@@ -92,6 +92,13 @@ export default function AboutPage() {
             <div>
               <p className="badge-patch mb-5">Founder</p>
               <h2 className="text-4xl md:text-5xl">A quiet beginning.</h2>
+              <figure className="mt-8 overflow-hidden rounded-[28px] border border-[rgba(26,26,24,0.1)] bg-[#f7f3ee] shadow-[0_22px_80px_rgba(26,26,24,0.08)]">
+                <img
+                  src="/images/founder-anas-mughal.jpeg"
+                  alt="Anas Mughal, Founder of Origino"
+                  className="aspect-[4/5] w-full object-cover object-[50%_32%] grayscale contrast-[1.04] brightness-[0.96]"
+                />
+              </figure>
               <div className="mt-8 border-t border-[rgba(26,26,24,0.14)] pt-6">
                 <p className="text-lg font-semibold text-[#1a1a18]">Anas Mughal</p>
                 <p className="mt-1 text-sm uppercase tracking-[0.16em] text-[#8a8a82]">Founder, Origino</p>
