@@ -1,7 +1,7 @@
 {
   "crons": [
     { "path": "/api/exchange-rates/refresh", "schedule": "0 6 * * *" },
-    { "path": "/api/email-sequences/process", "schedule": "0 * * * *" },
+    { "path": "/api/email-sequences/process", "schedule": "0 7 * * *" },
     { "path": "/api/performance-metrics/calculate", "schedule": "0 2 * * *" },
     { "path": "/api/sla/check", "schedule": "0 8 * * *" },
     { "path": "/api/saved-searches/notify", "schedule": "0 9 * * *" },
