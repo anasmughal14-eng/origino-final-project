@@ -148,16 +148,16 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
             <p className="mb-8 inline-flex rounded-full bg-white/45 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink)] backdrop-blur-md">
               {sectionText(hero, eyebrowKey, "Curated Sourcing From Pakistan")}
             </p>
-            <h1 className="max-w-4xl text-6xl leading-[0.96] text-[var(--ink)] md:text-8xl">
+            <h1 className="max-w-[52rem] text-[clamp(2.75rem,11vw,5.5rem)] leading-[1.02] text-[var(--ink)]">
               {sectionText(hero, titleKey, "Selected Pakistani manufacturers, seen with proof.")}
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#24221f]/75 md:text-xl">
+            <p className="mt-6 max-w-xl text-base leading-7 text-[#24221f]/75 md:text-lg md:leading-8">
               {sectionText(hero, descriptionKey, "For global buyers who need fewer names, clearer evidence, and export-ready work from Pakistan.")}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/audit">{t.auditCta}</Link>
             </div>
-            <p className="mt-7 max-w-2xl text-base leading-7 text-[#24221f]/68 md:text-lg md:leading-8">
+            <p className="mt-7 max-w-2xl text-[0.98rem] leading-7 text-[#24221f]/68 md:text-base md:leading-8">
               {t.clarityBody}
             </p>
           </div>
