@@ -58,7 +58,7 @@ export default function Navigation() {
                 {t(link.labelKey)} <ChevronDown size={14} />
               </button>
               {dropdown && (
-                <div className="absolute top-full mt-2 min-w-[250px] rounded-2xl border border-[rgba(44,44,44,0.08)] bg-[#fefdfb] p-2 shadow-[0_18px_60px_rgba(0,0,0,0.12)]" onMouseLeave={() => setDropdown(false)}>
+                <div className="absolute top-full mt-2 min-w-[250px] rounded-2xl border border-white/45 bg-[rgba(255,250,242,0.62)] p-2 shadow-[0_18px_56px_rgba(64,52,38,0.11)] backdrop-blur-2xl" onMouseLeave={() => setDropdown(false)}>
                   {link.children.map((child) => (
                     <Link
                       className={`${linkClass(child.href)} flex w-full rounded-xl px-3 py-2 text-[#6b6560] hover:bg-[#f4f2ed]`}
@@ -87,7 +87,7 @@ export default function Navigation() {
                 {t(link.labelKey)} <ChevronDown size={14} />
               </button>
               {dropdown && (
-                <div className="absolute right-0 top-full mt-2 min-w-[250px] rounded-2xl border border-[rgba(44,44,44,0.08)] bg-[#fefdfb] p-2 shadow-[0_18px_60px_rgba(0,0,0,0.12)]" onMouseLeave={() => setDropdown(false)}>
+                <div className="absolute right-0 top-full mt-2 min-w-[250px] rounded-2xl border border-white/45 bg-[rgba(255,250,242,0.62)] p-2 shadow-[0_18px_56px_rgba(64,52,38,0.11)] backdrop-blur-2xl" onMouseLeave={() => setDropdown(false)}>
                   {link.children.map((child) => (
                     <Link
                       className={`${linkClass(child.href)} flex w-full rounded-xl px-3 py-2 text-[#6b6560] hover:bg-[#f4f2ed]`}
@@ -102,8 +102,8 @@ export default function Navigation() {
               )}
             </div>
           ) : <Link className={`${linkClass(link.href)} rounded-full px-3 text-[#6b6560] hover:bg-white/45 hover:opacity-100`} key={link.href} href={link.href}>{t(link.labelKey)}</Link>)}
-          <button className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[rgba(36,34,31,0.24)] bg-white/20 px-4 text-xs font-semibold" onClick={() => setLang("en")} aria-pressed={lang === "en"}>EN</button>
-          <button className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[rgba(36,34,31,0.24)] bg-white/20 px-4 text-xs font-semibold" onClick={() => setLang("ur")} aria-pressed={lang === "ur"}>{t("lang.urdu")}</button>
+          <button className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/45 bg-white/25 px-4 text-xs font-semibold backdrop-blur-xl" onClick={() => setLang("en")} aria-pressed={lang === "en"}>EN</button>
+          <button className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/45 bg-white/25 px-4 text-xs font-semibold backdrop-blur-xl" onClick={() => setLang("ur")} aria-pressed={lang === "ur"}>{t("lang.urdu")}</button>
           <Link className="btn-pill btn-pill-forest min-h-[44px] min-w-[94px] whitespace-nowrap px-5 py-2 text-xs" href="/login">{t("nav.signIn")}</Link>
         </div>
         {!mobileOpen && (
