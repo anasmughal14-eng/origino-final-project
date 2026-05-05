@@ -15,6 +15,8 @@ type HomePageClientProps = {
   pageSections: PageSection[];
 };
 
+type Audience = "buyer" | "seller";
+
 const HERO_IMAGE =
   "https://images.pexels.com/photos/28806603/pexels-photo-28806603.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
@@ -37,6 +39,15 @@ const copy = {
     trustEscrow: "Escrow and inspection workflows",
     auditBody: "Not everything should be listed. Before a manufacturer is shown, ORIGINO looks at brand identity, digital presence, export history, product readiness, operations, and compliance.",
     auditCta: "Start AI Audit",
+    pathEyebrow: "Choose your path",
+    buyerPath: "I source from Pakistan",
+    sellerPath: "I make in Pakistan",
+    buyerPanelTitle: "For global buyers",
+    buyerPanelBody: "Start with a smaller field of manufacturers. Compare evidence, ask clearly, and move only when the fit is visible.",
+    sellerPanelTitle: "For manufacturers",
+    sellerPanelBody: "Begin with the export-readiness audit. If the work is ready, it can be reviewed for listing and buyer presentation.",
+    openMarketplace: "Open Marketplace",
+    viewPackages: "View Packages",
     auditScore: "80+ required for approval",
     conditional: "60-79 enters package-assisted improvement",
     roadmap: "Below 60 receives a readiness roadmap",
@@ -77,6 +88,15 @@ const copy = {
     trustEscrow: "ایسکرو اور انسپیکشن ورک فلو",
     auditBody: "سیلرز کو فوراً مارکیٹ پلیس میں شامل نہیں کیا جاتا۔ وہ چھ مرحلوں کے آڈٹ سے گزرتے ہیں جس میں برانڈ، ڈیجیٹل موجودگی، ایکسپورٹ تجربہ، مصنوعات، آپریشنز، اور کمپلائنس شامل ہیں۔",
     auditCta: "AI آڈٹ شروع کریں",
+    pathEyebrow: "اپنا راستہ منتخب کریں",
+    buyerPath: "میں پاکستان سے سورس کرتا ہوں",
+    sellerPath: "میں پاکستان میں بناتا ہوں",
+    buyerPanelTitle: "عالمی خریداروں کے لیے",
+    buyerPanelBody: "کم مگر بہتر منتخب مینوفیکچررز سے شروع کریں۔ ثبوت دیکھیں، موازنہ کریں، اور واضح فٹ کے بعد آگے بڑھیں۔",
+    sellerPanelTitle: "مینوفیکچررز کے لیے",
+    sellerPanelBody: "ایکسپورٹ readiness آڈٹ سے شروع کریں۔ اگر کام تیار ہے، تو اسے listing اور buyer presentation کے لیے review کیا جا سکتا ہے۔",
+    openMarketplace: "مارکیٹ پلیس کھولیں",
+    viewPackages: "پیکیجز دیکھیں",
     auditScore: "منظوری کے لیے 80+ اسکور ضروری",
     conditional: "60-79 پیکیج کے ذریعے بہتری",
     roadmap: "60 سے کم اسکور پر تیاری کا روڈ میپ",
@@ -111,6 +131,7 @@ function getSection(sections: PageSection[], type: string) {
 export default function HomePageClient({ suppliers, products, clusters, pageSections }: HomePageClientProps) {
   const { lang } = useLanguage();
   const t = copy[lang];
+  const [audience, setAudience] = useState<Audience>("buyer");
   const [effectiveSuppliers, setEffectiveSuppliers] = useState(() => applySupplierOverrides(suppliers));
   useEffect(() => {
     function syncSuppliers() {
@@ -154,12 +175,53 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
             <p className="mt-6 max-w-xl text-base leading-7 text-[#24221f]/75 md:text-lg md:leading-8">
               {sectionText(hero, descriptionKey, "For global buyers who need fewer names, clearer evidence, and export-ready work from Pakistan.")}
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/audit">{t.auditCta}</Link>
-            </div>
             <p className="mt-7 max-w-2xl text-[0.98rem] leading-7 text-[#24221f]/68 md:text-base md:leading-8">
               {t.clarityBody}
             </p>
+            <div className="mt-8 max-w-2xl rounded-[30px] border border-white/55 bg-white/35 p-3 shadow-[0_24px_80px_rgba(64,52,38,0.08)] backdrop-blur-xl">
+              <p className="px-3 pt-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#4f5b3a]">
+                {t.pathEyebrow}
+              </p>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                <button
+                  type="button"
+                  aria-pressed={audience === "buyer"}
+                  onClick={() => setAudience("buyer")}
+                  className={`min-h-[50px] rounded-full border px-5 text-sm font-semibold transition ${audience === "buyer" ? "border-[#4f5b3a] bg-[#4f5b3a] text-white" : "border-[#24221f]/18 bg-white/35 text-[#24221f] hover:border-[#4f5b3a]/45"}`}
+                >
+                  {t.buyerPath}
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={audience === "seller"}
+                  onClick={() => setAudience("seller")}
+                  className={`min-h-[50px] rounded-full border px-5 text-sm font-semibold transition ${audience === "seller" ? "border-[#4f5b3a] bg-[#4f5b3a] text-white" : "border-[#24221f]/18 bg-white/35 text-[#24221f] hover:border-[#4f5b3a]/45"}`}
+                >
+                  {t.sellerPath}
+                </button>
+              </div>
+              <div className="mt-3 rounded-[24px] border border-white/45 bg-white/30 p-5">
+                <h2 className="font-serif text-2xl leading-tight text-[var(--ink)] md:text-3xl">
+                  {audience === "buyer" ? t.buyerPanelTitle : t.sellerPanelTitle}
+                </h2>
+                <p className="mt-3 max-w-xl text-sm leading-6 text-[#24221f]/65">
+                  {audience === "buyer" ? t.buyerPanelBody : t.sellerPanelBody}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {audience === "buyer" ? (
+                    <>
+                      <Link className="btn-pill btn-pill-forest min-h-[46px] px-6 text-sm" href="/marketplace">{t.openMarketplace}</Link>
+                      <Link className="btn-pill btn-pill-outline min-h-[46px] px-6 text-sm" href="/compare">{t.compareCta}</Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link className="btn-pill btn-pill-forest min-h-[46px] px-6 text-sm" href="/audit">{t.auditCta}</Link>
+                      <Link className="btn-pill btn-pill-outline min-h-[46px] px-6 text-sm" href="/marketing-packages">{t.viewPackages}</Link>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-3 blur-in [animation-delay:180ms]">
             <div className="rounded-[999px] border border-white/55 bg-white/50 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.08)] backdrop-blur-sm"><p className="metric-numeral text-2xl text-[var(--ink)]">{certified}</p><p className="text-sm text-[#24221f]/60">{t.verified}</p></div>
