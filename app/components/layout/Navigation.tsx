@@ -6,7 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, Search, ShoppingBag, X } from "lucide-react";
 import { useLanguage } from "@/app/components/shared/LanguageProvider";
 
-const navLinks = [
+type NavLink =
+  | { href: string; labelKey: string; children?: never }
+  | { href?: never; labelKey: string; children: { href: string; labelKey: string }[] };
+
+const navLinks: NavLink[] = [
   { href: "/marketplace", labelKey: "nav.marketplace" },
   { href: "/audit", labelKey: "nav.audit" },
   { href: "/marketing-packages", labelKey: "nav.packages" },
@@ -25,10 +29,27 @@ const navLinks = [
   { href: "/about", labelKey: "nav.ourStory" },
 ];
 
-const leftNavLinks = navLinks.slice(0, 3);
-const rightNavLinks = navLinks.slice(3);
-const mobilePrimaryLinks = navLinks.filter((link) => !link.children);
-const mobileResourceLinks = navLinks.find((link) => link.children)?.children ?? [];
+const buyerHomeNavLinks: NavLink[] = [
+  { href: "/marketplace", labelKey: "nav.marketplace" },
+  {
+    labelKey: "nav.tools",
+    children: [
+      { href: "/compare", labelKey: "nav.compare" },
+      { href: "/landed-cost", labelKey: "nav.costCalculator" },
+      { href: "/logistics", labelKey: "nav.logistics" },
+    ],
+  },
+  { href: "/about", labelKey: "nav.ourStory" },
+];
+
+const sellerHomeNavLinks: NavLink[] = [
+  { href: "/audit", labelKey: "nav.audit" },
+  { href: "/marketing-packages", labelKey: "nav.packages" },
+  { href: "/export-docs", labelKey: "nav.exportGuides" },
+  { href: "/about", labelKey: "nav.ourStory" },
+];
+
+type Audience = "buyer" | "seller";
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -37,6 +58,7 @@ export default function Navigation() {
   const [dropdown, setDropdown] = useState(false);
   const [mobileToolsOpen, setMobileToolsOpen] = useState(false);
   const [mobileLanguageOpen, setMobileLanguageOpen] = useState(false);
+  const [audience, setAudience] = useState<Audience | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,7 +69,39 @@ export default function Navigation() {
     return () => document.removeEventListener("mousedown", close);
   }, []);
 
+  useEffect(() => {
+    function syncAudience() {
+      const savedAudience = window.localStorage.getItem("origino_audience");
+      setAudience(savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : null);
+    }
+    syncAudience();
+    window.addEventListener("storage", syncAudience);
+    window.addEventListener("origino:audience-change", syncAudience);
+    return () => {
+      window.removeEventListener("storage", syncAudience);
+      window.removeEventListener("origino:audience-change", syncAudience);
+    };
+  }, []);
+
   const linkClass = (href: string) => `nav-link min-h-[44px] inline-flex items-center ${pathname === href || pathname.startsWith(`${href}/`) ? "font-bold underline underline-offset-4" : ""}`;
+  const showAudienceGate = pathname === "/" && !audience;
+  const activeNavLinks = pathname === "/" && audience === "buyer" ? buyerHomeNavLinks : pathname === "/" && audience === "seller" ? sellerHomeNavLinks : navLinks;
+  const leftNavLinks = activeNavLinks.slice(0, Math.ceil(activeNavLinks.length / 2));
+  const rightNavLinks = activeNavLinks.slice(Math.ceil(activeNavLinks.length / 2));
+  const mobilePrimaryLinks = activeNavLinks.filter((link) => !link.children);
+  const mobileResourceLinks = activeNavLinks.find((link) => link.children)?.children ?? [];
+
+  if (showAudienceGate) {
+    return (
+      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+        <div className="glass relative mx-auto flex h-[68px] w-full max-w-[1280px] items-center justify-center rounded-[18px] px-5">
+          <Link href="/" className="text-3xl font-medium tracking-wide text-[#24221f]" style={{ fontFamily: "'Playfair Display', serif" }}>
+            ORIGINO
+          </Link>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">

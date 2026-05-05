@@ -48,6 +48,22 @@ const copy = {
     sellerPanelBody: "Begin with the export-readiness audit. If the work is ready, it can be reviewed for listing and buyer presentation.",
     openMarketplace: "Open Marketplace",
     viewPackages: "View Packages",
+    gateEyebrow: "ORIGINO",
+    gateTitle: "What brings you here?",
+    gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
+    buyerGateTitle: "I am sourcing",
+    buyerGateBody: "Find selected Pakistani manufacturers, compare evidence, and begin clear inquiries.",
+    sellerGateTitle: "I manufacture",
+    sellerGateBody: "Start the audit, understand readiness, and choose support before being listed.",
+    switchPath: "Switch path",
+    buyerHeroEyebrow: "For Global Buyers",
+    buyerHeroTitle: "Fewer names. Better evidence.",
+    buyerHeroBody: "Source from selected Pakistani manufacturers with clearer documents, verification signals, response context, and export readiness.",
+    buyerClarity: "ORIGINO reduces the field before you begin. Search the marketplace, compare suppliers, calculate landed cost, and ask only when the fit is visible.",
+    sellerHeroEyebrow: "For Pakistani Manufacturers",
+    sellerHeroTitle: "Be chosen before being shown.",
+    sellerHeroBody: "Start with the export-readiness audit. ORIGINO reviews brand, documents, product readiness, and buyer presentation before listing.",
+    sellerClarity: "Manufacturing already exists. Visibility needs care. The seller path moves from audit to support packages, export guides, and then admin review.",
     auditScore: "80+ required for approval",
     conditional: "60-79 enters package-assisted improvement",
     roadmap: "Below 60 receives a readiness roadmap",
@@ -64,6 +80,12 @@ const copy = {
     compare: "Supplier comparison",
     sourcingEyebrow: "Sourcing",
     compareBody: "Read verification, certifications, response rate, MOQ, lead time, and cluster fit side by side.",
+    buyerToolsTitle: "Tools for a clearer shortlist.",
+    buyerToolsBody: "Compare manufacturers, estimate landed cost, and understand the movement of goods before an inquiry becomes serious.",
+    logistics: "Logistics partners",
+    logisticsBody: "Freight and movement context for Pakistani export routes.",
+    sellerDocsTitle: "Documents before distance.",
+    sellerDocsBody: "Form-E, GSP+, Certificate of Origin, CE, Halal, FDA, and phytosanitary guidance for sellers preparing to export.",
     updatesBody: "Receive quiet updates when new manufacturers, guides, and buyer-seller meetings are ready.",
     response: "Response",
     moq: "MOQ",
@@ -97,6 +119,22 @@ const copy = {
     sellerPanelBody: "ایکسپورٹ readiness آڈٹ سے شروع کریں۔ اگر کام تیار ہے، تو اسے listing اور buyer presentation کے لیے review کیا جا سکتا ہے۔",
     openMarketplace: "مارکیٹ پلیس کھولیں",
     viewPackages: "پیکیجز دیکھیں",
+    gateEyebrow: "ORIGINO",
+    gateTitle: "What brings you here?",
+    gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
+    buyerGateTitle: "I am sourcing",
+    buyerGateBody: "Find selected Pakistani manufacturers, compare evidence, and begin clear inquiries.",
+    sellerGateTitle: "I manufacture",
+    sellerGateBody: "Start the audit, understand readiness, and choose support before being listed.",
+    switchPath: "Switch path",
+    buyerHeroEyebrow: "For Global Buyers",
+    buyerHeroTitle: "Fewer names. Better evidence.",
+    buyerHeroBody: "Source from selected Pakistani manufacturers with clearer documents, verification signals, response context, and export readiness.",
+    buyerClarity: "ORIGINO reduces the field before you begin. Search the marketplace, compare suppliers, calculate landed cost, and ask only when the fit is visible.",
+    sellerHeroEyebrow: "For Pakistani Manufacturers",
+    sellerHeroTitle: "Be chosen before being shown.",
+    sellerHeroBody: "Start with the export-readiness audit. ORIGINO reviews brand, documents, product readiness, and buyer presentation before listing.",
+    sellerClarity: "Manufacturing already exists. Visibility needs care. The seller path moves from audit to support packages, export guides, and then admin review.",
     auditScore: "منظوری کے لیے 80+ اسکور ضروری",
     conditional: "60-79 پیکیج کے ذریعے بہتری",
     roadmap: "60 سے کم اسکور پر تیاری کا روڈ میپ",
@@ -113,6 +151,12 @@ const copy = {
     compare: "سپلائر موازنہ",
     sourcingEyebrow: "سورسنگ",
     compareBody: "تصدیق، سرٹیفیکیشنز، جواب کی شرح، MOQ، lead time، اور cluster fit کا موازنہ کریں۔",
+    buyerToolsTitle: "Tools for a clearer shortlist.",
+    buyerToolsBody: "Compare manufacturers, estimate landed cost, and understand the movement of goods before an inquiry becomes serious.",
+    logistics: "Logistics partners",
+    logisticsBody: "Freight and movement context for Pakistani export routes.",
+    sellerDocsTitle: "Documents before distance.",
+    sellerDocsBody: "Form-E, GSP+, Certificate of Origin, CE, Halal, FDA, and phytosanitary guidance for sellers preparing to export.",
     updatesBody: "نئے سپلائرز، دستاویزی گائیڈز، buyer-seller meets، اور تصدیق شدہ ایکسپورٹرز کی اپ ڈیٹس حاصل کریں۔",
     response: "جواب",
     moq: "MOQ",
@@ -131,8 +175,12 @@ function getSection(sections: PageSection[], type: string) {
 export default function HomePageClient({ suppliers, products, clusters, pageSections }: HomePageClientProps) {
   const { lang } = useLanguage();
   const t = copy[lang];
-  const [audience, setAudience] = useState<Audience>("buyer");
+  const [audience, setAudience] = useState<Audience | null>(null);
   const [effectiveSuppliers, setEffectiveSuppliers] = useState(() => applySupplierOverrides(suppliers));
+  useEffect(() => {
+    const savedAudience = window.localStorage.getItem("origino_audience");
+    if (savedAudience === "buyer" || savedAudience === "seller") setAudience(savedAudience);
+  }, []);
   useEffect(() => {
     function syncSuppliers() {
       setEffectiveSuppliers(applySupplierOverrides(suppliers));
@@ -148,13 +196,72 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
   const activeSuppliers = effectiveSuppliers.filter((supplier) => supplier.is_active);
   const certified = activeSuppliers.filter((supplier) => supplier.verification_tier === "origino_certified" || supplier.verification_tier === "site_visited").length;
   const featured = activeSuppliers.filter((supplier) => supplier.is_featured).slice(0, 3);
-  const hero = getSection(pageSections, "hero");
   const featuredSection = getSection(pageSections, "featured_suppliers");
   const audit = getSection(pageSections, "audit");
   const waitlist = getSection(pageSections, "waitlist");
   const titleKey = lang === "ur" ? "title_ur" : "title";
   const eyebrowKey = lang === "ur" ? "eyebrow_ur" : "eyebrow";
-  const descriptionKey = lang === "ur" ? "description_ur" : "description";
+  const chooseAudience = (nextAudience: Audience) => {
+    window.localStorage.setItem("origino_audience", nextAudience);
+    window.dispatchEvent(new CustomEvent("origino:audience-change", { detail: nextAudience }));
+    setAudience(nextAudience);
+  };
+  const resetAudience = () => {
+    window.localStorage.removeItem("origino_audience");
+    window.dispatchEvent(new CustomEvent("origino:audience-change"));
+    setAudience(null);
+  };
+
+  if (!audience) {
+    return (
+      <div className="page-enter">
+        <section className="relative flex min-h-screen items-center overflow-hidden px-4 py-28">
+          <div className="absolute inset-0 z-0">
+            <img className="h-full w-full object-cover" src={HERO_IMAGE} alt="" aria-hidden="true" />
+            <div className="absolute inset-0 bg-[rgba(247,242,235,0.72)] backdrop-blur-[10px]" />
+            <div className="absolute inset-x-0 bottom-0 h-56 bg-[linear-gradient(to_top,rgba(247,242,235,0.98),transparent)]" />
+          </div>
+          <div className="relative z-10 mx-auto w-full max-w-5xl rounded-[34px] border border-white/55 bg-[rgba(255,250,242,0.58)] p-5 shadow-[0_30px_110px_rgba(64,52,38,0.14)] backdrop-blur-2xl md:p-8">
+            <p className="badge-patch mb-5">{t.gateEyebrow}</p>
+            <h1 className="max-w-2xl text-[clamp(3rem,8vw,6.4rem)] leading-[0.95] text-[var(--ink)]">
+              {t.gateTitle}
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#24221f]/68 md:text-lg md:leading-8">
+              {t.gateBody}
+            </p>
+            <div className="mt-10 grid gap-4 md:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => chooseAudience("buyer")}
+                className="group rounded-[30px] border border-white/50 bg-white/42 p-6 text-left shadow-[0_18px_70px_rgba(64,52,38,0.08)] transition hover:-translate-y-1 hover:bg-white/60"
+              >
+                <span className="badge-patch mb-10">Buyer</span>
+                <span className="block font-serif text-4xl leading-tight text-[var(--ink)]">{t.buyerGateTitle}</span>
+                <span className="mt-4 block max-w-md text-sm leading-6 text-[#24221f]/62">{t.buyerGateBody}</span>
+                <span className="btn-pill btn-pill-forest mt-8 inline-flex min-h-[46px] px-6 text-sm">{t.openMarketplace}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => chooseAudience("seller")}
+                className="group rounded-[30px] border border-white/50 bg-white/42 p-6 text-left shadow-[0_18px_70px_rgba(64,52,38,0.08)] transition hover:-translate-y-1 hover:bg-white/60"
+              >
+                <span className="badge-patch mb-10">Seller</span>
+                <span className="block font-serif text-4xl leading-tight text-[var(--ink)]">{t.sellerGateTitle}</span>
+                <span className="mt-4 block max-w-md text-sm leading-6 text-[#24221f]/62">{t.sellerGateBody}</span>
+                <span className="btn-pill btn-pill-forest mt-8 inline-flex min-h-[46px] px-6 text-sm">{t.auditCta}</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  const isBuyer = audience === "buyer";
+  const heroEyebrow = isBuyer ? t.buyerHeroEyebrow : t.sellerHeroEyebrow;
+  const heroTitle = isBuyer ? t.buyerHeroTitle : t.sellerHeroTitle;
+  const heroBody = isBuyer ? t.buyerHeroBody : t.sellerHeroBody;
+  const heroClarity = isBuyer ? t.buyerClarity : t.sellerClarity;
 
   return (
     <div className="page-enter">
@@ -167,60 +274,30 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         <div className="container-editorial relative z-10 py-32 text-[var(--ink)]">
           <div className="max-w-3xl blur-in">
             <p className="mb-8 inline-flex rounded-full bg-white/45 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink)] backdrop-blur-md">
-              {sectionText(hero, eyebrowKey, "Curated Sourcing From Pakistan")}
+              {heroEyebrow}
             </p>
             <h1 className="max-w-[52rem] text-[clamp(2.75rem,11vw,5.5rem)] leading-[1.02] text-[var(--ink)]">
-              {sectionText(hero, titleKey, "Selected Pakistani manufacturers, seen with proof.")}
+              {heroTitle}
             </h1>
             <p className="mt-6 max-w-xl text-base leading-7 text-[#24221f]/75 md:text-lg md:leading-8">
-              {sectionText(hero, descriptionKey, "For global buyers who need fewer names, clearer evidence, and export-ready work from Pakistan.")}
+              {heroBody}
             </p>
             <p className="mt-7 max-w-2xl text-[0.98rem] leading-7 text-[#24221f]/68 md:text-base md:leading-8">
-              {t.clarityBody}
+              {heroClarity}
             </p>
-            <div className="mt-8 max-w-2xl rounded-[30px] border border-white/55 bg-white/35 p-3 shadow-[0_24px_80px_rgba(64,52,38,0.08)] backdrop-blur-xl">
-              <p className="px-3 pt-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#4f5b3a]">
-                {t.pathEyebrow}
-              </p>
-              <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                <button
-                  type="button"
-                  aria-pressed={audience === "buyer"}
-                  onClick={() => setAudience("buyer")}
-                  className={`min-h-[50px] rounded-full border px-5 text-sm font-semibold transition ${audience === "buyer" ? "border-[#4f5b3a] bg-[#4f5b3a] text-white" : "border-[#24221f]/18 bg-white/35 text-[#24221f] hover:border-[#4f5b3a]/45"}`}
-                >
-                  {t.buyerPath}
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={audience === "seller"}
-                  onClick={() => setAudience("seller")}
-                  className={`min-h-[50px] rounded-full border px-5 text-sm font-semibold transition ${audience === "seller" ? "border-[#4f5b3a] bg-[#4f5b3a] text-white" : "border-[#24221f]/18 bg-white/35 text-[#24221f] hover:border-[#4f5b3a]/45"}`}
-                >
-                  {t.sellerPath}
-                </button>
-              </div>
-              <div className="mt-3 rounded-[24px] border border-white/45 bg-white/30 p-5">
-                <h2 className="font-serif text-2xl leading-tight text-[var(--ink)] md:text-3xl">
-                  {audience === "buyer" ? t.buyerPanelTitle : t.sellerPanelTitle}
-                </h2>
-                <p className="mt-3 max-w-xl text-sm leading-6 text-[#24221f]/65">
-                  {audience === "buyer" ? t.buyerPanelBody : t.sellerPanelBody}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {audience === "buyer" ? (
-                    <>
-                      <Link className="btn-pill btn-pill-forest min-h-[46px] px-6 text-sm" href="/marketplace">{t.openMarketplace}</Link>
-                      <Link className="btn-pill btn-pill-outline min-h-[46px] px-6 text-sm" href="/compare">{t.compareCta}</Link>
-                    </>
-                  ) : (
-                    <>
-                      <Link className="btn-pill btn-pill-forest min-h-[46px] px-6 text-sm" href="/audit">{t.auditCta}</Link>
-                      <Link className="btn-pill btn-pill-outline min-h-[46px] px-6 text-sm" href="/marketing-packages">{t.viewPackages}</Link>
-                    </>
-                  )}
-                </div>
-              </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {isBuyer ? (
+                <>
+                  <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/marketplace">{t.openMarketplace}</Link>
+                  <Link className="btn-pill btn-pill-outline min-h-[52px] px-8" href="/landed-cost">{t.cost}</Link>
+                </>
+              ) : (
+                <>
+                  <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/audit">{t.auditCta}</Link>
+                  <Link className="btn-pill btn-pill-outline min-h-[52px] px-8" href="/marketing-packages">{t.viewPackages}</Link>
+                </>
+              )}
+              <button className="btn-pill btn-pill-outline min-h-[52px] px-8" type="button" onClick={resetAudience}>{t.switchPath}</button>
             </div>
           </div>
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-3 blur-in [animation-delay:180ms]">
@@ -257,81 +334,125 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         </div>
       </section>
 
-      <section className="bg-[#f3eadf] py-20">
-        <div className="container-editorial">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#4f5b3a]">{sectionText(featuredSection, eyebrowKey, t.featuredSuppliers)}</p>
-            <h2 className="text-4xl md:text-5xl">{sectionText(featuredSection, titleKey, "Manufacturers worth reading.")}</h2>
-          </div>
-          <Link className="hidden items-center gap-2 text-sm font-semibold text-[#4f5b3a] transition hover:text-[#2a3320] sm:inline-flex" href="/marketplace">{t.browseAll}</Link>
-        </div>
-        <div className="grid gap-7 md:grid-cols-3">
-          {featured.map((supplier) => (
-            <Link key={supplier.id} href={`/suppliers/${supplier.slug}`} className="group overflow-hidden rounded-[34px] border border-[rgba(84,98,64,0.10)] bg-[var(--warm-white)] shadow-[0_22px_70px_rgba(64,52,38,0.06)] hover-lift">
-              <div className="relative m-3 aspect-[4/3] overflow-hidden rounded-[28px]">
-                <img className="img-zoom h-full w-full object-cover" src={supplier.hero_image_url || "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg?auto=compress&cs=tinysrgb&w=1200"} alt={supplier.company_name} />
-                <span className="badge-patch absolute left-4 top-4 bg-white/85 text-[#4f5b3a] backdrop-blur">{supplier.verification_tier.replace(/_/g, " ")}</span>
-              </div>
-              <div className="p-6">
-                <p className="text-xs uppercase tracking-[0.16em] text-[#8a8a82]">{supplier.city} / {supplier.category}</p>
-                <h3 className="mt-3 text-2xl transition group-hover:text-[#4f5b3a]">{lang === "ur" && supplier.company_name_ur ? supplier.company_name_ur : supplier.company_name}</h3>
-                <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#5a5a54]">{supplier.description}</p>
-                <p className="mt-5 metric-numeral text-sm">{t.response} {supplier.response_rate}% / {t.moq} ${supplier.moq_usd?.toLocaleString()}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-        </div>
-      </section>
-
-      <section className="container-editorial py-20">
-        <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
-          <div className="panel-soft p-6 md:p-10">
-            <p className="badge-patch mb-5">{sectionText(audit, eyebrowKey, "AI Audit")}</p>
-            <h2 className="max-w-2xl text-4xl md:text-6xl">{sectionText(audit, titleKey, "Chosen before shown.")}</h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-[#5a5a54]">{t.auditBody}</p>
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              {[
-                ["80-100", t.auditScore],
-                ["60-79", t.conditional],
-                ["0-59", t.roadmap],
-              ].map(([score, label]) => (
-                <div className="rounded-[26px] border border-[rgba(84,98,64,0.12)] bg-white/55 p-5" key={score}>
-                  <p className="metric-numeral text-2xl">{score}</p>
-                  <p className="mt-2 text-sm leading-5 text-[#6d675f]">{label}</p>
+      {isBuyer && (
+        <>
+          <section className="bg-[#f3eadf] py-20">
+            <div className="container-editorial">
+              <div className="mb-6 flex items-end justify-between gap-4">
+                <div>
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#4f5b3a]">{sectionText(featuredSection, eyebrowKey, t.featuredSuppliers)}</p>
+                  <h2 className="text-4xl md:text-5xl">{sectionText(featuredSection, titleKey, "Manufacturers worth reading.")}</h2>
                 </div>
-              ))}
+                <Link className="hidden items-center gap-2 text-sm font-semibold text-[#4f5b3a] transition hover:text-[#2a3320] sm:inline-flex" href="/marketplace">{t.browseAll}</Link>
+              </div>
+              <div className="grid gap-7 md:grid-cols-3">
+                {featured.map((supplier) => (
+                  <Link key={supplier.id} href={`/suppliers/${supplier.slug}`} className="group overflow-hidden rounded-[34px] border border-[rgba(84,98,64,0.10)] bg-[var(--warm-white)] shadow-[0_22px_70px_rgba(64,52,38,0.06)] hover-lift">
+                    <div className="relative m-3 aspect-[4/3] overflow-hidden rounded-[28px]">
+                      <img className="img-zoom h-full w-full object-cover" src={supplier.hero_image_url || "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg?auto=compress&cs=tinysrgb&w=1200"} alt={supplier.company_name} />
+                      <span className="badge-patch absolute left-4 top-4 bg-white/85 text-[#4f5b3a] backdrop-blur">{supplier.verification_tier.replace(/_/g, " ")}</span>
+                    </div>
+                    <div className="p-6">
+                      <p className="text-xs uppercase tracking-[0.16em] text-[#8a8a82]">{supplier.city} / {supplier.category}</p>
+                      <h3 className="mt-3 text-2xl transition group-hover:text-[#4f5b3a]">{lang === "ur" && supplier.company_name_ur ? supplier.company_name_ur : supplier.company_name}</h3>
+                      <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#5a5a54]">{supplier.description}</p>
+                      <p className="mt-5 metric-numeral text-sm">{t.response} {supplier.response_rate}% / {t.moq} ${supplier.moq_usd?.toLocaleString()}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link className="btn-pill btn-pill-forest min-h-[50px] px-8" href="/audit">{t.auditCta}</Link>
-              <Link className="btn-pill btn-pill-outline min-h-[50px] px-8" href="/compare">{t.compareCta}</Link>
-            </div>
-          </div>
+          </section>
 
-          <div className="panel-soft p-6 md:p-8">
-            <p className="badge-patch tier-certified mb-5">Seller Packages</p>
-            <h2 className="text-4xl">Marketing services sellers can buy quickly.</h2>
-            <p className="mt-4 text-sm leading-7 text-[#5a5a54]">
-              Basic, Growth, and Premium help a manufacturer become legible: identity, photography, catalogue, website, and buyer introductions.
-            </p>
-            <div className="mt-6 space-y-3">
-              {[
-                ["Basic", "$299", "3 weeks"],
-                ["Growth", "$799", "6 weeks"],
-                ["Premium", "$1,999", "10 weeks"],
-              ].map(([name, price, delivery]) => (
-                <Link className="flex items-center justify-between rounded-full border border-[rgba(84,98,64,0.12)] bg-white/55 px-5 py-4 transition hover:border-[var(--forest)]" href="/marketing-packages" key={name}>
-                  <span className="font-semibold">{name}</span>
-                  <span className="metric-numeral">{price}</span>
-                  <span className="text-sm text-[#6d675f]">{delivery}</span>
-                </Link>
-              ))}
+          <section className="container-editorial py-20">
+            <div className="panel-soft p-6 md:p-10">
+              <p className="badge-patch mb-5">{t.sourcingEyebrow}</p>
+              <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+                <div>
+                  <h2 className="text-4xl md:text-5xl">{t.buyerToolsTitle}</h2>
+                  <p className="mt-5 max-w-xl text-base leading-8 text-[#5a5a54]">{t.buyerToolsBody}</p>
+                </div>
+                <div className="grid gap-4 md:grid-cols-3">
+                  {[
+                    ["/compare", t.compare, t.compareBody],
+                    ["/landed-cost", t.cost, t.costBody],
+                    ["/logistics", t.logistics, t.logisticsBody],
+                  ].map(([href, title, body]) => (
+                    <Link className="rounded-[28px] border border-[rgba(84,98,64,0.12)] bg-white/50 p-5 transition hover:-translate-y-1 hover:border-[var(--forest)]" href={href} key={href}>
+                      <h3 className="font-serif text-2xl">{title}</h3>
+                      <p className="mt-3 text-sm leading-6 text-[#6d675f]">{body}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
-            <Link className="btn-pill btn-pill-forest mt-7 w-full min-h-[50px]" href="/marketing-packages">View Marketing Packages</Link>
-          </div>
-        </div>
-      </section>
+          </section>
+        </>
+      )}
+
+      {!isBuyer && (
+        <>
+          <section className="container-editorial py-20">
+            <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
+              <div className="panel-soft p-6 md:p-10">
+                <p className="badge-patch mb-5">{sectionText(audit, eyebrowKey, "AI Audit")}</p>
+                <h2 className="max-w-2xl text-4xl md:text-6xl">{sectionText(audit, titleKey, "Chosen before shown.")}</h2>
+                <p className="mt-5 max-w-2xl text-base leading-8 text-[#5a5a54]">{t.auditBody}</p>
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  {[
+                    ["80-100", t.auditScore],
+                    ["60-79", t.conditional],
+                    ["0-59", t.roadmap],
+                  ].map(([score, label]) => (
+                    <div className="rounded-[26px] border border-[rgba(84,98,64,0.12)] bg-white/55 p-5" key={score}>
+                      <p className="metric-numeral text-2xl">{score}</p>
+                      <p className="mt-2 text-sm leading-5 text-[#6d675f]">{label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link className="btn-pill btn-pill-forest min-h-[50px] px-8" href="/audit">{t.auditCta}</Link>
+                  <Link className="btn-pill btn-pill-outline min-h-[50px] px-8" href="/export-docs">{t.docs}</Link>
+                </div>
+              </div>
+
+              <div className="panel-soft p-6 md:p-8">
+                <p className="badge-patch tier-certified mb-5">Seller Packages</p>
+                <h2 className="text-4xl">Marketing services sellers can buy quickly.</h2>
+                <p className="mt-4 text-sm leading-7 text-[#5a5a54]">
+                  Basic, Growth, and Premium help a manufacturer become legible: identity, photography, catalogue, website, and buyer introductions.
+                </p>
+                <div className="mt-6 space-y-3">
+                  {[
+                    ["Basic", "$299", "3 weeks"],
+                    ["Growth", "$799", "6 weeks"],
+                    ["Premium", "$1,999", "10 weeks"],
+                  ].map(([name, price, delivery]) => (
+                    <Link className="flex items-center justify-between rounded-full border border-[rgba(84,98,64,0.12)] bg-white/55 px-5 py-4 transition hover:border-[var(--forest)]" href={`/checkout/marketing?package=${name.toLowerCase()}`} key={name}>
+                      <span className="font-semibold">{name}</span>
+                      <span className="metric-numeral">{price}</span>
+                      <span className="text-sm text-[#6d675f]">{delivery}</span>
+                    </Link>
+                  ))}
+                </div>
+                <Link className="btn-pill btn-pill-forest mt-7 w-full min-h-[50px]" href="/marketing-packages">View Marketing Packages</Link>
+              </div>
+            </div>
+          </section>
+
+          <section className="container-editorial pb-20">
+            <div className="panel-soft p-6 md:p-10">
+              <p className="badge-patch mb-5">{t.docsEyebrow}</p>
+              <h2 className="max-w-2xl text-4xl md:text-5xl">{t.sellerDocsTitle}</h2>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-[#5a5a54]">{t.sellerDocsBody}</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link className="btn-pill btn-pill-forest min-h-[50px] px-8" href="/export-docs">{t.docs}</Link>
+                <Link className="btn-pill btn-pill-outline min-h-[50px] px-8" href="/seller/export-docs">Seller checklist</Link>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
 
       <section className="container-editorial py-16">
         <div className="grid gap-8 rounded-[28px] border border-[rgba(44,44,44,0.08)] bg-white/80 p-6 shadow-[0_18px_70px_rgba(0,0,0,0.05)] md:grid-cols-[1fr_0.9fr] md:items-center md:p-8">
