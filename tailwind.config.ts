@@ -45,8 +45,8 @@ const config: Config = {
       fontFamily: {
         serif: ["Playfair Display", "Georgia", "serif"],
         sans: ["DM Sans", "system-ui", "sans-serif"],
-        mono: ["Courier Prime", "Courier New", "monospace"],
-        urdu: ["Noto Nastaliq Urdu", "serif"],
+        mono: ["DM Sans", "system-ui", "sans-serif"],
+        urdu: ["DM Sans", "system-ui", "sans-serif"],
       },
       fontSize: {
         "display-xl": ["5rem", { lineHeight: "1.05", letterSpacing: "-0.02em" }],

@@ -127,7 +127,7 @@ export default function AdminActivityLogClient({ initialLogs }: AdminActivityLog
                   <span className={log.severity === "critical" ? "badge-patch text-[#c0623a]" : "badge-patch"}>{log.severity}</span>
                   {reviewedIds.includes(log.id) && <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--forest)]">Reviewed</p>}
                 </td>
-                <td className="p-4 font-mono text-xs">{log.ip_address}</td>
+                <td className="p-4 text-xs font-semibold tracking-[0.04em]">{log.ip_address}</td>
                 <td className="p-4">
                   <div className="flex flex-wrap justify-end gap-2">
                     <button className="btn-pill btn-pill-outline min-h-[44px]" onClick={() => setSelectedLog(log)}>Details</button>
@@ -176,7 +176,7 @@ export default function AdminActivityLogClient({ initialLogs }: AdminActivityLog
                 {Object.entries(selectedLog.metadata).map(([key, value]) => (
                   <div className="flex justify-between gap-4 border-b border-[#e2ddd8] py-2" key={key}>
                     <span className="text-[#6b6b68]">{key}</span>
-                    <span className="font-mono">{value}</span>
+                    <span className="font-semibold tracking-[0.04em]">{value}</span>
                   </div>
                 ))}
               </div>

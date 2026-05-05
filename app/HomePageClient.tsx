@@ -146,10 +146,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
   const hero = getSection(pageSections, "hero");
   const clusterSection = getSection(pageSections, "clusters");
   const featuredSection = getSection(pageSections, "featured_suppliers");
-  const trust = getSection(pageSections, "trust");
   const audit = getSection(pageSections, "audit");
-  const rfq = getSection(pageSections, "rfq");
-  const tools = getSection(pageSections, "tools");
   const waitlist = getSection(pageSections, "waitlist");
   const titleKey = lang === "ur" ? "title_ur" : "title";
   const eyebrowKey = lang === "ur" ? "eyebrow_ur" : "eyebrow";
@@ -266,101 +263,50 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         </div>
       </section>
 
-      <section className="border-y border-[rgba(26,26,24,0.12)] bg-[#f7f3ee]">
-        <div className="container-editorial grid gap-6 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
-            <p className="badge-patch mb-3">{sectionText(trust, eyebrowKey, "Trust Layer")}</p>
-            <h2 className="text-3xl">{sectionText(trust, titleKey, "Verification before introduction")}</h2>
-            <p className="mt-4 text-[#5a5a54]">{t.trustBody}</p>
+      <section className="container-editorial py-20">
+        <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
+          <div className="panel-soft p-6 md:p-10">
+            <p className="badge-patch mb-5">{sectionText(audit, eyebrowKey, "AI Audit")}</p>
+            <h2 className="max-w-2xl text-4xl md:text-6xl">{sectionText(audit, titleKey, "A strict gate before any supplier is listed.")}</h2>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-[#5a5a54]">{t.auditBody}</p>
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {[
+                ["80-100", t.auditScore],
+                ["60-79", t.conditional],
+                ["0-59", t.roadmap],
+              ].map(([score, label]) => (
+                <div className="rounded-[26px] border border-[rgba(84,98,64,0.12)] bg-white/55 p-5" key={score}>
+                  <p className="metric-numeral text-2xl">{score}</p>
+                  <p className="mt-2 text-sm leading-5 text-[#6d675f]">{label}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link className="btn-pill btn-pill-forest min-h-[50px] px-8" href="/audit">{t.auditCta}</Link>
+              <Link className="btn-pill btn-pill-outline min-h-[50px] px-8" href="/compare">{t.compareCta}</Link>
+            </div>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {[t.trustSanctions, t.trustDocs, t.trustEscrow].map((item) => (
-              <div className="panel-soft p-6 hover-lift" key={item}>
-                <p className="badge-patch tier-certified">{t.verified}</p>
-                <p className="mt-4 text-lg font-semibold">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="container-editorial grid gap-6 py-14 lg:grid-cols-2">
-        <div className="panel-soft p-6 hover-lift">
-          <p className="badge-patch mb-3">{sectionText(audit, eyebrowKey, "Seller Audit")}</p>
-          <h2 className="text-3xl">{sectionText(audit, titleKey, "A strict gate for export readiness")}</h2>
-          <p className="mt-4 text-[#5a5a54]">{t.auditBody}</p>
-          <div className="mt-5 space-y-3 text-sm text-[#3a3a38]">
-            <p className="metric-numeral">80-100 / {t.auditScore}</p>
-            <p className="metric-numeral">60-79 / {t.conditional}</p>
-            <p className="metric-numeral">0-59 / {t.roadmap}</p>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link className="btn-pill btn-pill-forest inline-flex min-h-[44px] items-center" href="/audit">{t.auditCta}</Link>
-            <Link className="btn-pill btn-pill-outline inline-flex min-h-[44px] items-center" href="/marketing-packages">View Marketing Packages</Link>
-          </div>
-        </div>
-        <div className="panel-soft p-6 hover-lift">
-          <p className="badge-patch mb-3">{sectionText(rfq, eyebrowKey, "Buyer Sourcing")}</p>
-          <h2 className="text-3xl">{sectionText(rfq, titleKey, "Start with a marketplace search or RFQ")}</h2>
-          <p className="mt-4 text-[#5a5a54]">{t.rfqBody}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link className="btn-pill btn-pill-forest min-h-[44px]" href="/register?role=buyer&redirect=/buyer/rfq/new">{t.rfqCta}</Link>
-            <Link className="btn-pill btn-pill-outline min-h-[44px]" href="/compare">{t.compareCta}</Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="container-editorial pb-14">
-        <div className="panel-soft grid gap-8 p-6 md:grid-cols-[1fr_0.95fr] md:p-8">
-          <div>
-            <p className="badge-patch tier-certified mb-4">Seller Packages</p>
-            <h2 className="text-3xl md:text-4xl">Export-readiness services sellers can buy</h2>
-            <p className="mt-4 text-[#5a5a54]">
-              Basic, Growth, and Premium are ORIGINO's paid seller products: brand audit, logo work, photography, catalog and website assets, social setup, and buyer-network campaigns after the audit gate.
+          <div className="panel-soft p-6 md:p-8">
+            <p className="badge-patch tier-certified mb-5">Seller Packages</p>
+            <h2 className="text-4xl">Marketing services sellers can buy quickly.</h2>
+            <p className="mt-4 text-sm leading-7 text-[#5a5a54]">
+              Basic, Growth, and Premium package the exact export-readiness work from the specification: brand audit, logo, photography, catalog, website, and buyer introductions.
             </p>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {[
-              ["Basic", "$299", "3 weeks"],
-              ["Growth", "$799", "6 weeks"],
-              ["Premium", "$1,999", "10 weeks"],
-            ].map(([name, price, delivery]) => (
-              <Link className="dashboard-card p-5 hover-lift" href="/marketing-packages" key={name}>
-                <p className="text-xs uppercase tracking-[0.16em] text-[#8a8178]">{name}</p>
-                <p className="metric-numeral mt-3 text-3xl">{price}</p>
-                <p className="mt-1 text-sm text-[#5a5a54]">{delivery}</p>
-              </Link>
-            ))}
-          </div>
-          <div className="md:col-span-2">
-            <Link className="btn-pill btn-pill-forest min-h-[44px]" href="/marketing-packages">View Marketing Packages</Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-[rgba(26,26,24,0.12)] bg-[#f7f3ee]">
-        <div className="container-editorial py-14">
-          <div className="mb-8 max-w-3xl">
-            <p className="badge-patch mb-3">{sectionText(tools, eyebrowKey, "Trade Desk")}</p>
-            <h2 className="text-3xl">{sectionText(tools, titleKey, "Tools buyers need before they send an RFQ")}</h2>
-            <p className="mt-3 text-[#5a5a54]">{t.toolsBody}</p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Link href="/export-docs" className="panel-soft p-5 transition hover:border-[#4f5b3a] hover-lift">
-              <p className="text-xs uppercase tracking-[0.16em] text-[#8a8a82]">{t.docsEyebrow}</p>
-              <h3 className="mt-3 text-2xl">{t.docs}</h3>
-              <p className="mt-3 text-sm leading-6 text-[#5a5a54]">{t.docsBody}</p>
-            </Link>
-            <Link href="/landed-cost" className="panel-soft p-5 transition hover:border-[#4f5b3a] hover-lift">
-              <p className="text-xs uppercase tracking-[0.16em] text-[#8a8a82]">{t.costingEyebrow}</p>
-              <h3 className="mt-3 text-2xl">{t.cost}</h3>
-              <p className="mt-3 text-sm leading-6 text-[#5a5a54]">{t.costBody}</p>
-            </Link>
-            <Link href="/compare" className="panel-soft p-5 transition hover:border-[#4f5b3a] hover-lift">
-              <p className="text-xs uppercase tracking-[0.16em] text-[#8a8a82]">{t.sourcingEyebrow}</p>
-              <h3 className="mt-3 text-2xl">{t.compare}</h3>
-              <p className="mt-3 text-sm leading-6 text-[#5a5a54]">{t.compareBody}</p>
-            </Link>
+            <div className="mt-6 space-y-3">
+              {[
+                ["Basic", "$299", "3 weeks"],
+                ["Growth", "$799", "6 weeks"],
+                ["Premium", "$1,999", "10 weeks"],
+              ].map(([name, price, delivery]) => (
+                <Link className="flex items-center justify-between rounded-full border border-[rgba(84,98,64,0.12)] bg-white/55 px-5 py-4 transition hover:border-[var(--forest)]" href="/marketing-packages" key={name}>
+                  <span className="font-semibold">{name}</span>
+                  <span className="metric-numeral">{price}</span>
+                  <span className="text-sm text-[#6d675f]">{delivery}</span>
+                </Link>
+              ))}
+            </div>
+            <Link className="btn-pill btn-pill-forest mt-7 w-full min-h-[50px]" href="/marketing-packages">View Marketing Packages</Link>
           </div>
         </div>
       </section>
