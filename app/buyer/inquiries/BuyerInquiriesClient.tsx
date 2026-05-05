@@ -175,7 +175,7 @@ export default function BuyerInquiriesClient({ inquiries }: { inquiries: Inquiry
             <div>
               <p className="badge-patch">Buyer to Supplier</p>
               <h2 className="mt-3 text-2xl">Send a New Inquiry</h2>
-              <p className="mt-1 text-sm text-[#5a5a54]">This creates the same mock inquiry record in buyer and seller portals.</p>
+              <p className="mt-1 text-sm text-[#5a5a54]">Send a structured inquiry to the supplier workspace with quantity, context, and message history.</p>
             </div>
             <button className="btn-pill btn-pill-outline min-h-[44px]" onClick={() => router.push("/marketplace")}>Browse Marketplace</button>
           </div>

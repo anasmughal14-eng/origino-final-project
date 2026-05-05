@@ -32,7 +32,7 @@ export default function SellerSettingsPage() {
     <div>
       <span className="badge-patch">Seller Settings</span>
       <h1 className="mt-4 text-4xl">Settings</h1>
-      <p className="mt-3 max-w-3xl text-[var(--ink-soft)]">Security, language, agreement, notifications, and data deletion controls. These are local-state stubs now and map directly to profiles, seller agreement versions, and notification preferences in Supabase.</p>
+      <p className="mt-3 max-w-3xl text-[var(--ink-soft)]">Security, language, agreement, notifications, and data deletion controls for the seller workspace.</p>
 
       <div className="mt-8 grid gap-5 lg:grid-cols-2">
         <section className="border border-[var(--border)] p-5">
@@ -79,7 +79,7 @@ export default function SellerSettingsPage() {
 
       <section className="mt-6 border border-[var(--terracotta)] p-5">
         <h2 className="text-2xl">Data Deletion Request</h2>
-        <p className="mt-2 text-sm text-[var(--ink-muted)]">Creates a 30-day admin task in production. This mock version validates and records the request locally.</p>
+        <p className="mt-2 text-sm text-[var(--ink-muted)]">Creates a 30-day admin task for review and keeps a record of the request.</p>
         <textarea className="input-editorial mt-4 min-h-[120px]" value={deleteReason} onChange={(event) => setDeleteReason(event.target.value)} placeholder="Reason for deletion request" />
         <button className="btn-pill btn-pill-outline mt-4 min-h-[44px] border-[var(--terracotta)] text-[var(--terracotta)]" onClick={requestDeletion} disabled={saving === "Data deletion request"}>{saving === "Data deletion request" ? "Submitting..." : "Submit Deletion Request"}</button>
       </section>

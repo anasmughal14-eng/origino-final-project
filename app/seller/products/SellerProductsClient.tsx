@@ -165,7 +165,7 @@ export default function SellerProductsClient({ products }: { products: Product[]
           <div className="modal-surface max-h-[90vh] w-full max-w-3xl overflow-y-auto">
             <p className="badge-patch mb-4">{editing.id ? "Product editor" : "New product"}</p>
             <h2 className="text-3xl">{editing.id ? "Edit Product" : "Add Product"}</h2>
-            <p className="mt-2 text-sm text-[#5a5a54]">This form saves to Supabase in live mode and keeps local continuity in mock mode.</p>
+            <p className="mt-2 text-sm text-[#5a5a54]">Update buyer-facing product details, pricing, availability, and catalog status.</p>
             <div className="mt-5 grid gap-3 md:grid-cols-2">
               <label className="block"><span className="mb-1 block text-xs uppercase tracking-[0.14em] text-[#8a8a82]">Name</span><input className="input-editorial" value={editing.name} onChange={(event) => { setError(""); setEditing({ ...editing, name: event.target.value }); }} /></label>
               <label className="block"><span className="mb-1 block text-xs uppercase tracking-[0.14em] text-[#8a8a82]">Category</span><input className="input-editorial" value={editing.category} onChange={(event) => { setError(""); setEditing({ ...editing, category: event.target.value }); }} /></label>

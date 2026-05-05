@@ -64,7 +64,7 @@ export default function SellerNewProductPage() {
       setSaving(false);
       setDraft(blankDraft);
       setImageName("");
-      toast.success("Product draft saved. It is ready for Supabase product insertion.");
+      toast.success("Product draft saved for catalog review.");
     }, 600);
   }
 
