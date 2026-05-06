@@ -53,9 +53,9 @@ const copy = {
     gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
     select: "Select",
     buyerGateTitle: "I'm a Buyer",
-    buyerGateBody: "Find selected Pakistani manufacturers, compare evidence, and begin clear inquiries.",
+    buyerGateBody: "Browse selected manufacturers, compare proof, then send a clear inquiry.",
     sellerGateTitle: "I'm a Manufacturer",
-    sellerGateBody: "Start the audit, understand readiness, and choose support before being listed.",
+    sellerGateBody: "Apply, complete the audit, enter review, then choose support if it is needed.",
     switchPath: "Switch path",
     buyerSplit: "I'm a Buyer",
     manufacturerSplit: "I'm a Manufacturer",
@@ -63,12 +63,12 @@ const copy = {
     clarityBlock: "We do not list thousands of suppliers. We work with a few, carefully chosen, properly understood, and presented to build trust before conversation begins.",
     buyerHeroEyebrow: "For Global Buyers",
     buyerHeroTitle: "Selected manufacturers. Not endless options.",
-    buyerHeroBody: "Work with carefully chosen suppliers presented clearly, without noise.",
-    buyerClarity: "Selected manufacturers from Pakistan. Built for global buyers. We work with a small number of suppliers, understand them closely, and present them with clarity so sourcing becomes simpler, not overwhelming.",
+    buyerHeroBody: "Browse selected suppliers, compare evidence, and begin a clear inquiry.",
+    buyerClarity: "Selected manufacturers from Pakistan. Built for global buyers. First compare documents, verification signals, response data, and sourcing context. Then begin the conversation.",
     sellerHeroEyebrow: "For Pakistani Manufacturers",
     sellerHeroTitle: "What you make deserves to be seen.",
-    sellerHeroBody: "We work with a limited number of manufacturers and help them reach global buyers with clarity.",
-    sellerClarity: "Selected manufacturers from Pakistan. Built for global buyers. Before listing, ORIGINO reviews readiness, documents, verification signals, and how the work should be understood.",
+    sellerHeroBody: "Apply for review, complete the audit, and prepare your work for global buyers.",
+    sellerClarity: "Before listing, ORIGINO reviews readiness, documents, verification signals, and how the work should be understood. Packages only support the work after the audit path is clear.",
     auditScore: "80+ required for approval",
     conditional: "60-79 enters package-assisted improvement",
     roadmap: "Below 60 receives a readiness roadmap",
@@ -129,9 +129,9 @@ const copy = {
     gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
     select: "Select",
     buyerGateTitle: "I'm a Buyer",
-    buyerGateBody: "Find selected Pakistani manufacturers, compare evidence, and begin clear inquiries.",
+    buyerGateBody: "Browse selected manufacturers, compare proof, then send a clear inquiry.",
     sellerGateTitle: "I'm a Manufacturer",
-    sellerGateBody: "Start the audit, understand readiness, and choose support before being listed.",
+    sellerGateBody: "Apply, complete the audit, enter review, then choose support if it is needed.",
     switchPath: "Switch path",
     buyerSplit: "I'm a Buyer",
     manufacturerSplit: "I'm a Manufacturer",
@@ -139,12 +139,12 @@ const copy = {
     clarityBlock: "We do not list thousands of suppliers. We work with a few, carefully chosen, properly understood, and presented to build trust before conversation begins.",
     buyerHeroEyebrow: "For Global Buyers",
     buyerHeroTitle: "Selected manufacturers. Not endless options.",
-    buyerHeroBody: "Work with carefully chosen suppliers presented clearly, without noise.",
-    buyerClarity: "Selected manufacturers from Pakistan. Built for global buyers. We work with a small number of suppliers, understand them closely, and present them with clarity so sourcing becomes simpler, not overwhelming.",
+    buyerHeroBody: "Browse selected suppliers, compare evidence, and begin a clear inquiry.",
+    buyerClarity: "Selected manufacturers from Pakistan. Built for global buyers. First compare documents, verification signals, response data, and sourcing context. Then begin the conversation.",
     sellerHeroEyebrow: "For Pakistani Manufacturers",
     sellerHeroTitle: "What you make deserves to be seen.",
-    sellerHeroBody: "We work with a limited number of manufacturers and help them reach global buyers with clarity.",
-    sellerClarity: "Selected manufacturers from Pakistan. Built for global buyers. Before listing, ORIGINO reviews readiness, documents, verification signals, and how the work should be understood.",
+    sellerHeroBody: "Apply for review, complete the audit, and prepare your work for global buyers.",
+    sellerClarity: "Before listing, ORIGINO reviews readiness, documents, verification signals, and how the work should be understood. Packages only support the work after the audit path is clear.",
     auditScore: "منظوری کے لیے 80+ اسکور ضروری",
     conditional: "60-79 پیکیج کے ذریعے بہتری",
     roadmap: "60 سے کم اسکور پر تیاری کا روڈ میپ",
@@ -226,6 +226,12 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
     window.dispatchEvent(new CustomEvent("origino:audience-change", { detail: nextAudience }));
     setAudience(nextAudience);
   };
+  const resetAudience = () => {
+    window.localStorage.removeItem("origino_audience");
+    window.localStorage.removeItem("userType");
+    window.dispatchEvent(new CustomEvent("origino:audience-change", { detail: null }));
+    setAudience(null);
+  };
   if (!audience) {
     return (
       <div className="page-enter">
@@ -269,6 +275,20 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
   const heroTitle = isBuyer ? t.buyerHeroTitle : t.sellerHeroTitle;
   const heroBody = isBuyer ? t.buyerHeroBody : t.sellerHeroBody;
   const heroClarity = isBuyer ? t.buyerClarity : t.sellerClarity;
+  const processSteps = isBuyer
+    ? [
+        ["1", "Browse", "Start with selected Pakistani manufacturers."],
+        ["2", "Compare", "Review documents, verification, response data, and fit."],
+        ["3", "Inquire", "Send one clear request and move into quote discussion."],
+      ]
+    : [
+        ["1", "Apply", "Create a seller account and start the readiness audit."],
+        ["2", "Review", "ORIGINO checks score, documents, sanctions, and presentation."],
+        ["3", "List", "Approved suppliers move toward listing; support packages stay optional."],
+      ];
+  const proofPoints = isBuyer
+    ? ["Verification tier visible", "Documents and certifications surfaced", "MOQ, lead time, and response discipline shown"]
+    : ["Six-category readiness score", "Admin review before listing", "Packages only after the audit path is clear"];
 
   return (
     <div className="page-enter">
@@ -294,18 +314,11 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               {isBuyer ? (
-                <>
-                  <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/marketplace">{t.openMarketplace}</Link>
-                  <Link className="btn-pill btn-pill-outline min-h-[52px] px-8" href="/landed-cost">{t.cost}</Link>
-                </>
+                <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/marketplace">{t.openMarketplace}</Link>
               ) : (
-                <>
-                  <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/audit">{t.auditCta}</Link>
-                  <Link className="btn-pill btn-pill-outline min-h-[52px] px-8" href="/marketing-packages">{t.viewPackages}</Link>
-                </>
+                <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/audit">{t.auditCta}</Link>
               )}
-              <button className="btn-pill btn-pill-outline min-h-[52px] px-8" type="button" onClick={() => chooseAudience("buyer")}>{t.buyerSplit}</button>
-              <button className="btn-pill btn-pill-outline min-h-[52px] px-8" type="button" onClick={() => chooseAudience("seller")}>{t.manufacturerSplit}</button>
+              <button className="btn-pill btn-pill-outline min-h-[52px] px-8" type="button" onClick={resetAudience}>{t.switchPath}</button>
             </div>
           </div>
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-3 blur-in [animation-delay:180ms]">
@@ -326,6 +339,27 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
           <p className="max-w-3xl text-base leading-8 text-[#24221f]/72 md:text-lg md:leading-9">
             {t.clarityBlock}
           </p>
+          <div className="mt-8 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="grid gap-3 md:grid-cols-3">
+              {processSteps.map(([number, title, body]) => (
+                <div key={number} className="rounded-[26px] border border-[rgba(84,98,64,0.12)] bg-white/42 p-5">
+                  <p className="metric-numeral text-2xl text-[var(--forest)]">{number}</p>
+                  <h3 className="mt-3 font-serif text-2xl text-[var(--ink)]">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[#5a5a54]">{body}</p>
+                </div>
+              ))}
+            </div>
+            <div className="rounded-[26px] border border-[rgba(84,98,64,0.12)] bg-white/36 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#4f5b3a]">Proof appears early</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {proofPoints.map((point) => (
+                  <span key={point} className="rounded-full border border-[rgba(84,98,64,0.16)] bg-white/48 px-4 py-2 text-sm text-[#4d4944]">
+                    {point}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -435,9 +469,9 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
 
               <div className="panel-soft p-6 md:p-8">
                 <p className="badge-patch tier-certified mb-5">Seller Packages</p>
-                <h2 className="text-4xl">Marketing services sellers can buy quickly.</h2>
+                <h2 className="text-4xl">Support after the audit is clear.</h2>
                 <p className="mt-4 text-sm leading-7 text-[#5a5a54]">
-                  Basic, Growth, and Premium help a manufacturer become legible: identity, photography, catalogue, website, and buyer introductions.
+                  Basic, Growth, and Premium help a manufacturer become legible when the audit shows what is missing: identity, photography, catalogue, website, and buyer introductions.
                 </p>
                 <div className="mt-6 space-y-3">
                   {[
@@ -452,7 +486,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
                     </Link>
                   ))}
                 </div>
-                <Link className="btn-pill btn-pill-forest mt-7 w-full min-h-[50px]" href="/marketing-packages">View Marketing Packages</Link>
+                <Link className="btn-pill btn-pill-forest mt-7 w-full min-h-[50px]" href="/marketing-packages">Understand Packages</Link>
               </div>
             </div>
           </section>

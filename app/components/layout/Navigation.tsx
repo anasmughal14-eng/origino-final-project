@@ -51,6 +51,14 @@ const sellerHomeNavLinks: NavLink[] = [
 
 type Audience = "buyer" | "seller";
 
+function readAudiencePreference(): Audience | null {
+  const userType = window.localStorage.getItem("userType");
+  if (userType === "buyer") return "buyer";
+  if (userType === "manufacturer") return "seller";
+  const savedAudience = window.localStorage.getItem("origino_audience");
+  return savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : null;
+}
+
 export default function Navigation() {
   const pathname = usePathname();
   const { lang, setLang, t } = useLanguage();
@@ -71,8 +79,7 @@ export default function Navigation() {
 
   useEffect(() => {
     function syncAudience() {
-      const savedAudience = window.localStorage.getItem("origino_audience");
-      setAudience(savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : null);
+      setAudience(readAudiencePreference());
     }
     syncAudience();
     window.addEventListener("storage", syncAudience);
@@ -85,7 +92,7 @@ export default function Navigation() {
 
   const linkClass = (href: string) => `nav-link min-h-[44px] inline-flex items-center ${pathname === href || pathname.startsWith(`${href}/`) ? "font-bold underline underline-offset-4" : ""}`;
   const showAudienceGate = pathname === "/" && !audience;
-  const activeNavLinks = pathname === "/" && audience === "buyer" ? buyerHomeNavLinks : pathname === "/" && audience === "seller" ? sellerHomeNavLinks : navLinks;
+  const activeNavLinks = audience === "buyer" ? buyerHomeNavLinks : audience === "seller" ? sellerHomeNavLinks : navLinks;
   const leftNavLinks = activeNavLinks.slice(0, Math.ceil(activeNavLinks.length / 2));
   const rightNavLinks = activeNavLinks.slice(Math.ceil(activeNavLinks.length / 2));
   const mobilePrimaryLinks = activeNavLinks.filter((link) => !link.children);
@@ -181,11 +188,11 @@ export default function Navigation() {
               <Link href="/" className="text-3xl font-medium tracking-wide text-[#24221f]" style={{ fontFamily: "'Playfair Display', serif" }} onClick={() => setMobileOpen(false)}>
                 ORIGINO
               </Link>
-              <div className="flex min-w-[88px] items-center justify-end gap-2">
-                <Link href="/marketplace" className="flex min-h-[44px] min-w-[34px] items-center justify-center text-[#6b6560]" aria-label="Search marketplace" onClick={() => setMobileOpen(false)}>
+            <div className="flex min-w-[88px] items-center justify-end gap-2">
+                <Link href={audience === "seller" ? "/audit" : "/marketplace"} className="flex min-h-[44px] min-w-[34px] items-center justify-center text-[#6b6560]" aria-label={audience === "seller" ? "Open audit" : "Search marketplace"} onClick={() => setMobileOpen(false)}>
                   <Search size={19} />
                 </Link>
-                <Link href="/marketing-packages" className="flex min-h-[44px] min-w-[34px] items-center justify-center text-[#6b6560]" aria-label="Marketing packages" onClick={() => setMobileOpen(false)}>
+                <Link href={audience === "buyer" ? "/compare" : "/marketing-packages"} className="flex min-h-[44px] min-w-[34px] items-center justify-center text-[#6b6560]" aria-label={audience === "buyer" ? "Compare suppliers" : "Marketing packages"} onClick={() => setMobileOpen(false)}>
                   <ShoppingBag size={18} />
                 </Link>
               </div>
@@ -197,30 +204,32 @@ export default function Navigation() {
                 </Link>
               ))}
             </nav>
-            <div className="mt-4 border-t border-[rgba(36,34,31,0.1)] pt-3">
-              <button
-                className="nav-link flex min-h-[44px] w-full items-center justify-between rounded-xl px-3 py-2 text-[#4d4944] hover:bg-white/35"
-                onClick={() => setMobileToolsOpen((value) => !value)}
-                aria-expanded={mobileToolsOpen}
-              >
-                {t("nav.tools")}
-                <ChevronDown className={`transition-transform ${mobileToolsOpen ? "rotate-180" : ""}`} size={15} />
-              </button>
-              {mobileToolsOpen && (
-                <div className="mt-2 grid gap-1 rounded-[22px] border border-white/45 bg-white/22 p-2 backdrop-blur-xl">
-                  {mobileResourceLinks.map((link) => (
-                    <Link
-                      className="nav-link min-h-[42px] rounded-xl px-3 py-2 text-[#5d564f] hover:bg-white/35"
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {t(link.labelKey)}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+            {mobileResourceLinks.length > 0 && (
+              <div className="mt-4 border-t border-[rgba(36,34,31,0.1)] pt-3">
+                <button
+                  className="nav-link flex min-h-[44px] w-full items-center justify-between rounded-xl px-3 py-2 text-[#4d4944] hover:bg-white/35"
+                  onClick={() => setMobileToolsOpen((value) => !value)}
+                  aria-expanded={mobileToolsOpen}
+                >
+                  {t("nav.tools")}
+                  <ChevronDown className={`transition-transform ${mobileToolsOpen ? "rotate-180" : ""}`} size={15} />
+                </button>
+                {mobileToolsOpen && (
+                  <div className="mt-2 grid gap-1 rounded-[22px] border border-white/45 bg-white/22 p-2 backdrop-blur-xl">
+                    {mobileResourceLinks.map((link) => (
+                      <Link
+                        className="nav-link min-h-[42px] rounded-xl px-3 py-2 text-[#5d564f] hover:bg-white/35"
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {t(link.labelKey)}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
             <div className="mt-2">
               <button
                 className="nav-link flex min-h-[44px] w-full items-center justify-between rounded-xl px-3 py-2 text-[#4d4944] hover:bg-white/35"

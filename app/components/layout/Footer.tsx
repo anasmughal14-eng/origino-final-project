@@ -57,7 +57,7 @@ const buyerFooterSections: FooterSection[] = [
     headingKey: "nav.marketplace",
     links: [
       { href: "/marketplace", labelKey: "footer.browseSuppliers" },
-      { href: "/suppliers", label: "Supplier Directory" },
+      { href: "/marketplace?view=suppliers", label: "Supplier Directory" },
       { href: "/logistics", labelKey: "footer.logisticsPartners" },
       { href: "/status", labelKey: "footer.platformStatus" },
     ],
@@ -129,15 +129,24 @@ const sellerFooterSections: FooterSection[] = [
   },
 ];
 
+type Audience = "buyer" | "seller";
+
+function readAudiencePreference(): Audience | null {
+  const userType = window.localStorage.getItem("userType");
+  if (userType === "buyer") return "buyer";
+  if (userType === "manufacturer") return "seller";
+  const savedAudience = window.localStorage.getItem("origino_audience");
+  return savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : null;
+}
+
 export default function Footer() {
   const { t } = useLanguage();
   const pathname = usePathname();
-  const [audience, setAudience] = useState<"buyer" | "seller" | null | undefined>(undefined);
+  const [audience, setAudience] = useState<Audience | null | undefined>(undefined);
 
   useEffect(() => {
     function syncAudience() {
-      const savedAudience = window.localStorage.getItem("origino_audience");
-      setAudience(savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : null);
+      setAudience(readAudiencePreference());
     }
     syncAudience();
     window.addEventListener("storage", syncAudience);
