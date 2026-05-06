@@ -4,6 +4,7 @@ import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
 import LanguageProvider from "./components/shared/LanguageProvider";
 import ToastProvider from "./components/shared/ToastProvider";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: { default: "ORIGINO - Pakistan's Finest Export Marketplace", template: "%s | ORIGINO" },
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span>WhatsApp</span>
           </a>
         </LanguageProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
