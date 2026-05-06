@@ -77,7 +77,7 @@ export default function MarketplaceClient({ suppliers, initialFilters = {} }: { 
       <div className="flex flex-col gap-4 border-b border-[rgba(26,26,24,0.12)] pb-8 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="badge-patch mb-4">Selected manufacturers</p>
-          <h1 className="text-5xl">Marketplace</h1>
+          <h1 className="text-[2.8rem] leading-[0.98] md:text-[4.4rem]">Marketplace</h1>
           <p className="mt-3 max-w-2xl text-[#5a5a54]">A shorter list of Pakistani manufacturers, filtered by evidence, category, city, MOQ, and certification.</p>
         </div>
         <div className="text-start md:text-end">

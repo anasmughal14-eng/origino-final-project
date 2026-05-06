@@ -22,12 +22,12 @@ export default async function SupplierPage({ params }: { params: { slug: string 
   return (
     <div className="container-editorial pb-16 pt-32">
       <section className="relative mb-10 overflow-hidden rounded-[32px] bg-[#1a1a18]">
-        <img src={imageUrl} alt="" aria-hidden="true" className="h-[420px] w-full object-cover opacity-62" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(26,26,24,0.78),rgba(26,26,24,0.18))]" />
+        <img src={imageUrl} alt="" aria-hidden="true" className="h-[420px] w-full object-cover opacity-85" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(26,26,24,0.68),rgba(26,26,24,0.10))]" />
         <div className="absolute inset-0 flex items-end p-6 md:p-10">
           <div className="max-w-3xl text-[#fefdfb]">
             <SupplierVerificationBadgeClient supplierId={supplier.id} tier={supplier.verification_tier} />
-            <h1 className="mt-5 text-5xl text-[#fefdfb] md:text-7xl">{supplier.company_name}</h1>
+            <h1 className="mt-5 text-[2.8rem] leading-[0.98] text-[#fefdfb] md:text-[4.4rem]">{supplier.company_name}</h1>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-[#e8e4da]">{supplier.description}</p>
           </div>
         </div>

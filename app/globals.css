@@ -143,7 +143,7 @@ main textarea {
   mix-blend-mode: overlay;
 }
 
-.bw-image { filter: grayscale(100%) contrast(1.1) brightness(0.95); }
+.bw-image { filter: saturate(0.84) contrast(0.96) brightness(1.03); }
 
 .skeleton {
   background: var(--cream-dark);
@@ -929,16 +929,16 @@ button, a, input, select, textarea { touch-action: manipulation; }
 
 .img-editorial,
 main img:not(.no-editorial-image) {
-  filter: grayscale(100%) saturate(0.62) contrast(0.96) brightness(1.03);
+  filter: saturate(0.84) contrast(0.96) brightness(1.03);
 }
 
 .img-editorial-soft,
 .audience-gate-image {
-  filter: grayscale(100%) saturate(0.52) contrast(0.94) brightness(1.05);
+  filter: saturate(0.78) contrast(0.94) brightness(1.05);
 }
 
 .img-editorial-portrait {
-  filter: grayscale(100%) saturate(0.58) contrast(0.98) brightness(0.98);
+  filter: saturate(0.82) contrast(0.98) brightness(1.01);
 }
 
 .image-soft-shell {

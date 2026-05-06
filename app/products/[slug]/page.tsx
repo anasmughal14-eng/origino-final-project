@@ -20,7 +20,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
         </div>
         <div className="flex flex-col justify-end p-6 md:p-10">
           <p className="badge-patch">{product.category}</p>
-          <h1 className="mt-5 text-5xl md:text-7xl">{product.name}</h1>
+          <h1 className="mt-5 text-[2.8rem] leading-[0.98] md:text-[4.4rem]">{product.name}</h1>
           <p className="mt-4 text-lg leading-8 text-[#5a5a54]">{product.description}</p>
           <p className="mt-5 metric-numeral text-2xl">${product.price_usd_min} - ${product.price_usd_max}</p>
         </div>

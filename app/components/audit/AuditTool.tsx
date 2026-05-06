@@ -154,12 +154,12 @@ export default function AuditTool({ compact = false }: { compact?: boolean }) {
           <div className="mb-10 grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
             <div>
               <p className="section-kicker">AI Audit Engine</p>
-              <h1 className="mt-5 text-5xl md:text-7xl">Before anything is shown.</h1>
+              <h1 className="mt-5 text-[2.8rem] leading-[0.98] md:text-[4.4rem]">Before anything is shown.</h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--ink-muted)]">
                 The audit reads the manufacturer before the listing does. Brand, digital presence, export history, product readiness, operations, and compliance are scored out of 100.
               </p>
             </div>
-            <div className="panel-soft p-6">
+            <div className="panel-soft p-6 md:p-8">
               <h2 className="text-3xl">How the gate works</h2>
               <div className="mt-5 grid gap-3 text-sm">
                 <div className="rounded-full border border-[rgba(84,98,64,0.14)] px-4 py-3"><strong>80-100:</strong> Ready for admin verification</div>
@@ -175,7 +175,7 @@ export default function AuditTool({ compact = false }: { compact?: boolean }) {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="small-caps text-sm text-[var(--ink-muted)]">Step {step} of 6</p>
-                <h2 className="mt-1 text-3xl">{["Company basics", "Product readiness", "Export history", "Compliance vault", "Brand evidence", "Score review"][step - 1]}</h2>
+                <h2 className="mt-1 text-[2rem] leading-[1.05] md:text-[2.65rem]">{["Company basics", "Product readiness", "Export history", "Compliance vault", "Brand evidence", "Score review"][step - 1]}</h2>
               </div>
               <span className="metric-numeral text-2xl">{progress}%</span>
             </div>

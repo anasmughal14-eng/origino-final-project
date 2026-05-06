@@ -64,16 +64,16 @@ export default function AboutPage() {
           <div className="grid min-h-[620px] lg:grid-cols-[0.48fr_0.52fr]">
             <div className="relative min-h-[420px] overflow-hidden lg:min-h-full">
               <img
-                src="https://images.unsplash.com/photo-1565021005021-9e9ae2af0edd?w=1000&q=75"
+                src="https://images.pexels.com/photos/28806603/pexels-photo-28806603.jpeg?auto=compress&cs=tinysrgb&w=1400"
                 alt="Pakistani manufacturing detail"
-                className="img-editorial-soft h-full w-full object-cover"
+                className="img-editorial-soft h-full w-full object-cover object-[48%_45%]"
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,26,24,0.02),rgba(26,26,24,0.46))]" />
               <div className="absolute inset-x-0 bottom-0 p-8 text-[#fffaf2] md:p-12">
                 <p className="mb-5 inline-flex rounded-full border border-white/35 px-4 py-2 text-[0.68rem] uppercase tracking-[0.22em]">Lahore, Pakistan</p>
-                <h1 className="max-w-[520px] text-[3.1rem] font-medium leading-[0.94] md:text-[4.9rem]">
-                  Not a directory.
-                  <span className="block italic">A point of view.</span>
+                <h1 className="max-w-[500px] text-[2.65rem] font-medium leading-[0.97] md:text-[4.05rem]">
+                  A quieter way
+                  <span className="block italic">to be seen.</span>
                 </h1>
               </div>
             </div>
@@ -81,7 +81,7 @@ export default function AboutPage() {
             <div className="flex flex-col justify-between p-7 md:p-12">
               <div>
                 <p className="section-kicker">Our Story</p>
-                <p className="mt-8 max-w-xl text-[1.45rem] leading-[1.45] text-[#3e3a35] md:text-[2rem]">
+                <p className="mt-8 max-w-xl text-[1.18rem] leading-[1.55] text-[#3e3a35] md:text-[1.62rem]">
                   Manufacturing exists. Visibility is broken. Curation creates value.
                 </p>
               </div>
@@ -98,7 +98,7 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.36fr_0.64fr] lg:gap-20">
           <div className="lg:sticky lg:top-32 lg:self-start">
             <p className="section-kicker">Founder</p>
-            <h2 className="mt-5 text-[3.2rem] font-medium leading-[0.95] md:text-[5.4rem]">
+            <h2 className="mt-5 text-[2.7rem] font-medium leading-[0.98] md:text-[4.2rem]">
               A quiet
               <span className="block italic">beginning.</span>
             </h2>
@@ -116,7 +116,7 @@ export default function AboutPage() {
           </div>
 
           <article className="panel-soft p-7 md:p-12">
-            <div className="max-w-[760px] space-y-5 text-[1.18rem] leading-[1.85] text-[#49443e] md:text-[1.36rem]">
+            <div className="max-w-[720px] space-y-4 text-[1rem] leading-[1.78] text-[#49443e] md:text-[1.08rem]">
               {founderStory.map((paragraph, index) => (
                 <p
                   key={paragraph}
@@ -157,7 +157,7 @@ export default function AboutPage() {
           <div className="grid gap-12 lg:grid-cols-[0.42fr_0.58fr]">
             <div>
               <p className="text-[0.72rem] uppercase tracking-[0.24em] text-[var(--forest)]">Method</p>
-              <h2 className="mt-6 max-w-md text-[3rem] font-medium leading-[0.98] md:text-[4.8rem]">
+              <h2 className="mt-6 max-w-md text-[2.5rem] font-medium leading-[1] md:text-[4rem]">
                 Slow selection.
                 <span className="block italic">Clear evidence.</span>
               </h2>
@@ -176,7 +176,7 @@ export default function AboutPage() {
 
       <section className="container-editorial pb-20 pt-8 md:pb-28">
         <div className="panel-soft mx-auto max-w-[820px] p-8 text-center md:p-12">
-          <h2 className="text-[3.4rem] font-medium leading-[0.95] md:text-[5.6rem]">Enter carefully.</h2>
+          <h2 className="text-[2.8rem] font-medium leading-[0.98] md:text-[4.4rem]">Enter carefully.</h2>
           <p className="mx-auto mt-6 max-w-md text-lg leading-8 text-[#5a554f]">
             Buyers may source. Manufacturers may apply. Both paths begin with intent.
           </p>

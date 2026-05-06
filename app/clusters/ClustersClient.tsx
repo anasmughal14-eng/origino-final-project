@@ -33,7 +33,7 @@ export default function ClustersClient({ clusters }: { clusters: ClusterCard[] }
               <div className="text-right font-semibold tracking-[0.08em]">
                 <span className="text-sm text-[#8a8a82]">{String(index + 1).padStart(2, "0")}</span>
               </div>
-              <div className="h-40 overflow-hidden rounded-[22px] md:h-28" style={{ backgroundImage: `url('${cluster.img}')`, backgroundSize: "cover", backgroundPosition: "center", filter: "grayscale(100%) contrast(1.05)" }} />
+              <div className="h-40 overflow-hidden rounded-[22px] md:h-28" style={{ backgroundImage: `url('${cluster.img}')`, backgroundSize: "cover", backgroundPosition: "center", filter: "saturate(0.82) contrast(0.96) brightness(1.04)" }} />
               <div>
                 <h2 style={{ fontFamily: "'Playfair Display',serif" }} className="text-2xl font-bold text-[#1a1a18] transition-colors group-hover:text-[#2d4a3e]">{cluster.name}</h2>
                 <p className="mb-2 text-xs uppercase tracking-wide text-[#8a8a82]">{cluster.tagline}</p>

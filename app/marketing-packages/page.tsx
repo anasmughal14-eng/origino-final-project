@@ -61,7 +61,7 @@ export default function MarketingPackagesPage() {
       <section className="container-editorial pb-16">
         <div className="max-w-3xl">
           <p className="badge-patch tier-certified mb-5">Seller Growth Services</p>
-          <h1 className="text-5xl md:text-7xl">Make the work easier to understand.</h1>
+          <h1 className="text-[2.8rem] leading-[0.98] md:text-[4.4rem]">Make the work easier to understand.</h1>
           <p className="mt-5 text-lg leading-8 text-[#5a5a54]">
             For manufacturers whose work is ready, but whose presentation is not. Identity, photography, catalogue, web presence, and introductions are handled with restraint. Audit approval remains separate.
           </p>
@@ -77,7 +77,7 @@ export default function MarketingPackagesPage() {
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {packages.map((tier) => (
-            <article id={tier.name.toLowerCase()} className={`dashboard-card flex flex-col p-6 ${tier.featured ? "border-[#2d4a3e] bg-[#e8f0ec]" : ""}`} key={tier.name}>
+            <article id={tier.name.toLowerCase()} className={`panel-soft flex flex-col p-6 ${tier.featured ? "border-[rgba(84,98,64,0.28)] bg-[rgba(238,240,227,0.56)]" : ""}`} key={tier.name}>
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h2 className="text-3xl">{tier.name}</h2>
@@ -103,17 +103,17 @@ export default function MarketingPackagesPage() {
         </div>
 
         <div className="mt-12 grid gap-5 lg:grid-cols-2">
-          <section className="dashboard-card p-6">
+          <section className="panel-soft p-6">
             <h2 className="text-3xl">Payment options</h2>
             <p className="mt-3 text-sm leading-6 text-[#5a5a54]">
               International cards, local wallets, and bank transfer are prepared for the live payment step. PKR pricing follows the stored exchange rate with a small buffer.
             </p>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              {paymentOptions.map((option) => <div className="dashboard-card p-4 text-sm" key={option}>{option}</div>)}
+              {paymentOptions.map((option) => <div className="rounded-full border border-[rgba(84,98,64,0.14)] bg-[rgba(255,250,242,0.58)] px-4 py-3 text-sm" key={option}>{option}</div>)}
             </div>
           </section>
 
-          <section className="dashboard-card p-6">
+          <section className="panel-soft p-6">
             <h2 className="text-3xl">Milestones</h2>
             <div className="mt-5 space-y-4 text-sm leading-6 text-[#3a3a38]">
               <p>Growth and Premium use milestone payments: 50% at checkout and 50% when deliverables are marked received.</p>
