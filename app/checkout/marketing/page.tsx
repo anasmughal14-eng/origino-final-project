@@ -64,7 +64,7 @@ export default async function MarketingCheckoutPage({ searchParams }: { searchPa
             <p className="badge-patch tier-certified mb-5">Final checkout</p>
             <h1 className="text-5xl md:text-7xl">{tier.name} seller package</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-[#5a5a54]">
-              Confirm the service order for your manufacturing company. This begins the presentation work. Listing still depends on audit score, documents, sanctions, and admin review.
+              Confirm paid support for your manufacturing company. Marketing work can begin now. Public listing still depends on readiness, documents, sanctions checks, and admin review.
             </p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
@@ -94,8 +94,8 @@ export default async function MarketingCheckoutPage({ searchParams }: { searchPa
             </div>
 
             <div className="mt-8 rounded-[28px] border border-[rgba(184,145,58,0.28)] bg-[rgba(245,237,219,0.78)] p-5 text-sm leading-6 text-[#3a3a38]">
-              <p className="font-semibold">Audit and listing rule</p>
-              <p className="mt-1">This checkout does not auto-list the supplier. ORIGINO still checks audit score, documents, sanctions, and admin approval before anything is shown.</p>
+              <p className="font-semibold">Audit remains a diagnostic</p>
+              <p className="mt-1">You are not blocked from buying support. The audit maps gaps and helps ORIGINO decide when the supplier is ready to be shown publicly.</p>
             </div>
           </div>
 
@@ -121,7 +121,7 @@ export default async function MarketingCheckoutPage({ searchParams }: { searchPa
             <MarketingCheckoutActions packageKey={packageKey} amountUsd={tier.depositUsd} packageName={tier.name} sellerReady={sellerReady} />
 
             <Link className="mt-5 inline-flex text-sm underline decoration-[#2d4a3e]" href="/seller/onboarding">
-              Skip payment and start audit first
+              Run readiness audit instead
             </Link>
           </aside>
         </div>

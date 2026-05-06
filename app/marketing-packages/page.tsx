@@ -5,7 +5,7 @@ const packages = [
     name: "Basic",
     price: "$299",
     delivery: "3 weeks",
-    summary: "A clear first form for export presentation.",
+    summary: "A first layer of identity and export presentation.",
     features: [
       "Brand audit and 1 hour consultation call",
       "Professional logo design with 3 concepts",
@@ -19,7 +19,7 @@ const packages = [
     name: "Growth",
     price: "$799",
     delivery: "6 weeks",
-    summary: "A fuller launch layer for manufacturers ready to be seen.",
+    summary: "A stronger visibility layer for manufacturers ready to grow.",
     featured: true,
     features: [
       "Everything in Basic",
@@ -34,7 +34,7 @@ const packages = [
     name: "Premium",
     price: "$1,999",
     delivery: "10 weeks",
-    summary: "Story, catalogue, and introductions for serious export intent.",
+    summary: "Story, catalogue, and buyer introductions for serious export intent.",
     features: [
       "Everything in Growth",
       "Full product photography for unlimited products",
@@ -61,21 +61,21 @@ export default function MarketingPackagesPage() {
       <section className="container-editorial pb-16">
         <div className="max-w-3xl">
           <p className="badge-patch tier-certified mb-5">Seller Growth Services</p>
-          <h1 className="text-[2.8rem] leading-[0.98] md:text-[4.4rem]">Make the work easier to understand.</h1>
+          <h1 className="text-[2.8rem] leading-[0.98] md:text-[4.4rem]">Keep making well. We help the right buyers see it clearly.</h1>
           <p className="mt-5 text-lg leading-8 text-[#5a5a54]">
-            For manufacturers whose work is ready, but whose presentation is not. Identity, photography, catalogue, web presence, and introductions are handled with restraint. Audit approval remains separate.
+            Many Pakistani manufacturers already make well. The gap is usually not production. It is visibility, presentation, documentation, and buyer confidence. ORIGINO handles that layer so manufacturers can stay focused on the work itself.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="btn-pill btn-pill-forest min-h-[44px]" href="/audit">
-              Begin with audit
+            <Link className="btn-pill btn-pill-forest min-h-[44px]" href="#packages">
+              Choose support
             </Link>
-            <Link className="btn-pill btn-pill-outline min-h-[44px]" href="/login?redirect=/seller/marketing">
-              Seller sign in
+            <Link className="btn-pill btn-pill-outline min-h-[44px]" href="/audit">
+              Run readiness audit
             </Link>
           </div>
         </div>
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+        <div id="packages" className="mt-12 grid scroll-mt-28 gap-5 lg:grid-cols-3">
           {packages.map((tier) => (
             <article id={tier.name.toLowerCase()} className={`panel-soft flex flex-col p-6 ${tier.featured ? "border-[rgba(84,98,64,0.28)] bg-[rgba(238,240,227,0.56)]" : ""}`} key={tier.name}>
               <div className="flex items-start justify-between gap-3">
@@ -118,7 +118,7 @@ export default function MarketingPackagesPage() {
             <div className="mt-5 space-y-4 text-sm leading-6 text-[#3a3a38]">
               <p>Growth and Premium use milestone payments: 50% at checkout and 50% when deliverables are marked received.</p>
               <p>Each paid order receives a delivery date. Overdue work is flagged for admin follow-up and seller notification.</p>
-              <p>Payment does not skip curation. The audit and document checks still decide public approval.</p>
+              <p>You can buy support before or after the audit. The audit remains a readiness diagnostic, and public listing still depends on review, documents, and admin approval.</p>
             </div>
           </section>
         </div>

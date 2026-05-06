@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 const tiers = [
   {
@@ -30,24 +29,7 @@ export default function SellerMarketingPage() {
 
   async function selectTier(tier: typeof tiers[number]) {
     setLoadingTier(tier.name);
-    const response = await fetch("/api/stripe/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        orderId: `marketing-${tier.name.toLowerCase()}`,
-        amountUsd: tier.price,
-        successUrl: `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/seller/marketing?checkout=success`,
-        cancelUrl: `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/seller/marketing?checkout=cancelled`,
-      }),
-    });
-    const json = (await response.json()) as { success?: boolean; data?: { url?: string }; error?: string };
-    setLoadingTier("");
-    if (!response.ok || !json.success) {
-      toast.error(json.error ?? "Checkout failed");
-      return;
-    }
-    toast.success("Stripe checkout session ready");
-    if (json.data?.url) window.location.href = json.data.url;
+    window.location.href = `/checkout/marketing?package=${tier.name.toLowerCase()}`;
   }
 
   return (
@@ -56,7 +38,7 @@ export default function SellerMarketingPage() {
         <p className="badge-patch mb-1">Seller growth services</p>
         <h1 className="text-4xl">Marketing Packages</h1>
         <p className="max-w-3xl text-sm leading-6 text-[#5a5a54]">
-          Select a package after audit review. Growth and Premium use 50/50 milestone payments, and every paid order receives an SLA due date for admin follow-up.
+          Choose support when the presentation layer needs work. The audit helps diagnose gaps and public listing still needs review, but services can begin before the listing is approved.
         </p>
       </div>
       <div className="mt-6 grid gap-5 md:grid-cols-3">
@@ -70,7 +52,7 @@ export default function SellerMarketingPage() {
             <p className="mt-1 text-sm text-[#5a5a54]">Delivery: {tier.delivery}</p>
             <ul className="mt-4 flex-1 space-y-2 text-sm leading-6">{tier.features.map((feature) => <li className="border-t border-[#e2ddd8] pt-2" key={feature}>{feature}</li>)}</ul>
             <button className="btn-pill btn-pill-forest mt-5 min-h-[44px]" onClick={() => selectTier(tier)} disabled={loadingTier === tier.name || tier.name === currentTier}>
-              {tier.name === currentTier ? "Current Plan" : loadingTier === tier.name ? "Preparing..." : `Select ${tier.name}`}
+              {tier.name === currentTier ? "Current Plan" : loadingTier === tier.name ? "Opening checkout..." : `Select ${tier.name}`}
             </button>
           </div>
         ))}

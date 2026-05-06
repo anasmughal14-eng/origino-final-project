@@ -62,7 +62,7 @@ export async function POST(request: Request) {
         .from("applications")
         .update({
           marketing_package_purchased: packageKey as "basic" | "growth" | "premium",
-          admin_notes: `${existingNotes}Checkout reserved: ${packageKey} via ${paymentMethod}. Reference ${reference}. Listing remains audit-gated.`,
+          admin_notes: `${existingNotes}Checkout reserved: ${packageKey} via ${paymentMethod}. Reference ${reference}. Marketing support can begin; public listing still requires readiness review.`,
         })
         .eq("id", application.id);
       if (applicationUpdateError) return fail(applicationUpdateError.message, 500);
@@ -76,24 +76,25 @@ export async function POST(request: Request) {
     if (supplierError) return fail(supplierError.message, 500);
 
     if (!supplier?.id) {
-      if (!application?.id) {
-        return fail("Complete seller registration or audit setup before reserving a marketing package.", 409);
-      }
-
-      const baseSlug = slugify(application.company_name || profile.full_name || profile.email || "seller");
+      const companyName = application?.company_name || profile.full_name || profile.email || "Pending supplier";
+      const city = application?.city || "Pakistan";
+      const category = application?.product_category || "General Trade";
+      const baseSlug = slugify(companyName);
       const slug = `${baseSlug || "seller"}-${auth.user.id.slice(0, 8)}`;
       const { data: createdSupplier, error: createSupplierError } = await adminSupabase
         .from("suppliers")
         .insert({
           profile_id: auth.user.id,
-          company_name: application.company_name || profile.full_name || "Pending supplier",
+          company_name: companyName,
           company_name_ur: null,
           slug,
-          description: "Pending ORIGINO audit and admin approval before public marketplace visibility.",
+          description: application?.id
+            ? "Pending ORIGINO audit and admin approval before public marketplace visibility."
+            : "Marketing service customer pending readiness audit and admin approval before public marketplace visibility.",
           description_ur: null,
-          city: application.city || "Pakistan",
-          cluster: clusterFromCity(application.city),
-          category: application.product_category || "General Trade",
+          city,
+          cluster: clusterFromCity(city),
+          category,
           sub_categories: [],
           verification_tier: "unverified",
           audit_score: null,
@@ -156,7 +157,7 @@ export async function POST(request: Request) {
         linked_entity_id: marketingOrder.id,
         linked_href: "/admin/marketing-orders",
         due_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-        notes: `Seller reserved ${packageKey} package via ${paymentMethod}. Reference ${reference}.`,
+        notes: `Seller reserved ${packageKey} package via ${paymentMethod}. Reference ${reference}.${application?.id ? "" : " No audit submitted yet; invite seller to complete the readiness audit during onboarding."}`,
       });
       if (taskError) return fail(taskError.message, 500);
     }

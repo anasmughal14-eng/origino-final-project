@@ -128,16 +128,16 @@ export default function RegisterPage({ searchParams }: { searchParams?: Register
             </div>
           ) : role === "seller" && (
             <div className="rounded-[28px] border border-[rgba(79,91,58,0.16)] bg-[rgba(247,244,239,0.78)] p-5 text-sm leading-6 text-[#3a3a38]">
-              <p className="badge-patch mb-3">Seller gate</p>
-              <p>Seller accounts must complete the ORIGINO audit before being listed. Package selection unlocks only after the score confirms approval, conditional support, or a readiness roadmap.</p>
+              <p className="badge-patch mb-3">Seller path</p>
+              <p>Pakistani manufacturers are often strongest at the work itself. ORIGINO helps with the layer around it: presentation, documents, buyer context, and export readiness. The audit shows where you stand; services can begin whenever you are ready.</p>
               {packageInterest && (
                 <div className="mt-4 rounded-[22px] border border-[rgba(184,145,58,0.28)] bg-[rgba(245,237,219,0.78)] p-4">
                   <p className="font-semibold capitalize">{packageInterest} package interest noted</p>
-                  <p className="mt-1 text-xs leading-5 text-[#5a5a54]">This does not create a paid order yet. ORIGINO will carry this preference into the seller workspace after the audit gate.</p>
+                  <p className="mt-1 text-xs leading-5 text-[#5a5a54]">This does not create a paid order yet. After account creation, you can confirm checkout and still complete the readiness audit before public listing.</p>
                 </div>
               )}
               <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                {["Register", "Complete audit", "Admin review"].map((step, index) => (
+                {["Create account", "Choose support", "Run audit"].map((step, index) => (
                   <div className="rounded-full border border-[rgba(79,91,58,0.14)] bg-[rgba(255,250,242,0.72)] px-3 py-2 text-xs font-semibold" key={step}>{index + 1}. {step}</div>
                 ))}
               </div>
@@ -159,7 +159,7 @@ export default function RegisterPage({ searchParams }: { searchParams?: Register
             {role === "seller" && <><input className="input-editorial min-h-[44px]" value={form.city} onChange={(event) => update("city", event.target.value)} placeholder="City" /><input className="input-editorial min-h-[44px]" value={form.category} onChange={(event) => update("category", event.target.value)} placeholder="Product category" /></>}
             {error && <p className="rounded-2xl border border-[var(--terracotta)] bg-[rgba(166,93,87,0.08)] p-3 text-sm text-[var(--terracotta)]">{error}</p>}
             <button className="btn-pill btn-pill-forest min-h-[44px] w-full" disabled={loading}>
-              {loading ? "Creating account..." : sellerPackageFlow ? "Create Account & Continue to Checkout" : role === "seller" ? "Create Account & Start Audit" : "Create Buyer Account"}
+              {loading ? "Creating account..." : sellerPackageFlow ? "Create Account & Continue to Checkout" : role === "seller" ? "Create Seller Account" : "Create Buyer Account"}
             </button>
           </form>
           <p className="mt-5 text-center text-sm text-[#5a5a54]">

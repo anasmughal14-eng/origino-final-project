@@ -39,7 +39,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_SUPABASE_PUBLISHABLE_KEY
 SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
 CRON_SECRET=YOUR_LONG_RANDOM_CRON_SECRET
-NEXT_PUBLIC_WHATSAPP_NUMBER=923XXXXXXXXX
+NEXT_PUBLIC_WHATSAPP_NUMBER=923324823947
 RESEND_API_KEY=YOUR_RESEND_KEY
 EMAIL_FROM=noreply@origino.store
 NOTIFICATION_EMAIL=origino.pk@gmail.com
@@ -55,8 +55,7 @@ JAZZCASH_PASSWORD=YOUR_JAZZCASH_PASSWORD
 JAZZCASH_INTEGRITY_SALT=YOUR_JAZZCASH_SALT
 EASYPAISA_STORE_ID=YOUR_EASYPAISA_STORE_ID
 EASYPAISA_HASH_KEY=YOUR_EASYPAISA_HASH_KEY
-OPENAI_API_KEY=YOUR_OPENAI_API_KEY
-OPENAI_AUDIT_MODEL=gpt-4.1-mini
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY
 OPEN_EXCHANGE_RATES_APP_ID=YOUR_RATES_APP_ID
 NEXT_PUBLIC_POSTHOG_KEY=YOUR_POSTHOG_KEY
 SENTRY_DSN=YOUR_SENTRY_DSN
@@ -111,7 +110,7 @@ Cron:
 
 Optional production providers:
 
-- `OPENAI_API_KEY` and `OPENAI_AUDIT_MODEL` for AI audit feedback.
+- `GEMINI_API_KEY` for the marketing readiness audit. The key must stay server-side and must not use a `NEXT_PUBLIC_` prefix.
 - `OPEN_EXCHANGE_RATES_APP_ID` for exchange-rate refresh.
 - `DAILY_CO_API_KEY` for virtual tours.
 - `AFTERSHIP_API_KEY` for shipment tracking.
@@ -436,9 +435,10 @@ Make public buckets read-only for anonymous users where assets are public. Keep 
 
 ## 7. AI Audit Connection
 
-The audit route works without OpenAI. To enable generated feedback:
+The audit route is a server-side Gemini marketing readiness audit with a local fallback. To enable live Gemini scoring:
 
-1. Set `OPENAI_API_KEY`.
-2. Set `OPENAI_AUDIT_MODEL` to the model approved for your account.
-3. Keep `NEXT_PUBLIC_USE_MOCK_DATA=true` if you only want AI feedback without database writes.
-4. Set `NEXT_PUBLIC_USE_MOCK_DATA=false` and send `profileId` with the audit payload to write to `applications`.
+1. Set `GEMINI_API_KEY` in `.env.local` and in Vercel Project Settings. Do not expose it as a public browser variable.
+2. Enable or confirm access to `gemini-2.0-flash` in Google AI Studio for the same key/project.
+3. Keep `NEXT_PUBLIC_USE_MOCK_DATA=true` if you only want AI scoring without Supabase application writes.
+4. Set `NEXT_PUBLIC_USE_MOCK_DATA=false` and send `profileId` with the audit payload to write the audit record to `applications`.
+5. If Gemini returns quota or rate-limit errors, `/api/submit-audit` still returns a valid local score with `data.aiUsed=false`; when Gemini succeeds it returns `data.aiUsed=true`.

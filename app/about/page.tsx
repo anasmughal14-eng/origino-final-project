@@ -25,28 +25,14 @@ const principles = [
 ];
 
 const founderStory = [
-  "Origino did not begin as a platform.",
-  "It began with a quiet discomfort.",
-  "Growing up around making, in cities where things are produced every day, there was always a gap that was hard to explain.",
-  "Not in the work itself, but in how it was seen.",
-  "Good things existed.",
-  "They just did not travel far enough.",
-  "Over time, working in film and visual storytelling, that gap became clearer.",
-  "People do not only respond to what is made.",
-  "They respond to how it is understood.",
-  "And much of what is made here is never understood properly.",
-  "Origino comes from that tension.",
-  "Between what exists, and what is visible.",
-  "Between effort, and recognition.",
-  "It is not an attempt to fix everything.",
-  "Only to be more careful.",
-  "To spend time with the right manufacturers.",
-  "To understand what they do.",
-  "To present it without noise.",
-  "Not everything needs to be shown.",
-  "But what is shown should feel considered.",
-  "This is not about scale, at least not in the beginning.",
-  "It is about getting it right, slowly.",
+  "Origino did not begin as a platform. It began with a quiet discomfort.",
+  "Growing up around making, in cities where things are produced every day, there was always a gap that was hard to explain. Not in the work itself, but in how it was seen.",
+  "Good things existed. They just did not travel far enough.",
+  "Over time, working in film and visual storytelling, that gap became clearer. People do not only respond to what is made. They respond to how it is understood. And much of what is made here is never understood properly.",
+  "Origino comes from that tension. Between what exists, and what is visible. Between effort, and recognition.",
+  "It is not an attempt to fix everything. Only to be more careful. To spend time with the right manufacturers. To understand what they do. To present it without noise.",
+  "Not everything needs to be shown. But what is shown should feel considered.",
+  "This is not about scale, at least not in the beginning. It is about getting it right, slowly.",
   "And over time, becoming a place where trust is not built through claims, but through what is consistently chosen and shown.",
 ];
 
@@ -98,9 +84,9 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.36fr_0.64fr] lg:gap-20">
           <div className="lg:sticky lg:top-32 lg:self-start">
             <p className="section-kicker">Founder</p>
-            <h2 className="mt-5 text-[2.7rem] font-medium leading-[0.98] md:text-[4.2rem]">
+            <h2 className="mt-5 max-w-[8ch] text-[2.65rem] font-medium leading-[0.94] tracking-[-0.01em] md:text-[4rem]">
               A quiet
-              <span className="block italic">beginning.</span>
+              <span className="block italic leading-[0.92]">beginning.</span>
             </h2>
             <figure className="image-soft-shell mt-8">
               <img
@@ -116,11 +102,11 @@ export default function AboutPage() {
           </div>
 
           <article className="panel-soft p-7 md:p-12">
-            <div className="max-w-[720px] space-y-4 text-[1rem] leading-[1.78] text-[#49443e] md:text-[1.08rem]">
+            <div className="max-w-[720px] space-y-4 text-[0.98rem] leading-[1.56] text-[#49443e] md:space-y-5 md:text-[1.03rem] md:leading-[1.62]">
               {founderStory.map((paragraph, index) => (
                 <p
                   key={paragraph}
-                  className={index === 0 || index === 10 || index === 20 ? "font-medium text-[#1a1a18]" : undefined}
+                  className={index === 0 || index === 4 || index === 8 ? "font-medium text-[#1a1a18]" : undefined}
                 >
                   {paragraph}
                 </p>

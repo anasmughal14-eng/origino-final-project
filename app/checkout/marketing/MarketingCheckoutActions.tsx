@@ -164,7 +164,7 @@ export default function MarketingCheckoutActions({
           <p className="font-semibold">{packageName} order reserved</p>
           <p>{result.message}</p>
           {result.reference && <p className="metric-numeral mt-2">Reference: {result.reference}</p>}
-          {result.nextUrl && <p className="mt-2 font-semibold">Redirecting to the AI audit so the listing gate can be completed.</p>}
+          {result.nextUrl && <p className="mt-2 font-semibold">Redirecting to seller onboarding so ORIGINO can tailor the support and readiness map.</p>}
           {method === "bank_transfer" && (
             <div className="mt-3 border-t border-[rgba(45,74,62,0.16)] pt-3">
               <p className="font-semibold">Manual payment instruction</p>

@@ -55,7 +55,7 @@ const copy = {
     buyerGateTitle: "I'm a Buyer",
     buyerGateBody: "Browse selected manufacturers, compare proof, then send a clear inquiry.",
     sellerGateTitle: "I'm a Manufacturer",
-    sellerGateBody: "Apply, complete the audit, enter review, then choose support if it is needed.",
+    sellerGateBody: "Create a seller account, choose support when needed, and use the audit to understand readiness.",
     switchPath: "Switch path",
     buyerSplit: "I'm a Buyer",
     manufacturerSplit: "I'm a Manufacturer",
@@ -67,8 +67,8 @@ const copy = {
     buyerClarity: "Selected manufacturers from Pakistan. Built for global buyers. First compare documents, verification signals, response data, and sourcing context. Then begin the conversation.",
     sellerHeroEyebrow: "For Pakistani Manufacturers",
     sellerHeroTitle: "What you make deserves to be seen.",
-    sellerHeroBody: "Apply for review, complete the audit, and prepare your work for global buyers.",
-    sellerClarity: "Before listing, ORIGINO reviews readiness, documents, verification signals, and how the work should be understood. Packages only support the work after the audit path is clear.",
+    sellerHeroBody: "Keep making well. ORIGINO helps with the presentation, documents, and buyer context around the work.",
+    sellerClarity: "Many Pakistani manufacturers do not lack skill; they lack the time and system to market themselves properly. ORIGINO handles that visibility layer while the audit shows what must improve before public listing.",
     auditScore: "80+ required for approval",
     conditional: "60-79 enters package-assisted improvement",
     roadmap: "Below 60 receives a readiness roadmap",
@@ -144,7 +144,7 @@ const copy = {
     sellerHeroEyebrow: "For Pakistani Manufacturers",
     sellerHeroTitle: "What you make deserves to be seen.",
     sellerHeroBody: "Apply for review, complete the audit, and prepare your work for global buyers.",
-    sellerClarity: "Before listing, ORIGINO reviews readiness, documents, verification signals, and how the work should be understood. Packages only support the work after the audit path is clear.",
+    sellerClarity: "Pakistani manufacturers are often strongest at making. ORIGINO supports the visibility layer around that work while the audit shows what must improve before public listing.",
     auditScore: "منظوری کے لیے 80+ اسکور ضروری",
     conditional: "60-79 پیکیج کے ذریعے بہتری",
     roadmap: "60 سے کم اسکور پر تیاری کا روڈ میپ",
@@ -281,13 +281,13 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         ["3", "Inquire", "Send one clear request and move into quote discussion."],
       ]
     : [
-        ["1", "Apply", "Create a seller account and start the readiness audit."],
-        ["2", "Review", "ORIGINO checks score, documents, sanctions, and presentation."],
-        ["3", "List", "Approved suppliers move toward listing; support packages stay optional."],
+        ["1", "Create", "Create a seller account and choose support when you need it."],
+        ["2", "Diagnose", "Use the audit to see gaps in brand, digital presence, documents, and readiness."],
+        ["3", "Review", "Public listing still depends on score, documents, sanctions, and admin review."],
       ];
   const proofPoints = isBuyer
     ? ["Verification tier visible", "Documents and certifications surfaced", "MOQ, lead time, and response discipline shown"]
-    : ["Six-category readiness score", "Admin review before listing", "Packages only after the audit path is clear"];
+    : ["Six-category readiness score", "Admin review before listing", "Marketing support can start anytime"];
 
   return (
     <div className="page-enter">
@@ -468,9 +468,9 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
 
               <div className="panel-soft p-6 md:p-8">
                 <p className="badge-patch tier-certified mb-5">Seller Packages</p>
-                <h2 className="text-4xl">Support after the audit is clear.</h2>
+                <h2 className="text-4xl">Support for the work around the work.</h2>
                 <p className="mt-4 text-sm leading-7 text-[#5a5a54]">
-                  Basic, Growth, and Premium help a manufacturer become legible when the audit shows what is missing: identity, photography, catalogue, website, and buyer introductions.
+                  Basic, Growth, and Premium help a manufacturer become easier to understand: identity, photography, catalogue, website, and buyer introductions. The audit remains the readiness map, not the payment door.
                 </p>
                 <div className="mt-6 space-y-3">
                   {[
