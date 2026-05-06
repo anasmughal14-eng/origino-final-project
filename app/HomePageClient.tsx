@@ -32,13 +32,13 @@ const copy = {
     viewAll: "View All",
     browseAll: "Browse All",
     featuredSuppliers: "Featured Suppliers",
-    clarityBody: "ORIGINO selects Pakistani manufacturers, reviews their export readiness, and presents them with documents, verification signals, and sourcing context. It exists because good manufacturing is often present, but poorly seen.",
+    clarityBody: "Origino is a curated sourcing platform. We do not list thousands of suppliers. We work with a few, carefully chosen, properly understood, and presented to build trust before conversation begins.",
     trustBody: "Manufacturing already exists. What is missing is careful presentation, visible evidence, and a reason to be chosen.",
     trustSanctions: "OFAC / UN / EU screened",
     trustDocs: "Document vault ready",
     trustEscrow: "Escrow and inspection workflows",
     auditBody: "Not everything should be listed. Before a manufacturer is shown, ORIGINO looks at brand identity, digital presence, export history, product readiness, operations, and compliance.",
-    auditCta: "Start AI Audit",
+    auditCta: "Apply to be selected",
     pathEyebrow: "Choose your path",
     buyerPath: "I source from Pakistan",
     sellerPath: "I make in Pakistan",
@@ -46,25 +46,29 @@ const copy = {
     buyerPanelBody: "Start with a smaller field of manufacturers. Compare evidence, ask clearly, and move only when the fit is visible.",
     sellerPanelTitle: "For manufacturers",
     sellerPanelBody: "Begin with the export-readiness audit. If the work is ready, it can be reviewed for listing and buyer presentation.",
-    openMarketplace: "Open Marketplace",
+    openMarketplace: "See selected manufacturers",
     viewPackages: "View Packages",
     gateEyebrow: "ORIGINO",
     gateTitle: "What brings you here?",
     gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
     select: "Select",
-    buyerGateTitle: "I am sourcing",
+    buyerGateTitle: "I'm a Buyer",
     buyerGateBody: "Find selected Pakistani manufacturers, compare evidence, and begin clear inquiries.",
-    sellerGateTitle: "I manufacture",
+    sellerGateTitle: "I'm a Manufacturer",
     sellerGateBody: "Start the audit, understand readiness, and choose support before being listed.",
     switchPath: "Switch path",
+    buyerSplit: "I'm a Buyer",
+    manufacturerSplit: "I'm a Manufacturer",
+    clarityTitle: "Origino is a curated sourcing platform.",
+    clarityBlock: "We do not list thousands of suppliers. We work with a few, carefully chosen, properly understood, and presented to build trust before conversation begins.",
     buyerHeroEyebrow: "For Global Buyers",
-    buyerHeroTitle: "Fewer names. Better evidence.",
-    buyerHeroBody: "Source from selected Pakistani manufacturers with clearer documents, verification signals, response context, and export readiness.",
-    buyerClarity: "ORIGINO reduces the field before you begin. Search the marketplace, compare suppliers, calculate landed cost, and ask only when the fit is visible.",
+    buyerHeroTitle: "Selected manufacturers. Not endless options.",
+    buyerHeroBody: "Work with carefully chosen suppliers presented clearly, without noise.",
+    buyerClarity: "Selected manufacturers from Pakistan. Built for global buyers. We work with a small number of suppliers, understand them closely, and present them with clarity so sourcing becomes simpler, not overwhelming.",
     sellerHeroEyebrow: "For Pakistani Manufacturers",
-    sellerHeroTitle: "Be chosen before being shown.",
-    sellerHeroBody: "Start with the export-readiness audit. ORIGINO reviews brand, documents, product readiness, and buyer presentation before listing.",
-    sellerClarity: "Manufacturing already exists. Visibility needs care. The seller path moves from audit to support packages, export guides, and then admin review.",
+    sellerHeroTitle: "What you make deserves to be seen.",
+    sellerHeroBody: "We work with a limited number of manufacturers and help them reach global buyers with clarity.",
+    sellerClarity: "Selected manufacturers from Pakistan. Built for global buyers. Before listing, ORIGINO reviews readiness, documents, verification signals, and how the work should be understood.",
     auditScore: "80+ required for approval",
     conditional: "60-79 enters package-assisted improvement",
     roadmap: "Below 60 receives a readiness roadmap",
@@ -110,7 +114,7 @@ const copy = {
     trustDocs: "دستاویز والٹ تیار",
     trustEscrow: "ایسکرو اور انسپیکشن ورک فلو",
     auditBody: "سیلرز کو فوراً مارکیٹ پلیس میں شامل نہیں کیا جاتا۔ وہ چھ مرحلوں کے آڈٹ سے گزرتے ہیں جس میں برانڈ، ڈیجیٹل موجودگی، ایکسپورٹ تجربہ، مصنوعات، آپریشنز، اور کمپلائنس شامل ہیں۔",
-    auditCta: "AI آڈٹ شروع کریں",
+    auditCta: "Apply to be selected",
     pathEyebrow: "اپنا راستہ منتخب کریں",
     buyerPath: "میں پاکستان سے سورس کرتا ہوں",
     sellerPath: "میں پاکستان میں بناتا ہوں",
@@ -118,25 +122,29 @@ const copy = {
     buyerPanelBody: "کم مگر بہتر منتخب مینوفیکچررز سے شروع کریں۔ ثبوت دیکھیں، موازنہ کریں، اور واضح فٹ کے بعد آگے بڑھیں۔",
     sellerPanelTitle: "مینوفیکچررز کے لیے",
     sellerPanelBody: "ایکسپورٹ readiness آڈٹ سے شروع کریں۔ اگر کام تیار ہے، تو اسے listing اور buyer presentation کے لیے review کیا جا سکتا ہے۔",
-    openMarketplace: "مارکیٹ پلیس کھولیں",
+    openMarketplace: "See selected manufacturers",
     viewPackages: "پیکیجز دیکھیں",
     gateEyebrow: "ORIGINO",
     gateTitle: "What brings you here?",
     gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
     select: "Select",
-    buyerGateTitle: "I am sourcing",
+    buyerGateTitle: "I'm a Buyer",
     buyerGateBody: "Find selected Pakistani manufacturers, compare evidence, and begin clear inquiries.",
-    sellerGateTitle: "I manufacture",
+    sellerGateTitle: "I'm a Manufacturer",
     sellerGateBody: "Start the audit, understand readiness, and choose support before being listed.",
     switchPath: "Switch path",
+    buyerSplit: "I'm a Buyer",
+    manufacturerSplit: "I'm a Manufacturer",
+    clarityTitle: "Origino is a curated sourcing platform.",
+    clarityBlock: "We do not list thousands of suppliers. We work with a few, carefully chosen, properly understood, and presented to build trust before conversation begins.",
     buyerHeroEyebrow: "For Global Buyers",
-    buyerHeroTitle: "Fewer names. Better evidence.",
-    buyerHeroBody: "Source from selected Pakistani manufacturers with clearer documents, verification signals, response context, and export readiness.",
-    buyerClarity: "ORIGINO reduces the field before you begin. Search the marketplace, compare suppliers, calculate landed cost, and ask only when the fit is visible.",
+    buyerHeroTitle: "Selected manufacturers. Not endless options.",
+    buyerHeroBody: "Work with carefully chosen suppliers presented clearly, without noise.",
+    buyerClarity: "Selected manufacturers from Pakistan. Built for global buyers. We work with a small number of suppliers, understand them closely, and present them with clarity so sourcing becomes simpler, not overwhelming.",
     sellerHeroEyebrow: "For Pakistani Manufacturers",
-    sellerHeroTitle: "Be chosen before being shown.",
-    sellerHeroBody: "Start with the export-readiness audit. ORIGINO reviews brand, documents, product readiness, and buyer presentation before listing.",
-    sellerClarity: "Manufacturing already exists. Visibility needs care. The seller path moves from audit to support packages, export guides, and then admin review.",
+    sellerHeroTitle: "What you make deserves to be seen.",
+    sellerHeroBody: "We work with a limited number of manufacturers and help them reach global buyers with clarity.",
+    sellerClarity: "Selected manufacturers from Pakistan. Built for global buyers. Before listing, ORIGINO reviews readiness, documents, verification signals, and how the work should be understood.",
     auditScore: "منظوری کے لیے 80+ اسکور ضروری",
     conditional: "60-79 پیکیج کے ذریعے بہتری",
     roadmap: "60 سے کم اسکور پر تیاری کا روڈ میپ",
@@ -180,6 +188,15 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
   const [audience, setAudience] = useState<Audience | null>(null);
   const [effectiveSuppliers, setEffectiveSuppliers] = useState(() => applySupplierOverrides(suppliers));
   useEffect(() => {
+    const savedUserType = window.localStorage.getItem("userType");
+    if (savedUserType === "buyer") {
+      setAudience("buyer");
+      return;
+    }
+    if (savedUserType === "manufacturer") {
+      setAudience("seller");
+      return;
+    }
     const savedAudience = window.localStorage.getItem("origino_audience");
     if (savedAudience === "buyer" || savedAudience === "seller") setAudience(savedAudience);
   }, []);
@@ -205,15 +222,10 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
   const eyebrowKey = lang === "ur" ? "eyebrow_ur" : "eyebrow";
   const chooseAudience = (nextAudience: Audience) => {
     window.localStorage.setItem("origino_audience", nextAudience);
+    window.localStorage.setItem("userType", nextAudience === "buyer" ? "buyer" : "manufacturer");
     window.dispatchEvent(new CustomEvent("origino:audience-change", { detail: nextAudience }));
     setAudience(nextAudience);
   };
-  const resetAudience = () => {
-    window.localStorage.removeItem("origino_audience");
-    window.dispatchEvent(new CustomEvent("origino:audience-change"));
-    setAudience(null);
-  };
-
   if (!audience) {
     return (
       <div className="page-enter">
@@ -292,7 +304,8 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
                   <Link className="btn-pill btn-pill-outline min-h-[52px] px-8" href="/marketing-packages">{t.viewPackages}</Link>
                 </>
               )}
-              <button className="btn-pill btn-pill-outline min-h-[52px] px-8" type="button" onClick={resetAudience}>{t.switchPath}</button>
+              <button className="btn-pill btn-pill-outline min-h-[52px] px-8" type="button" onClick={() => chooseAudience("buyer")}>{t.buyerSplit}</button>
+              <button className="btn-pill btn-pill-outline min-h-[52px] px-8" type="button" onClick={() => chooseAudience("seller")}>{t.manufacturerSplit}</button>
             </div>
           </div>
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-3 blur-in [animation-delay:180ms]">
@@ -304,6 +317,15 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
             <span>Scroll</span>
             <span className="h-12 w-px bg-[var(--ink)]/18" />
           </div>
+        </div>
+      </section>
+
+      <section className="container-editorial py-12">
+        <div className="panel-soft p-6 md:p-8">
+          <p className="badge-patch mb-5">{t.clarityTitle}</p>
+          <p className="max-w-3xl text-base leading-8 text-[#24221f]/72 md:text-lg md:leading-9">
+            {t.clarityBlock}
+          </p>
         </div>
       </section>
 
