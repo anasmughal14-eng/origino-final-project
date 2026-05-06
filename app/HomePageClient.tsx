@@ -235,33 +235,32 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
   if (!audience) {
     return (
       <div className="page-enter">
-        <section className="relative flex min-h-screen items-center overflow-hidden px-4 py-28">
-          <div className="absolute inset-0 z-0">
-            <img className="h-full w-full object-cover" src={HERO_IMAGE} alt="" aria-hidden="true" />
-            <div className="absolute inset-0 bg-[rgba(247,242,235,0.72)] backdrop-blur-[10px]" />
-            <div className="absolute inset-x-0 bottom-0 h-56 bg-[linear-gradient(to_top,rgba(247,242,235,0.98),transparent)]" />
+        <section className="audience-gate">
+          <div className="audience-gate-backdrop">
+            <img className="audience-gate-image" src={HERO_IMAGE} alt="" aria-hidden="true" />
+            <div className="audience-gate-overlay" />
           </div>
-          <div className="relative z-10 mx-auto w-full max-w-5xl rounded-[34px] border border-white/55 bg-[rgba(255,250,242,0.58)] p-5 shadow-[0_30px_110px_rgba(64,52,38,0.14)] backdrop-blur-2xl md:p-8">
+          <div className="audience-gate-panel">
             <div className="grid gap-4 md:grid-cols-2">
               <button
                 type="button"
                 onClick={() => chooseAudience("buyer")}
-                className="group rounded-[30px] border border-white/50 bg-white/42 p-6 text-left shadow-[0_18px_70px_rgba(64,52,38,0.08)] transition hover:-translate-y-1 hover:bg-white/60"
+                className="audience-gate-card group"
               >
                 <span className="badge-patch mb-10">Buyer</span>
-                <span className="block font-serif text-4xl leading-tight text-[var(--ink)]">{t.buyerGateTitle}</span>
-                <span className="mt-4 block max-w-md text-sm leading-6 text-[#24221f]/62">{t.buyerGateBody}</span>
-                <span className="btn-pill btn-pill-forest mt-8 inline-flex min-h-[46px] px-6 text-sm">{t.select}</span>
+                <span className="audience-gate-title">{t.buyerGateTitle}</span>
+                <span className="audience-gate-body">{t.buyerGateBody}</span>
+                <span className="audience-gate-action">{t.select}</span>
               </button>
               <button
                 type="button"
                 onClick={() => chooseAudience("seller")}
-                className="group rounded-[30px] border border-white/50 bg-white/42 p-6 text-left shadow-[0_18px_70px_rgba(64,52,38,0.08)] transition hover:-translate-y-1 hover:bg-white/60"
+                className="audience-gate-card group"
               >
                 <span className="badge-patch mb-10">Seller</span>
-                <span className="block font-serif text-4xl leading-tight text-[var(--ink)]">{t.sellerGateTitle}</span>
-                <span className="mt-4 block max-w-md text-sm leading-6 text-[#24221f]/62">{t.sellerGateBody}</span>
-                <span className="btn-pill btn-pill-forest mt-8 inline-flex min-h-[46px] px-6 text-sm">{t.select}</span>
+                <span className="audience-gate-title">{t.sellerGateTitle}</span>
+                <span className="audience-gate-body">{t.sellerGateBody}</span>
+                <span className="audience-gate-action">{t.select}</span>
               </button>
             </div>
           </div>
@@ -292,27 +291,27 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
 
   return (
     <div className="page-enter">
-      <section className="relative flex min-h-screen items-center overflow-hidden">
+      <section className="home-hero relative flex min-h-screen items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img className="h-full w-full object-cover" src={HERO_IMAGE} alt="" aria-hidden="true" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(247,242,235,0.94),rgba(247,242,235,0.58),rgba(247,242,235,0.05))]" />
           <div className="absolute inset-x-0 bottom-0 h-44 bg-[linear-gradient(to_top,rgba(247,242,235,0.98),transparent)]" />
         </div>
-        <div className="container-editorial relative z-10 py-32 text-[var(--ink)]">
-          <div className="max-w-3xl blur-in">
-            <p className="mb-8 inline-flex rounded-full bg-white/45 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink)] backdrop-blur-md">
+        <div className="container-editorial home-hero-inner relative z-10 text-[var(--ink)]">
+          <div className="home-hero-content blur-in">
+            <p className="home-hero-kicker">
               {heroEyebrow}
             </p>
-            <h1 className="max-w-[52rem] text-[clamp(2.75rem,11vw,5.5rem)] leading-[1.02] text-[var(--ink)]">
+            <h1 className="home-hero-title text-[var(--ink)]">
               {heroTitle}
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-7 text-[#24221f]/75 md:text-lg md:leading-8">
+            <p className="home-hero-body">
               {heroBody}
             </p>
-            <p className="mt-7 max-w-2xl text-[0.98rem] leading-7 text-[#24221f]/68 md:text-base md:leading-8">
+            <p className="home-hero-clarity">
               {heroClarity}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="home-hero-actions">
               {isBuyer ? (
                 <Link className="btn-pill btn-pill-forest min-h-[52px] px-8" href="/marketplace">{t.openMarketplace}</Link>
               ) : (
@@ -321,10 +320,10 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
               <button className="btn-pill btn-pill-outline min-h-[52px] px-8" type="button" onClick={resetAudience}>{t.switchPath}</button>
             </div>
           </div>
-          <div className="mt-12 grid max-w-xl grid-cols-3 gap-3 blur-in [animation-delay:180ms]">
-            <div className="rounded-[999px] border border-white/55 bg-white/50 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.08)] backdrop-blur-sm"><p className="metric-numeral text-2xl text-[var(--ink)]">{certified}</p><p className="text-sm text-[#24221f]/60">{t.verified}</p></div>
-            <div className="rounded-[999px] border border-white/55 bg-white/50 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.08)] backdrop-blur-sm"><p className="metric-numeral text-2xl text-[var(--ink)]">5h</p><p className="text-sm text-[#24221f]/60">{t.fastestReply}</p></div>
-            <div className="rounded-[999px] border border-white/55 bg-white/50 px-5 py-4 shadow-[0_20px_50px_rgba(64,52,38,0.08)] backdrop-blur-sm"><p className="metric-numeral text-2xl text-[var(--ink)]">GSP+</p><p className="text-sm text-[#24221f]/60">{t.euReady}</p></div>
+          <div className="home-proof-strip blur-in [animation-delay:180ms]">
+            <div className="home-proof-pill"><p className="metric-numeral text-[var(--ink)]">{certified}</p><p>{t.verified}</p></div>
+            <div className="home-proof-pill"><p className="metric-numeral text-[var(--ink)]">5h</p><p>{t.fastestReply}</p></div>
+            <div className="home-proof-pill"><p className="metric-numeral text-[var(--ink)]">GSP+</p><p>{t.euReady}</p></div>
           </div>
           <div className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-[var(--ink)]/70 md:flex">
             <span>Scroll</span>

@@ -131,12 +131,36 @@ const sellerFooterSections: FooterSection[] = [
 
 type Audience = "buyer" | "seller";
 
-function readAudiencePreference(): Audience | null {
+function inferAudienceFromPath(pathname: string): Audience | null {
+  if (pathname === "/") return null;
+  if (
+    pathname.startsWith("/seller") ||
+    pathname === "/audit" ||
+    pathname.startsWith("/marketing-packages") ||
+    pathname.startsWith("/checkout/marketing")
+  ) {
+    return "seller";
+  }
+  if (
+    pathname.startsWith("/buyer") ||
+    pathname.startsWith("/marketplace") ||
+    pathname.startsWith("/suppliers") ||
+    pathname.startsWith("/products") ||
+    pathname.startsWith("/compare") ||
+    pathname.startsWith("/landed-cost") ||
+    pathname.startsWith("/logistics")
+  ) {
+    return "buyer";
+  }
+  return null;
+}
+
+function readAudiencePreference(pathname: string): Audience | null {
   const userType = window.localStorage.getItem("userType");
   if (userType === "buyer") return "buyer";
   if (userType === "manufacturer") return "seller";
   const savedAudience = window.localStorage.getItem("origino_audience");
-  return savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : null;
+  return savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : inferAudienceFromPath(pathname);
 }
 
 export default function Footer() {
@@ -146,7 +170,7 @@ export default function Footer() {
 
   useEffect(() => {
     function syncAudience() {
-      setAudience(readAudiencePreference());
+      setAudience(readAudiencePreference(pathname));
     }
     syncAudience();
     window.addEventListener("storage", syncAudience);
@@ -155,7 +179,7 @@ export default function Footer() {
       window.removeEventListener("storage", syncAudience);
       window.removeEventListener("origino:audience-change", syncAudience);
     };
-  }, []);
+  }, [pathname]);
 
   if (pathname === "/" && audience !== "buyer" && audience !== "seller") {
     return null;

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, Search, ShoppingBag, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useLanguage } from "@/app/components/shared/LanguageProvider";
 
 type NavLink =
@@ -51,12 +51,36 @@ const sellerHomeNavLinks: NavLink[] = [
 
 type Audience = "buyer" | "seller";
 
-function readAudiencePreference(): Audience | null {
+function inferAudienceFromPath(pathname: string): Audience | null {
+  if (pathname === "/") return null;
+  if (
+    pathname.startsWith("/seller") ||
+    pathname === "/audit" ||
+    pathname.startsWith("/marketing-packages") ||
+    pathname.startsWith("/checkout/marketing")
+  ) {
+    return "seller";
+  }
+  if (
+    pathname.startsWith("/buyer") ||
+    pathname.startsWith("/marketplace") ||
+    pathname.startsWith("/suppliers") ||
+    pathname.startsWith("/products") ||
+    pathname.startsWith("/compare") ||
+    pathname.startsWith("/landed-cost") ||
+    pathname.startsWith("/logistics")
+  ) {
+    return "buyer";
+  }
+  return null;
+}
+
+function readAudiencePreference(pathname: string): Audience | null {
   const userType = window.localStorage.getItem("userType");
   if (userType === "buyer") return "buyer";
   if (userType === "manufacturer") return "seller";
   const savedAudience = window.localStorage.getItem("origino_audience");
-  return savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : null;
+  return savedAudience === "buyer" || savedAudience === "seller" ? savedAudience : inferAudienceFromPath(pathname);
 }
 
 export default function Navigation() {
@@ -79,7 +103,7 @@ export default function Navigation() {
 
   useEffect(() => {
     function syncAudience() {
-      setAudience(readAudiencePreference());
+      setAudience(readAudiencePreference(pathname));
     }
     syncAudience();
     window.addEventListener("storage", syncAudience);
@@ -88,7 +112,7 @@ export default function Navigation() {
       window.removeEventListener("storage", syncAudience);
       window.removeEventListener("origino:audience-change", syncAudience);
     };
-  }, []);
+  }, [pathname]);
 
   const linkClass = (href: string) => `nav-link min-h-[44px] inline-flex items-center ${pathname === href || pathname.startsWith(`${href}/`) ? "font-bold underline underline-offset-4" : ""}`;
   const showAudienceGate = pathname === "/" && !audience;
@@ -131,6 +155,13 @@ export default function Navigation() {
                       {t(child.labelKey)}
                     </Link>
                   ))}
+                  <div className="mt-2 border-t border-[rgba(36,34,31,0.10)] pt-2">
+                    <p className="px-3 pb-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-[#8c8378]">{t("nav.languageSelection")}</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button className="btn-pill btn-pill-outline min-h-[40px] bg-white/20 px-3 py-1 text-[0.72rem]" onClick={() => setLang("en")} aria-pressed={lang === "en"}>EN</button>
+                      <button className="btn-pill btn-pill-outline min-h-[40px] bg-white/20 px-3 py-1 text-[0.72rem]" onClick={() => setLang("ur")} aria-pressed={lang === "ur"}>{t("lang.urdu")}</button>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -160,13 +191,18 @@ export default function Navigation() {
                       {t(child.labelKey)}
                     </Link>
                   ))}
+                  <div className="mt-2 border-t border-[rgba(36,34,31,0.10)] pt-2">
+                    <p className="px-3 pb-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-[#8c8378]">{t("nav.languageSelection")}</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button className="btn-pill btn-pill-outline min-h-[40px] bg-white/20 px-3 py-1 text-[0.72rem]" onClick={() => setLang("en")} aria-pressed={lang === "en"}>EN</button>
+                      <button className="btn-pill btn-pill-outline min-h-[40px] bg-white/20 px-3 py-1 text-[0.72rem]" onClick={() => setLang("ur")} aria-pressed={lang === "ur"}>{t("lang.urdu")}</button>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
           ) : <Link className={`${linkClass(link.href)} rounded-full px-3 text-[#6b6560] hover:bg-white/45 hover:opacity-100`} key={link.href} href={link.href}>{t(link.labelKey)}</Link>)}
-          <button className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/45 bg-white/25 px-4 text-xs font-semibold backdrop-blur-xl" onClick={() => setLang("en")} aria-pressed={lang === "en"}>EN</button>
-          <button className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/45 bg-white/25 px-4 text-xs font-semibold backdrop-blur-xl" onClick={() => setLang("ur")} aria-pressed={lang === "ur"}>{t("lang.urdu")}</button>
-          <Link className="btn-pill btn-pill-forest min-h-[44px] min-w-[94px] whitespace-nowrap px-5 py-2 text-xs" href="/login">{t("nav.signIn")}</Link>
+          <Link className="btn-pill btn-pill-outline min-h-[44px] min-w-[92px] whitespace-nowrap bg-white/15 px-5 py-2 text-xs" href="/login">{t("nav.signIn")}</Link>
         </div>
         {!mobileOpen && (
           <button
@@ -188,14 +224,7 @@ export default function Navigation() {
               <Link href="/" className="text-3xl font-medium tracking-wide text-[#24221f]" style={{ fontFamily: "'Playfair Display', serif" }} onClick={() => setMobileOpen(false)}>
                 ORIGINO
               </Link>
-            <div className="flex min-w-[88px] items-center justify-end gap-2">
-                <Link href={audience === "seller" ? "/audit" : "/marketplace"} className="flex min-h-[44px] min-w-[34px] items-center justify-center text-[#6b6560]" aria-label={audience === "seller" ? "Open audit" : "Search marketplace"} onClick={() => setMobileOpen(false)}>
-                  <Search size={19} />
-                </Link>
-                <Link href={audience === "buyer" ? "/compare" : "/marketing-packages"} className="flex min-h-[44px] min-w-[34px] items-center justify-center text-[#6b6560]" aria-label={audience === "buyer" ? "Compare suppliers" : "Marketing packages"} onClick={() => setMobileOpen(false)}>
-                  <ShoppingBag size={18} />
-                </Link>
-              </div>
+              <div className="min-w-[44px]" aria-hidden="true" />
             </div>
             <nav className="mt-4 grid gap-1">
               {mobilePrimaryLinks.map((link) => (
