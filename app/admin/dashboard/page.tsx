@@ -124,24 +124,24 @@ export default async function AdminDashboardPage() {
     <div>
       <div className="border-b border-[rgba(26,26,24,0.12)] pb-6">
         <p className="badge-patch mb-3">Admin Portal</p>
-        <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-4xl">Operations Dashboard</h1>
-            <p className="mt-2 max-w-3xl text-[#5a5a54]">Application reviews, SLA breaches, marketplace supply, escrow exposure, and order activity.</p>
+            <h1 className="text-3xl sm:text-4xl">Operations Dashboard</h1>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-[#5a5a54] sm:text-base">Application reviews, SLA breaches, marketplace supply, escrow exposure, and order activity.</p>
           </div>
-          <Link className="btn-pill btn-pill-outline min-h-[44px]" href="/admin/activity-log">Open Activity Log</Link>
+          <Link className="btn-pill btn-pill-outline min-h-[44px] w-full sm:w-auto" href="/admin/activity-log">Open Activity Log</Link>
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         {metricCards.map((metric) => (
           <Link
-            className={`dashboard-card p-5 ${metric.tone === "breach" ? "border-[var(--terracotta)] bg-[var(--terracotta-pale)] text-[var(--terracotta)]" : ""} ${metric.tone === "warning" ? "border-[var(--gold)] bg-[var(--gold-pale)]" : ""} ${metric.tone === "forest" ? "border-[var(--forest)] bg-[var(--forest-pale)]" : ""}`}
+            className={`dashboard-card p-4 sm:p-5 ${metric.tone === "breach" ? "border-[var(--terracotta)] bg-[var(--terracotta-pale)] text-[var(--terracotta)]" : ""} ${metric.tone === "warning" ? "border-[var(--gold)] bg-[var(--gold-pale)]" : ""} ${metric.tone === "forest" ? "border-[var(--forest)] bg-[var(--forest-pale)]" : ""}`}
             href={metric.href}
             key={metric.key}
           >
-            <p className="metric-numeral text-3xl">{metric.value}</p>
-            <p className="text-sm text-[#5a5a54]">{metric.label}</p>
+            <p className="metric-numeral text-2xl sm:text-3xl">{metric.value}</p>
+            <p className="mt-1 text-xs leading-5 text-[#5a5a54] sm:text-sm">{metric.label}</p>
           </Link>
         ))}
       </div>
@@ -150,15 +150,15 @@ export default async function AdminDashboardPage() {
         <section>
           <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <h2 className="text-3xl">Pending Actions</h2>
+              <h2 className="text-2xl sm:text-3xl">Pending Actions</h2>
               <p className="mt-1 text-sm text-[#5a5a54]">Each row routes to the relevant admin entity for review.</p>
             </div>
-            <Link className="btn-pill btn-pill-outline min-h-[44px]" href="/admin/tasks">View Task Queue</Link>
+            <Link className="btn-pill btn-pill-outline min-h-[44px] w-full sm:w-auto" href="/admin/tasks">View Task Queue</Link>
           </div>
           <div className="space-y-3">
             {pendingActions.map((action, index) => (
               <div
-                className={`dashboard-card flex flex-wrap items-center justify-between gap-4 p-4 ${action.severity === "breach" ? "border-[var(--terracotta)] bg-[var(--terracotta-pale)] text-[var(--terracotta)]" : ""} ${action.severity === "warning" ? "border-[var(--gold)] bg-[var(--gold-pale)]" : ""}`}
+                className={`dashboard-card flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between ${action.severity === "breach" ? "border-[var(--terracotta)] bg-[var(--terracotta-pale)] text-[var(--terracotta)]" : ""} ${action.severity === "warning" ? "border-[var(--gold)] bg-[var(--gold-pale)]" : ""}`}
                 key={`${action.href}-${action.label}-${action.title}-${action.meta}-${index}`}
               >
                 <div className="max-w-3xl">
@@ -169,14 +169,14 @@ export default async function AdminDashboardPage() {
                   <p className="mt-1 text-sm">{action.body}</p>
                   <p className="small-caps mt-2 text-xs">{action.meta}</p>
                 </div>
-                <Link className="btn-pill btn-pill-outline min-h-[44px]" href={action.href}>{action.label}</Link>
+                <Link className="btn-pill btn-pill-outline min-h-[44px] w-full shrink-0 sm:w-auto" href={action.href}>{action.label}</Link>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="dashboard-card p-5">
-          <h2 className="text-3xl">Operational Queues</h2>
+        <section className="dashboard-card p-4 sm:p-5">
+          <h2 className="text-2xl sm:text-3xl">Operational Queues</h2>
           <p className="mt-1 text-sm text-[#5a5a54]">Fast links for the admin workstreams called out in the build prompt.</p>
           <div className="mt-5 space-y-3">
             {supplyGaps.map((item) => (

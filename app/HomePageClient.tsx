@@ -214,8 +214,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
   }, [suppliers]);
   const activeSuppliers = effectiveSuppliers.filter((supplier) => supplier.is_active);
   const certified = activeSuppliers.filter((supplier) => supplier.verification_tier === "origino_certified" || supplier.verification_tier === "site_visited").length;
-  const featured = activeSuppliers.filter((supplier) => supplier.is_featured).slice(0, 3);
-  const featuredSection = getSection(pageSections, "featured_suppliers");
+  const hasMarketplaceStats = activeSuppliers.length > 0 || products.length > 0 || certified > 0;
   const audit = getSection(pageSections, "audit");
   const waitlist = getSection(pageSections, "waitlist");
   const titleKey = lang === "ur" ? "title_ur" : "title";
@@ -362,58 +361,23 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         </div>
       </section>
 
-      <section className="overflow-hidden border-y border-[rgba(84,98,64,0.12)] bg-[rgba(255,250,242,0.78)] py-5 text-[var(--ink)] shadow-[inset_0_1px_rgba(255,255,255,0.7)]">
-        <div className="animate-marquee flex whitespace-nowrap">
-          {[0, 1, 2].map((group) => (
-            <div key={group} className="flex">
-              <div className="inline-flex items-center gap-10 px-12"><span className="font-serif text-3xl">{activeSuppliers.length}</span><span className="text-sm font-medium text-[var(--ink-muted)]">{t.suppliers}</span><span className="text-[var(--forest-light)]">/</span></div>
-              <div className="inline-flex items-center gap-10 px-12"><span className="font-serif text-3xl">{products.length}</span><span className="text-sm font-medium text-[var(--ink-muted)]">{t.products}</span><span className="text-[var(--forest-light)]">/</span></div>
-              <div className="inline-flex items-center gap-10 px-12"><span className="font-serif text-3xl">{certified}</span><span className="text-sm font-medium text-[var(--ink-muted)]">{t.verifiedLeaders}</span><span className="text-[var(--forest-light)]">/</span></div>
-              <div className="inline-flex items-center gap-10 px-12"><span className="font-serif text-3xl">{clusters.length}</span><span className="text-sm font-medium text-[var(--ink-muted)]">{t.cityClusters}</span><span className="text-[var(--forest-light)]">/</span></div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="hidden border-y border-[rgba(26,26,24,0.12)] bg-[#f7f3ee]">
-        <div className="container-editorial grid grid-cols-2 gap-6 py-8 md:grid-cols-4">
-          <div><div className="metric-numeral text-3xl">{activeSuppliers.length}</div><p className="text-sm text-[#5a5a54]">{t.suppliers}</p></div>
-          <div><div className="metric-numeral text-3xl">{products.length}</div><p className="text-sm text-[#5a5a54]">{t.products}</p></div>
-          <div><div className="metric-numeral text-3xl">{certified}</div><p className="text-sm text-[#5a5a54]">{t.verifiedLeaders}</p></div>
-          <div><div className="metric-numeral text-3xl">{clusters.length}</div><p className="text-sm text-[#5a5a54]">{t.cityClusters}</p></div>
-        </div>
-      </section>
+      {hasMarketplaceStats && (
+        <section className="overflow-hidden border-y border-[rgba(84,98,64,0.12)] bg-[rgba(255,250,242,0.78)] py-5 text-[var(--ink)] shadow-[inset_0_1px_rgba(255,255,255,0.7)]">
+          <div className="animate-marquee flex whitespace-nowrap">
+            {[0, 1, 2].map((group) => (
+              <div key={group} className="flex">
+                <div className="inline-flex items-center gap-10 px-12"><span className="font-serif text-3xl">{activeSuppliers.length}</span><span className="text-sm font-medium text-[var(--ink-muted)]">{t.suppliers}</span><span className="text-[var(--forest-light)]">/</span></div>
+                <div className="inline-flex items-center gap-10 px-12"><span className="font-serif text-3xl">{products.length}</span><span className="text-sm font-medium text-[var(--ink-muted)]">{t.products}</span><span className="text-[var(--forest-light)]">/</span></div>
+                <div className="inline-flex items-center gap-10 px-12"><span className="font-serif text-3xl">{certified}</span><span className="text-sm font-medium text-[var(--ink-muted)]">{t.verifiedLeaders}</span><span className="text-[var(--forest-light)]">/</span></div>
+                <div className="inline-flex items-center gap-10 px-12"><span className="font-serif text-3xl">{clusters.length}</span><span className="text-sm font-medium text-[var(--ink-muted)]">{t.cityClusters}</span><span className="text-[var(--forest-light)]">/</span></div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {isBuyer && (
         <>
-          <section className="bg-[#f3eadf] py-20">
-            <div className="container-editorial">
-              <div className="mb-6 flex items-end justify-between gap-4">
-                <div>
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#4f5b3a]">{sectionText(featuredSection, eyebrowKey, t.featuredSuppliers)}</p>
-                  <h2 className="text-4xl md:text-5xl">{sectionText(featuredSection, titleKey, "Manufacturers worth reading.")}</h2>
-                </div>
-                <Link className="hidden items-center gap-2 text-sm font-semibold text-[#4f5b3a] transition hover:text-[#2a3320] sm:inline-flex" href="/marketplace">{t.browseAll}</Link>
-              </div>
-              <div className="grid gap-7 md:grid-cols-3">
-                {featured.map((supplier) => (
-                  <Link key={supplier.id} href={`/suppliers/${supplier.slug}`} className="group overflow-hidden rounded-[34px] border border-[rgba(84,98,64,0.10)] bg-[var(--warm-white)] shadow-[0_22px_70px_rgba(64,52,38,0.06)] hover-lift">
-                    <div className="relative m-3 aspect-[4/3] overflow-hidden rounded-[28px]">
-                      <img className="img-zoom h-full w-full object-cover" src={supplier.hero_image_url || "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg?auto=compress&cs=tinysrgb&w=1200"} alt={supplier.company_name} />
-                      <span className="badge-patch absolute left-4 top-4 bg-white/85 text-[#4f5b3a] backdrop-blur">{supplier.verification_tier.replace(/_/g, " ")}</span>
-                    </div>
-                    <div className="p-6">
-                      <p className="text-xs uppercase tracking-[0.16em] text-[#8a8a82]">{supplier.city} / {supplier.category}</p>
-                      <h3 className="mt-3 text-2xl transition group-hover:text-[#4f5b3a]">{lang === "ur" && supplier.company_name_ur ? supplier.company_name_ur : supplier.company_name}</h3>
-                      <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#5a5a54]">{supplier.description}</p>
-                      <p className="mt-5 metric-numeral text-sm">{t.response} {supplier.response_rate}% / {t.moq} ${supplier.moq_usd?.toLocaleString()}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-
           <section className="container-editorial py-20">
             <div className="panel-soft p-6 md:p-10">
               <p className="badge-patch mb-5">{t.sourcingEyebrow}</p>

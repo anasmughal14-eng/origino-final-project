@@ -4,6 +4,32 @@ import { getInquiries, getOrders, getQuotes, getSuppliers } from "@/lib/data-ser
 export default async function SellerDashboardPage() {
   const [suppliers, inquiries, quotes, orders] = await Promise.all([getSuppliers(), getInquiries(), getQuotes(), getOrders()]);
   const supplier = suppliers[0];
+  if (!supplier) {
+    return (
+      <div>
+        <div className="border-b border-[rgba(26,26,24,0.12)] pb-6">
+          <p className="badge-patch mb-3">Seller Portal</p>
+          <h1 className="text-3xl sm:text-4xl">Dashboard</h1>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5a5a54] sm:text-base">
+            No supplier profile is attached yet. Start the audit or complete onboarding so the seller workspace can load verified company data.
+          </p>
+        </div>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <Link className="dashboard-card block p-5" href="/seller/onboarding">
+            <p className="badge-patch mb-4">Next step</p>
+            <h2 className="text-2xl">Complete onboarding</h2>
+            <p className="mt-2 text-sm leading-6 text-[#5a5a54]">Add company details, documents, products, and audit readiness data.</p>
+          </Link>
+          <Link className="dashboard-card block p-5" href="/audit">
+            <p className="badge-patch mb-4">Readiness</p>
+            <h2 className="text-2xl">Start AI audit</h2>
+            <p className="mt-2 text-sm leading-6 text-[#5a5a54]">Understand marketing readiness before choosing support or listing work.</p>
+          </Link>
+        </div>
+      </div>
+    );
+  }
   const sellerInquiries = inquiries.filter((item) => item.supplier_id === supplier.id);
   const sellerOrders = orders.filter((order) => order.supplier_id === supplier.id);
   const sellerQuotes = quotes.filter((quote) => quote.supplier_id === supplier.id);

@@ -46,28 +46,52 @@ const navItems: NavItem[] = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   return (
-    <div className="portal-bg min-h-screen pt-28">
-      <div className="flex">
-        <aside className="portal-sidebar fixed bottom-6 left-4 top-28 hidden w-64 flex-shrink-0 overflow-y-auto p-4 md:block">
-          <div className="mb-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[var(--forest)]">Admin</div>
-          <div className="mb-6 text-[0.6rem] tracking-[0.1em] text-[var(--ink-muted)]">Restricted Access</div>
-          <nav className="space-y-1">
-            {navItems.map((item) => {
-              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`portal-nav-link ${active ? "portal-nav-link-active font-medium" : ""}`}
-                >
-                  <span className="portal-icon"><item.icon size={16} strokeWidth={1.8} /></span>
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-        </aside>
-        <main className="min-w-0 flex-1 p-5 md:ml-72 md:p-8">{children}</main>
+    <div className="portal-bg min-h-screen pt-24 md:pt-28">
+      <aside className="portal-sidebar fixed bottom-6 left-4 top-28 hidden w-64 flex-shrink-0 overflow-y-auto p-4 md:block">
+        <div className="mb-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[var(--forest)]">Admin</div>
+        <div className="mb-6 text-[0.6rem] tracking-[0.1em] text-[var(--ink-muted)]">Restricted Access</div>
+        <nav className="space-y-1">
+          {navItems.map((item) => {
+            const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`portal-nav-link ${active ? "portal-nav-link-active font-medium" : ""}`}
+              >
+                <span className="portal-icon"><item.icon size={16} strokeWidth={1.8} /></span>
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </aside>
+
+      <div className="min-w-0 md:ml-72">
+        <div className="px-4 pb-4 md:hidden">
+          <div className="portal-mobile-nav">
+            <div className="mb-3 flex items-center justify-between px-1">
+              <span className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[var(--forest)]">Admin</span>
+              <span className="text-[0.62rem] uppercase tracking-[0.14em] text-[var(--ink-muted)]">Restricted</span>
+            </div>
+            <nav className="portal-mobile-nav-scroll" aria-label="Admin sections">
+              {navItems.map((item) => {
+                const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`portal-mobile-nav-link ${active ? "portal-mobile-nav-link-active font-medium" : ""}`}
+                  >
+                    <item.icon size={15} strokeWidth={1.8} />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
+        <main className="min-w-0 p-4 pt-0 md:p-8">{children}</main>
       </div>
     </div>
   );
