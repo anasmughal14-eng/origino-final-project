@@ -60,18 +60,18 @@ export default function AboutPage() {
   return (
     <div className="page-enter pt-24">
       <section className="container-editorial pb-16 pt-10 md:pb-24 md:pt-16">
-        <div className="mx-auto max-w-[1180px] overflow-hidden rounded-[34px] border border-white/55 bg-[rgba(255,250,242,0.54)] shadow-[0_28px_110px_rgba(64,52,38,0.1)] backdrop-blur-2xl">
+        <div className="panel-soft mx-auto max-w-[1180px] overflow-hidden">
           <div className="grid min-h-[620px] lg:grid-cols-[0.48fr_0.52fr]">
             <div className="relative min-h-[420px] overflow-hidden lg:min-h-full">
               <img
                 src="https://images.unsplash.com/photo-1565021005021-9e9ae2af0edd?w=1000&q=75"
                 alt="Pakistani manufacturing detail"
-                className="h-full w-full object-cover grayscale"
+                className="img-editorial-soft h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,26,24,0.04),rgba(26,26,24,0.5))]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,26,24,0.02),rgba(26,26,24,0.46))]" />
               <div className="absolute inset-x-0 bottom-0 p-8 text-[#fffaf2] md:p-12">
                 <p className="mb-5 inline-flex rounded-full border border-white/35 px-4 py-2 text-[0.68rem] uppercase tracking-[0.22em]">Lahore, Pakistan</p>
-                <h1 className="max-w-[540px] text-[4rem] font-medium leading-[0.92] md:text-[5.8rem]">
+                <h1 className="max-w-[520px] text-[3.1rem] font-medium leading-[0.94] md:text-[4.9rem]">
                   Not a directory.
                   <span className="block italic">A point of view.</span>
                 </h1>
@@ -102,11 +102,11 @@ export default function AboutPage() {
               A quiet
               <span className="block italic">beginning.</span>
             </h2>
-            <figure className="mt-8 overflow-hidden rounded-[30px] border border-white/60 bg-[#f7f3ee] shadow-[0_28px_90px_rgba(64,52,38,0.12)]">
+            <figure className="image-soft-shell mt-8">
               <img
                 src="/images/founder-anas-mughal.jpeg"
                 alt="Anas Mughal, Founder of Origino"
-                className="aspect-[4/5] w-full object-cover object-[50%_32%] grayscale contrast-[1.03] brightness-[0.96]"
+                className="img-editorial-portrait aspect-[4/5] w-full object-cover object-[50%_32%]"
               />
             </figure>
             <div className="mt-7 border-t border-[rgba(26,26,24,0.12)] pt-6">
@@ -115,7 +115,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <article className="rounded-[34px] border border-white/60 bg-[rgba(255,250,242,0.48)] p-7 shadow-[0_24px_90px_rgba(64,52,38,0.08)] backdrop-blur-2xl md:p-12">
+          <article className="panel-soft p-7 md:p-12">
             <div className="max-w-[760px] space-y-5 text-[1.18rem] leading-[1.85] text-[#49443e] md:text-[1.36rem]">
               {founderStory.map((paragraph, index) => (
                 <p
@@ -141,7 +141,7 @@ export default function AboutPage() {
             {principles.map((principle) => (
               <div
                 key={principle.title}
-                className="rounded-[26px] border border-white/55 bg-[rgba(255,250,242,0.42)] p-7 shadow-[0_18px_70px_rgba(64,52,38,0.07)] backdrop-blur-xl"
+                className="panel-soft p-7"
               >
                 <p className="text-[0.72rem] uppercase tracking-[0.22em] text-[#b8913a]">{principle.label}</p>
                 <h3 className="mt-10 text-2xl font-medium text-[#1a1a18]">{principle.title}</h3>
@@ -153,10 +153,10 @@ export default function AboutPage() {
       </section>
 
       <section className="container-editorial py-14 md:py-24">
-        <div className="mx-auto max-w-[1180px] rounded-[34px] bg-[#4f6138] p-8 text-[#fffaf2] shadow-[0_28px_110px_rgba(64,52,38,0.14)] md:p-12">
+        <div className="panel-soft mx-auto max-w-[1180px] p-8 md:p-12">
           <div className="grid gap-12 lg:grid-cols-[0.42fr_0.58fr]">
             <div>
-              <p className="text-[0.72rem] uppercase tracking-[0.24em] text-[#d9c9a8]">Method</p>
+              <p className="text-[0.72rem] uppercase tracking-[0.24em] text-[var(--forest)]">Method</p>
               <h2 className="mt-6 max-w-md text-[3rem] font-medium leading-[0.98] md:text-[4.8rem]">
                 Slow selection.
                 <span className="block italic">Clear evidence.</span>
@@ -164,9 +164,9 @@ export default function AboutPage() {
             </div>
             <div className="grid gap-5 md:grid-cols-3">
               {methods.map(([title, body]) => (
-                <div key={title} className="border-t border-white/25 pt-6">
+                <div key={title} className="border-t border-[rgba(84,98,64,0.16)] pt-6">
                   <h3 className="text-xl font-medium">{title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[#ece2d2]">{body}</p>
+                  <p className="mt-4 text-sm leading-7 text-[#6d675f]">{body}</p>
                 </div>
               ))}
             </div>
@@ -175,7 +175,7 @@ export default function AboutPage() {
       </section>
 
       <section className="container-editorial pb-20 pt-8 md:pb-28">
-        <div className="mx-auto max-w-[760px] text-center">
+        <div className="panel-soft mx-auto max-w-[820px] p-8 text-center md:p-12">
           <h2 className="text-[3.4rem] font-medium leading-[0.95] md:text-[5.6rem]">Enter carefully.</h2>
           <p className="mx-auto mt-6 max-w-md text-lg leading-8 text-[#5a554f]">
             Buyers may source. Manufacturers may apply. Both paths begin with intent.
