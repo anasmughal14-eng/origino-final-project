@@ -104,9 +104,9 @@ const sellerFooterSections: FooterSection[] = [
     headingKey: "nav.packages",
     links: [
       { href: "/marketing-packages", labelKey: "footer.marketingPackages" },
-      { href: "/checkout/marketing?package=basic", label: "Basic Package" },
-      { href: "/checkout/marketing?package=growth", label: "Growth Package" },
-      { href: "/checkout/marketing?package=premium", label: "Premium Package" },
+      { href: "/checkout/marketing?package=basic", label: "Foundation Package" },
+      { href: "/checkout/marketing?package=growth", label: "Transformation Package" },
+      { href: "/checkout/marketing?package=premium", label: "Access Package" },
     ],
   },
   {

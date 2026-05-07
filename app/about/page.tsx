@@ -10,17 +10,17 @@ const principles = [
   {
     label: "01",
     title: "Evidence before claim",
-    body: "Verification, documents, audit scores, and visits are shown plainly. A buyer should not have to guess.",
+    body: "Verification tier, NTN certificate, audit score, ISO, CE, and GSP+ status are shown plainly on every profile. A buyer should not have to ask.",
   },
   {
     label: "02",
     title: "Origin matters",
-    body: "A product is not only a price. It has a city, a workshop, a process, and a standard of care.",
+    body: "A product has a city: Sialkot, Faisalabad, Gujranwala. A workshop with a process. A standard that either holds under scrutiny or does not. Origin is part of the proof.",
   },
   {
     label: "03",
     title: "Curation over volume",
-    body: "Not everything needs to be shown. What is shown should feel considered.",
+    body: "A shorter list of verified manufacturers is more useful than a directory of thousands. What is listed here has been chosen, scored, and reviewed, not simply registered.",
   },
 ];
 
@@ -37,9 +37,9 @@ const founderStory = [
 ];
 
 const methods = [
-  ["Look closely", "Begin with the manufacturer, the process, and the work already being done."],
-  ["Ask for proof", "Place documents, response behaviour, and verification beside the story."],
-  ["Show less", "The point is not endless choice. The point is a better short list."],
+  ["Look closely", "Begin with the factory. The city. The category. The years in operation. The export history. The work that already exists before the profile is written."],
+  ["Ask for proof", "NTN certificate, company registration, ISO, CE, response rate, and average response time are placed beside every manufacturer profile. The story is supported by documents, not claims."],
+  ["Show less", "Fewer manufacturers on the list means each one has earned the position. The point is not volume. The point is a shortlist a buyer can act on."],
 ];
 
 export default function AboutPage() {
@@ -68,12 +68,12 @@ export default function AboutPage() {
               <div>
                 <p className="section-kicker">Our Story</p>
                 <p className="mt-8 max-w-xl text-[1.18rem] leading-[1.55] text-[#3e3a35] md:text-[1.62rem]">
-                  Manufacturing exists. Visibility is broken. Curation creates value.
+                  Manufacturing exists. Visibility is broken. Curation is the answer.
                 </p>
               </div>
               <div className="mt-12 grid gap-5 text-[#5a554f] md:grid-cols-2">
-                <p className="text-lg leading-8">ORIGINO exists for manufacturers whose work is real, but not yet properly seen.</p>
-                <p className="text-lg leading-8">Fewer names. Better context. Proof placed close to the work.</p>
+                <p className="text-lg leading-8">ORIGINO exists for manufacturers in Sialkot, Faisalabad, Lahore, Karachi, and Gujranwala whose work is serious, but not yet reached by the buyers looking for it.</p>
+                <p className="text-lg leading-8">Fewer names on the list. Deeper documentation behind each one. Sanctions screening, audit scores, and certifications placed next to every profile, not hidden in a follow-up email.</p>
               </div>
             </div>
           </div>

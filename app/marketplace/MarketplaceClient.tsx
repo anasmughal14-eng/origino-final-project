@@ -73,21 +73,30 @@ export default function MarketplaceClient({ suppliers, initialFilters = {} }: { 
   const shown = filtered.slice(0, visible);
 
   return (
-    <div className="container-editorial pb-16 pt-36">
-      <div className="flex flex-col gap-4 border-b border-[rgba(26,26,24,0.12)] pb-8 md:flex-row md:items-end md:justify-between">
+    <div className="container-editorial pb-16 pt-32 md:pt-36">
+      <div className="grid max-w-[73rem] gap-5 md:gap-8 lg:grid-cols-[0.95fr_0.42fr] lg:items-end">
         <div>
-          <p className="badge-patch mb-4">Selected manufacturers</p>
-          <h1 className="text-[2.8rem] leading-[0.98] md:text-[4.4rem]">Marketplace</h1>
-          <p className="mt-3 max-w-2xl text-[#5a5a54]">A shorter list of Pakistani manufacturers, filtered by evidence, category, city, MOQ, and certification.</p>
+          <p className="badge-patch mb-4">For Global Buyers</p>
+          <div className="relative mt-5 max-w-4xl px-3 py-4 md:px-5 md:py-5">
+            <div className="absolute -inset-x-1 -inset-y-1 rounded-[26px] border border-[rgba(84,98,64,0.2)] bg-[linear-gradient(135deg,rgba(238,240,227,0.95),rgba(255,248,235,0.9))] shadow-[0_22px_70px_rgba(84,98,64,0.16)] md:-inset-x-2 md:-inset-y-2 md:rounded-[34px]" />
+            <h1 className="relative text-[2.7rem] leading-[0.95] md:text-[4.4rem]">Selected manufacturers. Not endless options.</h1>
+          </div>
+          <p className="mt-5 max-w-2xl text-[1.02rem] leading-7 text-[#5a5a54] md:text-lg md:leading-8">
+            Every manufacturer listed here has been audit scored across 6 categories, sanctions screened against OFAC, UN, EU, and HMT lists, and approved by admin review. Documents, verification tier, and buyer context are visible before a message is sent.
+          </p>
         </div>
-        <div className="text-start md:text-end">
-          <p className="metric-numeral text-4xl">{filtered.length}</p>
-          <p className="text-sm text-[#5a5a54]">shown</p>
+        <div className="panel-soft border-[rgba(84,98,64,0.22)] bg-[rgba(238,240,227,0.64)] p-4 shadow-[0_24px_70px_rgba(79,91,58,0.12)] md:p-6">
+          <p className="section-kicker text-[var(--forest)]">Marketplace</p>
+          <p className="mt-4 metric-numeral text-5xl">{filtered.length}</p>
+          <p className="mt-2 text-sm leading-6 text-[#5a5a54]">manufacturers shown after review and filtering</p>
+          <div className="mt-5 rounded-[18px] border border-[rgba(198,161,89,0.28)] bg-[rgba(255,248,235,0.72)] px-4 py-3 text-sm leading-6 text-[#5a5a54]">
+            Buyer trust is protected by selection, evidence, and admin review.
+          </div>
         </div>
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[300px_1fr]">
-        <aside className="marketplace-filters panel-soft relative z-10 h-max space-y-4 p-5 lg:sticky lg:top-28">
+        <aside className="marketplace-filters panel-soft relative z-10 h-max space-y-4 border-[rgba(84,98,64,0.16)] bg-[rgba(255,250,242,0.72)] p-5 shadow-[0_24px_70px_rgba(79,91,58,0.1)] lg:sticky lg:top-28">
           <label className="block text-xs uppercase tracking-[0.16em] text-[#8a8a82]">Search</label>
           <input className="input-editorial min-h-[44px] bg-[#fdfbf8]" placeholder="Search by work, city, or evidence" value={query} onChange={(event) => { setQuery(event.target.value); setVisible(pageSize); }} />
 
@@ -130,7 +139,7 @@ export default function MarketplaceClient({ suppliers, initialFilters = {} }: { 
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
                       <h2 className="text-2xl transition-colors group-hover:text-[var(--forest)]">{supplier.company_name}</h2>
-                      <p className="mt-2 text-sm text-[#5a5a54]">{supplier.city} / {supplier.category}</p>
+                      <p className="mt-2 text-sm text-[#5a5a54]">{supplier.city}, {supplier.category}</p>
                     </div>
                     <SupplierVerificationBadgeClient supplierId={supplier.id} tier={supplier.verification_tier} />
                   </div>

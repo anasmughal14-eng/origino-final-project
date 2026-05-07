@@ -27,8 +27,8 @@ const copy = {
     verifiedLeaders: "Verified leaders",
     cityClusters: "City clusters",
     verified: "Verified",
-    fastestReply: "Fastest reply",
-    euReady: "EU ready",
+    fastestReply: "Avg. first response",
+    euReady: "EU duty savings calculated",
     viewAll: "View All",
     browseAll: "Browse All",
     featuredSuppliers: "Featured Suppliers",
@@ -37,7 +37,7 @@ const copy = {
     trustSanctions: "OFAC / UN / EU screened",
     trustDocs: "Document vault ready",
     trustEscrow: "Escrow and inspection workflows",
-    auditBody: "Not everything should be listed. Before a manufacturer is shown, ORIGINO looks at brand identity, digital presence, export history, product readiness, operations, and compliance.",
+    auditBody: "10 minutes. 6 categories. One honest score. Brand identity, digital presence, export history, product readiness, capacity, and compliance are each scored separately with specific feedback on what to improve.",
     auditCta: "Apply to be selected",
     pathEyebrow: "Choose your path",
     buyerPath: "I source from Pakistan",
@@ -45,33 +45,34 @@ const copy = {
     buyerPanelTitle: "For global buyers",
     buyerPanelBody: "Start with a smaller field of manufacturers. Compare evidence, ask clearly, and move only when the fit is visible.",
     sellerPanelTitle: "For manufacturers",
-    sellerPanelBody: "Begin with the export-readiness audit. If the work is ready, it can be reviewed for listing and buyer presentation.",
-    openMarketplace: "See selected manufacturers",
+    sellerPanelBody: "Begin with the export readiness audit. If the work is ready, it can be reviewed for listing and buyer presentation.",
+    openMarketplace: "Browse verified manufacturers",
     viewPackages: "View Packages",
     gateEyebrow: "ORIGINO",
     gateTitle: "What brings you here?",
     gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
     select: "Select",
     buyerGateTitle: "I'm a Buyer",
-    buyerGateBody: "Browse selected manufacturers, compare proof, then send a clear inquiry.",
+    buyerGateBody: "No cold outreach. No unverified factories. Browse manufacturers that have already passed audit and sanctions screening, then send one clear inquiry.",
     sellerGateTitle: "I'm a Manufacturer",
-    sellerGateBody: "Create a seller account, choose support when needed, and use the audit to understand readiness.",
+    sellerGateBody: "Apply to enter. Take the audit to see your score across 6 categories. Serious international buyers find you. You do not chase them.",
     switchPath: "Switch path",
     buyerSplit: "I'm a Buyer",
     manufacturerSplit: "I'm a Manufacturer",
-    clarityTitle: "Origino is a curated sourcing platform.",
-    clarityBlock: "We do not list thousands of suppliers. We work with a few, carefully chosen, properly understood, and presented to build trust before conversation begins.",
+    clarityTitle: "ORIGINO is a curated sourcing platform.",
+    clarityBlock: "We do not list thousands of suppliers. Every manufacturer passes a six category AI audit, document verification, and OFAC/UN/EU/HMT sanctions screening before a buyer sees their profile. Fewer names. More certainty.",
+    sellerClarityBlock: "Entry is not open to everyone. Manufacturers who pass the audit and admin review enter a marketplace that international buyers already trust. The selectivity is your competitive advantage, not a barrier.",
     buyerHeroEyebrow: "For Global Buyers",
     buyerHeroTitle: "Selected manufacturers. Not endless options.",
-    buyerHeroBody: "Browse selected suppliers, compare evidence, and begin a clear inquiry.",
-    buyerClarity: "Selected manufacturers from Pakistan. Built for global buyers. First compare documents, verification signals, response data, and sourcing context. Then begin the conversation.",
+    buyerHeroBody: "Source from Pakistan without flying there. Every manufacturer on ORIGINO has passed an AI audit, a sanctions check, and admin review before you see them.",
+    buyerClarity: "No cold emails to unknown factories. No wire transfers into the void. Documents, certifications, response rates, and verification tier are visible before a single message is sent.",
     sellerHeroEyebrow: "For Pakistani Manufacturers",
     sellerHeroTitle: "What you make deserves to be seen.",
-    sellerHeroBody: "Keep making well. ORIGINO helps with the presentation, documents, and buyer context around the work.",
-    sellerClarity: "Many Pakistani manufacturers do not lack skill; they lack the time and system to market themselves properly. ORIGINO handles that visibility layer while the audit shows what must improve before public listing.",
-    auditScore: "80+ required for approval",
-    conditional: "60-79 enters package-assisted improvement",
-    roadmap: "Below 60 receives a readiness roadmap",
+    sellerHeroBody: "Serious international buyers from Europe, the US, and the Gulf find you through ORIGINO without cold outreach, trade show flights, or unvetted agents.",
+    sellerClarity: "ORIGINO handles the identity, photography, website, and buyer facing presentation. The free 10 minute audit shows your score across 6 categories and tells you exactly what to fix.",
+    auditScore: "Moves into admin review. Listing is the next step.",
+    conditional: "Enters a supported path. Foundation or Transformation closes the gap.",
+    roadmap: "Receives a detailed roadmap. Every gap is named and explained.",
     rfqBody: "Buyers see fewer names, with more context. Search, compare, ask for samples, and move into quote negotiation only when the fit is clear.",
     rfqCta: "Create Buyer RFQ",
     compareCta: "Compare Suppliers",
@@ -81,17 +82,18 @@ const copy = {
     docsBody: "Form-E, GSP+, Certificate of Origin, CE, Halal, FDA, and phytosanitary guides.",
     cost: "Landed cost calculator",
     costingEyebrow: "Costing",
-    costBody: "Estimate freight, insurance, duty, VAT, and Pakistan GSP+ savings.",
+    costBody: "Enter product value, destination country, and HS code. Get freight, insurance, customs duty, VAT, and GSP+ savings before you commit to a supplier.",
     compare: "Supplier comparison",
     sourcingEyebrow: "Sourcing",
-    compareBody: "Read verification, certifications, response rate, MOQ, lead time, and cluster fit side by side.",
+    compareBody: "Verification tier, certifications, response rate, MOQ, lead time, incoterms, and city cluster are compared side by side for up to 3 manufacturers at once.",
     buyerToolsTitle: "Tools for a clearer shortlist.",
-    buyerToolsBody: "Compare manufacturers, estimate landed cost, and understand the movement of goods before an inquiry becomes serious.",
+    buyerToolsBody: "Know the true cost of a Pakistani shipment before you send a single message. Compare manufacturers side by side. Run the landed cost calculator. Then decide.",
     logistics: "Logistics partners",
-    logisticsBody: "Freight and movement context for Pakistani export routes.",
+    logisticsBody: "Verified freight forwarders covering Pakistan's main export corridors: Karachi, Sialkot, Faisalabad, and Lahore, with route and cost context.",
     sellerDocsTitle: "Documents before distance.",
-    sellerDocsBody: "Form-E, GSP+, Certificate of Origin, CE, Halal, FDA, and phytosanitary guidance for sellers preparing to export.",
-    updatesBody: "Receive quiet updates when new manufacturers, guides, and buyer-seller meetings are ready.",
+    sellerDocsBody: "Form-E, GSP+ certificate, Certificate of Origin, CE marking, Halal, FDA registration, and phytosanitary are each explained step by step for Pakistani manufacturers, with costs, timelines, and issuing authorities.",
+    updatesBody: "New manufacturers are added in batches, not continuously. Join to receive notice when new profiles are placed, export guides publish, and buyer and seller introduction sessions open.",
+    sellerUpdatesBody: "Buyer introduction sessions, new export guides, and placement milestones are announced to the list first. Join to receive notice when something is ready.",
     response: "Response",
     moq: "MOQ",
   },
@@ -122,32 +124,33 @@ const copy = {
     buyerPanelBody: "کم مگر بہتر منتخب مینوفیکچررز سے شروع کریں۔ ثبوت دیکھیں، موازنہ کریں، اور واضح فٹ کے بعد آگے بڑھیں۔",
     sellerPanelTitle: "مینوفیکچررز کے لیے",
     sellerPanelBody: "ایکسپورٹ readiness آڈٹ سے شروع کریں۔ اگر کام تیار ہے، تو اسے listing اور buyer presentation کے لیے review کیا جا سکتا ہے۔",
-    openMarketplace: "See selected manufacturers",
+    openMarketplace: "Browse verified manufacturers",
     viewPackages: "پیکیجز دیکھیں",
     gateEyebrow: "ORIGINO",
     gateTitle: "What brings you here?",
     gateBody: "Choose the side of the platform you need. The site will open with the work that belongs to you.",
     select: "Select",
     buyerGateTitle: "I'm a Buyer",
-    buyerGateBody: "Browse selected manufacturers, compare proof, then send a clear inquiry.",
+    buyerGateBody: "No cold outreach. No unverified factories. Browse manufacturers that have already passed audit and sanctions screening, then send one clear inquiry.",
     sellerGateTitle: "I'm a Manufacturer",
-    sellerGateBody: "Apply, complete the audit, enter review, then choose support if it is needed.",
+    sellerGateBody: "Apply to enter. Take the audit to see your score across 6 categories. Serious international buyers find you. You do not chase them.",
     switchPath: "Switch path",
     buyerSplit: "I'm a Buyer",
     manufacturerSplit: "I'm a Manufacturer",
     clarityTitle: "Origino is a curated sourcing platform.",
-    clarityBlock: "We do not list thousands of suppliers. We work with a few, carefully chosen, properly understood, and presented to build trust before conversation begins.",
+    clarityBlock: "We do not list thousands of suppliers. Every manufacturer passes a six category AI audit, document verification, and OFAC/UN/EU/HMT sanctions screening before a buyer sees their profile. Fewer names. More certainty.",
+    sellerClarityBlock: "Entry is not open to everyone. Manufacturers who pass the audit and admin review enter a marketplace that international buyers already trust. The selectivity is your competitive advantage, not a barrier.",
     buyerHeroEyebrow: "For Global Buyers",
     buyerHeroTitle: "Selected manufacturers. Not endless options.",
-    buyerHeroBody: "Browse selected suppliers, compare evidence, and begin a clear inquiry.",
-    buyerClarity: "Selected manufacturers from Pakistan. Built for global buyers. First compare documents, verification signals, response data, and sourcing context. Then begin the conversation.",
+    buyerHeroBody: "Source from Pakistan without flying there. Every manufacturer on ORIGINO has passed an AI audit, a sanctions check, and admin review before you see them.",
+    buyerClarity: "No cold emails to unknown factories. No wire transfers into the void. Documents, certifications, response rates, and verification tier are visible before a single message is sent.",
     sellerHeroEyebrow: "For Pakistani Manufacturers",
     sellerHeroTitle: "What you make deserves to be seen.",
-    sellerHeroBody: "Apply for review, complete the audit, and prepare your work for global buyers.",
-    sellerClarity: "Pakistani manufacturers are often strongest at making. ORIGINO supports the visibility layer around that work while the audit shows what must improve before public listing.",
-    auditScore: "منظوری کے لیے 80+ اسکور ضروری",
-    conditional: "60-79 پیکیج کے ذریعے بہتری",
-    roadmap: "60 سے کم اسکور پر تیاری کا روڈ میپ",
+    sellerHeroBody: "Serious international buyers from Europe, the US, and the Gulf find you through ORIGINO without cold outreach, trade show flights, or unvetted agents.",
+    sellerClarity: "ORIGINO handles the identity, photography, website, and buyer facing presentation. The free 10 minute audit shows your score across 6 categories and tells you exactly what to fix.",
+    auditScore: "Moves into admin review. Listing is the next step.",
+    conditional: "Enters a supported path. Foundation or Transformation closes the gap.",
+    roadmap: "Receives a detailed roadmap. Every gap is named and explained.",
     rfqBody: "خریدار فوراً تصدیق شدہ سپلائرز تلاش کر سکتے ہیں یا RFQ، سیمپل، موازنہ، اور کوٹیشن کے لیے رجسٹر ہو سکتے ہیں۔",
     rfqCta: "Buyer RFQ بنائیں",
     compareCta: "سپلائرز کا موازنہ",
@@ -162,12 +165,13 @@ const copy = {
     sourcingEyebrow: "سورسنگ",
     compareBody: "تصدیق، سرٹیفیکیشنز، جواب کی شرح، MOQ، lead time، اور cluster fit کا موازنہ کریں۔",
     buyerToolsTitle: "Tools for a clearer shortlist.",
-    buyerToolsBody: "Compare manufacturers, estimate landed cost, and understand the movement of goods before an inquiry becomes serious.",
+    buyerToolsBody: "Know the true cost of a Pakistani shipment before you send a single message. Compare manufacturers side by side. Run the landed cost calculator. Then decide.",
     logistics: "Logistics partners",
-    logisticsBody: "Freight and movement context for Pakistani export routes.",
+    logisticsBody: "Verified freight forwarders covering Pakistan's main export corridors: Karachi, Sialkot, Faisalabad, and Lahore, with route and cost context.",
     sellerDocsTitle: "Documents before distance.",
-    sellerDocsBody: "Form-E, GSP+, Certificate of Origin, CE, Halal, FDA, and phytosanitary guidance for sellers preparing to export.",
-    updatesBody: "نئے سپلائرز، دستاویزی گائیڈز، buyer-seller meets، اور تصدیق شدہ ایکسپورٹرز کی اپ ڈیٹس حاصل کریں۔",
+    sellerDocsBody: "Form-E, GSP+ certificate, Certificate of Origin, CE marking, Halal, FDA registration, and phytosanitary are each explained step by step for Pakistani manufacturers, with costs, timelines, and issuing authorities.",
+    updatesBody: "نئے سپلائرز، دستاویزی گائیڈز، buyer and seller meets، اور تصدیق شدہ ایکسپورٹرز کی اپ ڈیٹس حاصل کریں۔",
+    sellerUpdatesBody: "Buyer introduction sessions, new export guides, and placement milestones are announced to the list first. Join to receive notice when something is ready.",
     response: "جواب",
     moq: "MOQ",
   },
@@ -273,20 +277,33 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
   const heroTitle = isBuyer ? t.buyerHeroTitle : t.sellerHeroTitle;
   const heroBody = isBuyer ? t.buyerHeroBody : t.sellerHeroBody;
   const heroClarity = isBuyer ? t.buyerClarity : t.sellerClarity;
+  const sectionClarity = isBuyer ? t.clarityBlock : t.sellerClarityBlock;
+  const waitlistBody = isBuyer ? t.updatesBody : t.sellerUpdatesBody;
   const processSteps = isBuyer
     ? [
-        ["1", "Browse", "Start with selected Pakistani manufacturers."],
-        ["2", "Compare", "Review documents, verification, response data, and fit."],
-        ["3", "Inquire", "Send one clear request and move into quote discussion."],
+        ["1", "Browse", "Start with manufacturers from Sialkot, Faisalabad, Lahore, Karachi, and Gujranwala. Each one is audit scored and sanctions cleared."],
+        ["2", "Compare", "Review verification tier, certifications, response rate, MOQ, lead time, and cluster fit before any conversation begins."],
+        ["3", "Inquire", "Send one structured inquiry. Receive a formal quote with counter offer capability. No untracked WhatsApp negotiations."],
       ]
     : [
-        ["1", "Create", "Create a seller account and choose support when you need it."],
-        ["2", "Diagnose", "Use the audit to see gaps in brand, digital presence, documents, and readiness."],
-        ["3", "Review", "Public listing still depends on score, documents, sanctions, and admin review."],
+        ["1", "Create", "Create an account. Choose your support package, or start with the free audit and decide later."],
+        ["2", "Diagnose", "Take the 10 minute AI audit. Get a score across brand, digital presence, export history, product readiness, capacity, and compliance. No evidence means no credit. The scoring is honest."],
+        ["3", "Review", "Score above 80, pass sanctions screening, and submit documents. Admin reviews and approves. Your profile goes live to global buyers."],
       ];
   const proofPoints = isBuyer
-    ? ["Verification tier visible", "Documents and certifications surfaced", "MOQ, lead time, and response discipline shown"]
-    : ["Six-category readiness score", "Admin review before listing", "Marketing support can start anytime"];
+    ? ["Verification tier visible on every profile", "NTN, ISO, CE, GSP+ certificates surfaced before inquiry", "MOQ, lead time, avg. response time, and response rate shown"]
+    : ["Brand, digital, export history, products, capacity, compliance", "OFAC + UN + EU + HMT sanctions check on every application", "Foundation, Transformation, and Access packages start at any stage"];
+  const proofStats = isBuyer
+    ? [
+        ["Screened", "OFAC + UN + EU"],
+        ["<5h", t.fastestReply],
+        ["GSP+", "EU duty savings"],
+      ]
+    : [
+        ["6 categories", "AI audit score"],
+        ["10 min", "Complete the audit"],
+        ["GSP+", "EU tariff advantage"],
+      ];
 
   return (
     <div className="page-enter">
@@ -320,9 +337,9 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
             </div>
           </div>
           <div className="home-proof-strip blur-in [animation-delay:180ms]">
-            <div className="home-proof-pill"><p className="metric-numeral text-[var(--ink)]">{certified}</p><p>{t.verified}</p></div>
-            <div className="home-proof-pill"><p className="metric-numeral text-[var(--ink)]">5h</p><p>{t.fastestReply}</p></div>
-            <div className="home-proof-pill"><p className="metric-numeral text-[var(--ink)]">GSP+</p><p>{t.euReady}</p></div>
+            {proofStats.map(([value, label]) => (
+              <div className="home-proof-pill" key={`${value}-${label}`}><p className="metric-numeral text-[var(--ink)]">{value}</p><p>{label}</p></div>
+            ))}
           </div>
           <div className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-[var(--ink)]/70 md:flex">
             <span>Scroll</span>
@@ -335,7 +352,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
         <div className="panel-soft p-6 md:p-8">
           <p className="badge-patch mb-5">{t.clarityTitle}</p>
           <p className="max-w-3xl text-base leading-8 text-[#24221f]/72 md:text-lg md:leading-9">
-            {t.clarityBlock}
+            {sectionClarity}
           </p>
           <div className="mt-8 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="grid gap-3 md:grid-cols-3">
@@ -348,7 +365,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
               ))}
             </div>
             <div className="rounded-[26px] border border-[rgba(84,98,64,0.12)] bg-white/36 p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#4f5b3a]">Proof appears early</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#4f5b3a]">PROOF APPEARS EARLY</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {proofPoints.map((point) => (
                   <span key={point} className="rounded-full border border-[rgba(84,98,64,0.16)] bg-white/48 px-4 py-2 text-sm text-[#4d4944]">
@@ -414,9 +431,9 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
                 <p className="mt-5 max-w-2xl text-base leading-8 text-[#5a5a54]">{t.auditBody}</p>
                 <div className="mt-8 grid gap-3 sm:grid-cols-3">
                   {[
-                    ["80-100", t.auditScore],
-                    ["60-79", t.conditional],
-                    ["0-59", t.roadmap],
+                    ["80 to 100", t.auditScore],
+                    ["60 to 79", t.conditional],
+                    ["0 to 59", t.roadmap],
                   ].map(([score, label]) => (
                     <div className="rounded-[26px] border border-[rgba(84,98,64,0.12)] bg-white/55 p-5" key={score}>
                       <p className="metric-numeral text-2xl">{score}</p>
@@ -431,18 +448,18 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
               </div>
 
               <div className="panel-soft p-6 md:p-8">
-                <p className="badge-patch tier-certified mb-5">Seller Packages</p>
+                <p className="badge-patch tier-certified mb-5">SELLER PACKAGES</p>
                 <h2 className="text-4xl">Support for the work around the work.</h2>
                 <p className="mt-4 text-sm leading-7 text-[#5a5a54]">
-                  Basic, Growth, and Premium help a manufacturer become easier to understand: identity, photography, catalogue, website, and buyer introductions. The audit remains the readiness map, not the payment door.
+                  Foundation, Transformation, and Access handle everything buyers need to evaluate you: brand identity, product photography, export website, and direct buyer introductions. ORIGINO does the preparation. You focus on fulfillment. The audit is free, and packages are optional.
                 </p>
                 <div className="mt-6 space-y-3">
                   {[
-                    ["Basic", "$299", "3 weeks"],
-                    ["Growth", "$799", "6 weeks"],
-                    ["Premium", "$1,999", "10 weeks"],
-                  ].map(([name, price, delivery]) => (
-                    <Link className="flex items-center justify-between rounded-full border border-[rgba(84,98,64,0.12)] bg-white/55 px-5 py-4 transition hover:border-[var(--forest)]" href={`/checkout/marketing?package=${name.toLowerCase()}`} key={name}>
+                    ["Foundation", "$2,500", "within 21 days", "basic"],
+                    ["Transformation", "$7,500", "30 to 45 days", "growth"],
+                    ["Access", "$18,000", "45 to 60 days", "premium"],
+                  ].map(([name, price, delivery, packageKey]) => (
+                    <Link className="flex items-center justify-between rounded-full border border-[rgba(84,98,64,0.12)] bg-white/55 px-5 py-4 transition hover:border-[var(--forest)]" href={`/checkout/marketing?package=${packageKey}`} key={name}>
                       <span className="font-semibold">{name}</span>
                       <span className="metric-numeral">{price}</span>
                       <span className="text-sm text-[#6d675f]">{delivery}</span>
@@ -473,7 +490,7 @@ export default function HomePageClient({ suppliers, products, clusters, pageSect
           <div>
             <p className="badge-patch mb-4">{sectionText(waitlist, eyebrowKey, "Notes")}</p>
             <h2 className="text-3xl">{sectionText(waitlist, titleKey, "When something is ready, we send it.")}</h2>
-            <p className="mt-4 max-w-2xl text-[#5a5a54]">{t.updatesBody}</p>
+            <p className="mt-4 max-w-2xl text-[#5a5a54]">{waitlistBody}</p>
           </div>
           <div>
             <WaitlistForm />

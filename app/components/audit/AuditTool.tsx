@@ -272,27 +272,33 @@ export default function AuditTool({ compact = false }: { compact?: boolean }) {
     <div className={compact ? "" : "page-enter pt-28"}>
       <section className={compact ? "" : "container-editorial pb-16"}>
         {!compact && (
-          <div className="mb-10 grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="mb-8 grid max-w-[73rem] gap-5 md:mb-12 md:gap-8 lg:grid-cols-[0.95fr_0.7fr] lg:items-end">
             <div>
-              <p className="section-kicker">AI marketing audit</p>
-              <h1 className="mt-5 max-w-3xl text-[2.7rem] leading-[1.02] md:text-[4.2rem]">Know why buyers are not converting.</h1>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--ink-muted)]">
-                Pakistani manufacturers often make well. Marketing is usually the gap. This audit shows what is missing before visibility, inquiries, and paid growth can work.
+              <p className="section-kicker">Export readiness audit</p>
+              <div className="relative mt-5 max-w-3xl px-3 py-4 md:px-5 md:py-5">
+                <div className="absolute -inset-x-1 -inset-y-1 rounded-[26px] border border-[rgba(84,98,64,0.2)] bg-[linear-gradient(135deg,rgba(238,240,227,0.95),rgba(255,248,235,0.9))] shadow-[0_22px_70px_rgba(84,98,64,0.16)] md:-inset-x-2 md:-inset-y-2 md:rounded-[34px]" />
+                <h1 className="relative text-[2.55rem] leading-[0.95] md:text-[4.25rem]">Know your score before a buyer sees you.</h1>
+              </div>
+              <p className="mt-5 max-w-2xl text-[1.02rem] leading-7 text-[var(--ink-muted)] md:text-lg md:leading-8">
+                10 minutes. 6 categories. One honest export readiness score. The audit shows exactly which gaps prevent a serious buyer from taking you seriously before you spend a single rupee on marketing or platform fees.
               </p>
             </div>
-            <div className="panel-soft p-6 md:p-8">
-              <h2 className="text-3xl">What it measures</h2>
-              <div className="mt-5 grid gap-3 text-sm">
-                <div className="rounded-full border border-[rgba(84,98,64,0.14)] px-4 py-3">Brand clarity and positioning</div>
-                <div className="rounded-full border border-[rgba(84,98,64,0.14)] px-4 py-3">Website, tracking, and lead capture</div>
-                <div className="rounded-full border border-[rgba(84,98,64,0.14)] px-4 py-3">Content, social, paid ads, and follow-up</div>
+            <div className="panel-soft border-[rgba(84,98,64,0.22)] bg-[rgba(238,240,227,0.64)] p-4 shadow-[0_24px_70px_rgba(79,91,58,0.12)] md:p-6">
+              <p className="section-kicker text-[var(--forest)]">Measures</p>
+              <h2 className="mt-3 text-[2rem] leading-tight md:text-4xl">What it measures</h2>
+              <div className="mt-5 grid gap-3 text-sm leading-6">
+                <div className="rounded-[18px] border border-[rgba(84,98,64,0.14)] bg-[rgba(255,250,242,0.74)] px-4 py-3">Brand identity: logo, packaging, buyer facing materials</div>
+                <div className="rounded-[18px] border border-[rgba(84,98,64,0.14)] bg-[rgba(255,250,242,0.74)] px-4 py-3">Digital presence: English website, product catalog, social activity</div>
+                <div className="rounded-[18px] border border-[rgba(84,98,64,0.14)] bg-[rgba(255,250,242,0.74)] px-4 py-3">Export history: countries, volumes, buyer relationships</div>
+                <div className="rounded-[18px] border border-[rgba(84,98,64,0.14)] bg-[rgba(255,250,242,0.74)] px-4 py-3">Product readiness: photography, HS code, certifications</div>
+                <div className="rounded-[18px] border border-[rgba(84,98,64,0.14)] bg-[rgba(255,250,242,0.74)] px-4 py-3">Capacity and compliance: production volume, NTN, DTRE, documentation</div>
               </div>
             </div>
           </div>
         )}
 
-        <div className="grid gap-8 lg:grid-cols-[0.68fr_0.32fr]">
-          <div className="panel-soft p-5 md:p-8">
+        <div className="grid gap-5 md:gap-8 lg:grid-cols-[1fr_0.38fr]">
+          <div className="panel-soft border-[rgba(84,98,64,0.16)] bg-[rgba(255,250,242,0.72)] p-5 shadow-[0_24px_70px_rgba(79,91,58,0.1)] md:p-8">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="small-caps text-sm text-[var(--ink-muted)]">Step {step} of 6</p>
@@ -395,7 +401,7 @@ export default function AuditTool({ compact = false }: { compact?: boolean }) {
               {step === 6 && (
                 <div className="space-y-6">
                   <p className="max-w-2xl leading-7 text-[var(--ink-muted)]">
-                    Generate a strict marketing-readiness report for {form.business_name || "this business"}. The report scores execution, not product quality, and shows what ORIGINO can repair.
+                    Generate a strict marketing readiness report for {form.business_name || "this business"}. The report scores execution, not product quality, and shows what ORIGINO can repair.
                   </p>
                   {result && <AuditReport result={result} />}
                 </div>
@@ -408,28 +414,29 @@ export default function AuditTool({ compact = false }: { compact?: boolean }) {
               {step < 6 ? (
                 <button className="btn-pill btn-pill-forest" type="button" onClick={next}>Next</button>
               ) : (
-                <button className="btn-pill btn-pill-forest" type="button" disabled={loading} onClick={submit}>{loading ? "Auditing..." : result ? "Run Again" : "Run Marketing Audit"}</button>
+                <button className="btn-pill btn-pill-forest" type="button" disabled={loading} onClick={submit}>{loading ? "Auditing..." : result ? "Run Again" : "Run Readiness Audit"}</button>
               )}
             </div>
           </div>
 
-          <aside className="panel-soft h-max p-6">
-            <h2 className="text-3xl">Score map</h2>
-            <div className="mt-5 space-y-3 text-sm">
+          <aside className="panel-soft h-max border-[rgba(84,98,64,0.22)] bg-[rgba(238,240,227,0.64)] p-4 shadow-[0_24px_70px_rgba(79,91,58,0.12)] md:p-6">
+            <p className="section-kicker text-[var(--forest)]">Readiness</p>
+            <h2 className="mt-3 text-[2rem] leading-tight md:text-4xl">Score map</h2>
+            <div className="mt-5 grid gap-3 text-sm">
               {[
-                ["0-35", "Invisible"],
-                ["36-49", "Awareness-only"],
-                ["50-64", "Traffic without conversion"],
-                ["65-84", "Conversion functional"],
-                ["85-100", "Marketing-led"],
+                ["0 to 35", "Invisible"],
+                ["36 to 49", "Awareness only"],
+                ["50 to 64", "Needs improvement"],
+                ["65 to 84", "Supported improvement path"],
+                ["85 to 100", "Approved for admin review"],
               ].map(([range, label]) => (
-                <div className="flex justify-between border-b border-[rgba(84,98,64,0.12)] pb-2" key={range}>
+                <div className="flex items-center justify-between gap-4 rounded-[18px] border border-[rgba(84,98,64,0.14)] bg-[rgba(255,250,242,0.72)] px-4 py-3" key={range}>
                   <span>{label}</span>
-                  <strong className="metric-numeral">{range}</strong>
+                  <strong className="metric-numeral shrink-0 whitespace-nowrap text-sm md:text-base">{range}</strong>
                 </div>
               ))}
             </div>
-            <p className="mt-5 rounded-[24px] border border-[rgba(84,98,64,0.12)] p-4 text-sm leading-6 text-[var(--ink-muted)]">
+            <p className="mt-5 rounded-[22px] border border-[rgba(198,161,89,0.28)] bg-[rgba(255,248,235,0.72)] p-4 text-sm leading-6 text-[var(--ink-muted)]">
               If a field is unknown, the audit scores it harshly. No evidence means no credit.
             </p>
           </aside>
@@ -444,7 +451,7 @@ function SelectField({ label, value, options, onChange }: { label: string; value
     <label className="block">
       <span className="small-caps mb-2 block text-xs text-[var(--ink-muted)]">{label}</span>
       <select className="input-editorial" value={value} onChange={(event) => onChange(event.target.value)}>
-        {options.map((option) => <option key={option} value={option}>{option ? option.replaceAll("_", " ") : "Select"}</option>)}
+        {options.map((option) => <option key={option} value={option}>{option ? option.replaceAll("_", " ").replaceAll("-", " to ") : "Select"}</option>)}
       </select>
     </label>
   );
@@ -457,7 +464,7 @@ function AuditReport({ result }: { result: AuditResult }) {
         <div className={`flex h-40 w-40 items-center justify-center rounded-full border-[12px] bg-[rgba(255,250,242,0.72)] ${scoreTone(result.overall_score)}`}>
           <div className="text-center">
             <p className="metric-numeral text-5xl">{result.overall_score}</p>
-            <p className="small-caps text-xs">{result.marketing_stage}</p>
+            <p className="small-caps text-xs">{result.marketing_stage.replaceAll("-", " ")}</p>
           </div>
         </div>
         <div>
@@ -536,7 +543,7 @@ function AuditReport({ result }: { result: AuditResult }) {
       )}
 
       <p className="small-caps text-xs text-[var(--ink-muted)]">
-        {result.aiUsed ? "Gemini audit generated." : "Rule-based fallback used. Add GEMINI_API_KEY for live Gemini scoring."}
+        {result.aiUsed ? "Gemini audit generated." : "Rule based fallback used. Add GEMINI_API_KEY for live Gemini scoring."}
         {result.savedToSupabase ? " Saved to Supabase." : result.requiresAccount ? " Sign in to save this audit to your seller account." : ""}
       </p>
     </div>
