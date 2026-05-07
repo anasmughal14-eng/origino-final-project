@@ -888,6 +888,20 @@ ALTER TABLE admin_tasks ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Admins manage admin tasks" ON admin_tasks FOR ALL USING (public.is_admin(auth.uid()));
 
 -- ============================================================
+-- BUYER WAITLIST
+-- ============================================================
+CREATE TABLE buyer_waitlist (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  email TEXT NOT NULL,
+  category TEXT NOT NULL DEFAULT 'All categories',
+  city TEXT NOT NULL DEFAULT 'All cities',
+  source TEXT NOT NULL DEFAULT 'marketplace_zero_state',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE buyer_waitlist ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Service role can manage buyer waitlist" ON buyer_waitlist FOR ALL USING (auth.role() = 'service_role') WITH CHECK (auth.role() = 'service_role');
+
+-- ============================================================
 -- LANDED COST CALCULATIONS (Saved)
 -- ============================================================
 CREATE TABLE landed_cost_calculations (

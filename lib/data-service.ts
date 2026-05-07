@@ -298,3 +298,41 @@ export async function getPageSections(page: string): Promise<PageSection[]> {
   if (error) throw error;
   return data;
 }
+
+function countValue(result: { count: number | null; error: unknown }) {
+  if (result.error) throw result.error;
+  return result.count ?? 0;
+}
+
+export type MarketplaceStats = {
+  applicationsReceived: number;
+  liveManufacturers: number;
+  auditScored: number;
+  underReview: number;
+};
+
+export async function getMarketplaceStats(): Promise<MarketplaceStats> {
+  if (USE_MOCK_DATA) {
+    return {
+      applicationsReceived: 0,
+      liveManufacturers: 0,
+      auditScored: 0,
+      underReview: 0,
+    };
+  }
+
+  const db = adminSupabase();
+  const [applications, liveManufacturers, auditScored, underReview] = await Promise.all([
+    db.from("applications").select("id", { count: "exact", head: true }),
+    db.from("suppliers").select("id", { count: "exact", head: true }).eq("is_active", true),
+    db.from("applications").select("id", { count: "exact", head: true }).not("audit_score", "is", null),
+    db.from("applications").select("id", { count: "exact", head: true }).in("status", ["approved", "visiting"] as any),
+  ]);
+
+  return {
+    applicationsReceived: countValue(applications),
+    liveManufacturers: countValue(liveManufacturers),
+    auditScored: countValue(auditScored),
+    underReview: countValue(underReview),
+  };
+}
