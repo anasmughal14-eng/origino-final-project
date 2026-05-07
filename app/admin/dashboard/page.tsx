@@ -8,6 +8,7 @@ import {
   getOrders,
   getSuppliers,
 } from "@/lib/data-service";
+import { AdminDashboardCharts } from "./AdminDashboardCharts";
 
 type PendingAction = {
   title: string;
@@ -120,6 +121,36 @@ export default async function AdminDashboardPage() {
     { label: "At-risk marketing", value: atRiskMarketingOrders.length, href: "/admin/marketing-orders" },
   ];
 
+  const activityChart = [
+    { label: "Suppliers", value: metrics.suppliers },
+    { label: "Products", value: metrics.products },
+    { label: "Orders", value: metrics.orders },
+    { label: "Quotes", value: metrics.quotes },
+    { label: "Inquiries", value: metrics.inquiries },
+    { label: "Pending apps", value: pendingApplications.length },
+  ];
+
+  const riskChart = [
+    { label: "SLA breaches", value: breachedMarketingOrders.length, color: "#c0623a" },
+    { label: "Urgent tasks", value: urgentTasks.length, color: "#b8913a" },
+    { label: "Disputes", value: disputedOrders, color: "#7b4e35" },
+    {
+      label: "Sanctions",
+      value: tasks.filter((task) => task.type === "sanctions_review" && task.status !== "completed").length,
+      color: "#52653f",
+    },
+  ].filter((item) => item.value > 0);
+
+  const visibleRiskChart = riskChart.length > 0 ? riskChart : [{ label: "Clear", value: 1, color: "#52653f" }];
+
+  const revenueChart = [
+    { label: "Escrow held", value: heldEscrowTotal },
+    { label: "GMV", value: metrics.revenue },
+    { label: "Commission", value: Math.round(metrics.revenue * 0.05) },
+  ];
+
+  const lastUpdatedLabel = new Date().toLocaleString("en-PK", { dateStyle: "medium", timeStyle: "short" });
+
   return (
     <div>
       <div className="border-b border-[rgba(26,26,24,0.12)] pb-6">
@@ -145,6 +176,13 @@ export default async function AdminDashboardPage() {
           </Link>
         ))}
       </div>
+
+      <AdminDashboardCharts
+        activity={activityChart}
+        risk={visibleRiskChart}
+        revenue={revenueChart}
+        lastUpdatedLabel={lastUpdatedLabel}
+      />
 
       <div className="mt-8 grid gap-6 xl:grid-cols-[1.6fr_1fr]">
         <section>
