@@ -107,21 +107,21 @@ export default function RegisterPage({ searchParams }: { searchParams?: Register
           <div className="absolute inset-0 bg-[rgba(0,0,0,0.3)]" />
           <div className="absolute bottom-8 left-8 right-8 text-[var(--cream)]">
             <p className="section-kicker border-[rgba(247,244,239,0.7)] text-[var(--cream)]">Join ORIGINO</p>
-            <h1 className="mt-5 text-5xl leading-none text-[var(--cream)] md:text-7xl">{sellerPackageFlow ? "Checkout for seller growth." : role === "seller" ? "Start your export readiness audit." : "Create your sourcing account."}</h1>
+            <h1 className="mt-5 text-5xl leading-none text-[var(--cream)] md:text-7xl">{sellerPackageFlow ? "Attach your selected package." : role === "seller" ? "Start your export readiness audit." : "Create your sourcing account."}</h1>
           </div>
         </div>
         <div className="p-6 md:p-10">
           {sellerPackageFlow ? (
             <div className="rounded-[28px] border border-[rgba(79,91,58,0.16)] bg-[rgba(247,244,239,0.78)] p-5 text-sm leading-6 text-[#3a3a38]">
               <p className="badge-patch mb-3">Seller service</p>
-              <h2 className="text-3xl capitalize">{packageInterest} package checkout</h2>
-              <p className="mt-3">Marketing packages are sold to Pakistani manufacturers and exporters. Create a seller account now, then confirm payment on the final checkout page.</p>
+              <h2 className="text-3xl capitalize">{packageInterest} package selected</h2>
+              <p className="mt-3">Your package choice is already set. Create a seller account so ORIGINO can attach checkout, readiness work, and supplier records to the right business.</p>
               <div className="mt-4 rounded-[22px] border border-[rgba(184,145,58,0.28)] bg-[rgba(245,237,219,0.78)] p-4">
                 <p className="font-semibold">Audit rule stays active</p>
                 <p className="mt-1 text-xs leading-5 text-[#5a5a54]">Buying a package starts paid export-readiness support. Public marketplace listing still requires the ORIGINO audit, admin review, and document checks.</p>
               </div>
               <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                {["Create account", "Final checkout", "Start audit"].map((step, index) => (
+                {["Package selected", "Create account", "Confirm checkout"].map((step, index) => (
                   <div className="rounded-full border border-[rgba(79,91,58,0.14)] bg-[rgba(255,250,242,0.72)] px-3 py-2 text-xs font-semibold" key={step}>{index + 1}. {step}</div>
                 ))}
               </div>
@@ -159,7 +159,7 @@ export default function RegisterPage({ searchParams }: { searchParams?: Register
             {role === "seller" && <><input className="input-editorial min-h-[44px]" value={form.city} onChange={(event) => update("city", event.target.value)} placeholder="City" /><input className="input-editorial min-h-[44px]" value={form.category} onChange={(event) => update("category", event.target.value)} placeholder="Product category" /></>}
             {error && <p className="rounded-2xl border border-[var(--terracotta)] bg-[rgba(166,93,87,0.08)] p-3 text-sm text-[var(--terracotta)]">{error}</p>}
             <button className="btn-pill btn-pill-forest min-h-[44px] w-full" disabled={loading}>
-              {loading ? "Creating account..." : sellerPackageFlow ? "Create Account & Continue to Checkout" : role === "seller" ? "Create Seller Account" : "Create Buyer Account"}
+              {loading ? "Creating account..." : sellerPackageFlow ? "Create Account & Return to Checkout" : role === "seller" ? "Create Seller Account" : "Create Buyer Account"}
             </button>
           </form>
           <p className="mt-5 text-center text-sm text-[#5a5a54]">

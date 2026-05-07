@@ -23,26 +23,26 @@ const paymentMethods: Array<{ value: PaymentMethod; label: string; note: string;
   {
     value: "stripe",
     label: "International card",
-    note: "Reserves the order now. Live Stripe redirect activates after provider approval.",
-    action: "Reserve card checkout",
+    note: "Card checkout route for international payments.",
+    action: "Secure by card",
   },
   {
     value: "bank_transfer",
     label: "Bank transfer",
-    note: "Creates a payable ORIGINO reference for manual admin confirmation.",
+    note: "Creates a payable ORIGINO reference.",
     action: "Create bank reference",
   },
   {
     value: "jazzcash",
     label: "JazzCash",
-    note: "Reserves the PKR wallet route while merchant approval is pending.",
-    action: "Reserve JazzCash order",
+    note: "PKR wallet route for local payment.",
+    action: "Secure with JazzCash",
   },
   {
     value: "easypaisa",
     label: "EasyPaisa",
-    note: "Reserves the PKR wallet route while merchant approval is pending.",
-    action: "Reserve EasyPaisa order",
+    note: "PKR wallet route for local payment.",
+    action: "Secure with EasyPaisa",
   },
 ];
 
@@ -83,7 +83,7 @@ export default function MarketingCheckoutActions({
       if (!response.ok || !payload.success || !payload.data) {
         if (response.status === 401) {
           setAuthRequired(true);
-          setError("Create or sign in to a seller account to reserve this package.");
+          setError("");
           return;
         }
         setError(payload.error ?? "Unable to start checkout.");
@@ -135,30 +135,22 @@ export default function MarketingCheckoutActions({
         ))}
       </div>
 
-      <div className="mt-4 rounded-[22px] border border-[rgba(44,44,44,0.1)] bg-[rgba(255,250,242,0.72)] p-4 text-sm leading-6">
-        <p className="font-semibold">Next step: {selectedMethod.action}</p>
-        <p className="mt-1 text-[#6b6560]">
-          {method === "bank_transfer"
-            ? "After confirmation, ORIGINO creates a reference, shows it here, and admin can mark the order paid from the marketing orders desk."
-            : "After confirmation, ORIGINO reserves the package and creates an admin follow-up until this provider is live."}
-        </p>
-      </div>
-
-      {(!sellerReady || authRequired) && (
-        <div className="mt-4 rounded-[22px] border border-[rgba(79,91,58,0.18)] bg-[rgba(232,240,236,0.9)] p-4 text-sm leading-6">
-          <p className="font-semibold">Seller account required</p>
-          <p className="mt-1 text-[#6b6560]">Marketing services are sold to manufacturers and exporters. Create a seller account or sign in, then ORIGINO returns you to this checkout with the selected package.</p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link className="btn-pill btn-pill-forest min-h-[44px]" href={registerHref}>
-              Create seller account
-            </Link>
-            <Link className="btn-pill btn-pill-outline min-h-[44px]" href={loginHref}>
-              Sign in
-            </Link>
-          </div>
+      {sellerReady && (
+        <div className="mt-4 rounded-[22px] border border-[rgba(44,44,44,0.1)] bg-[rgba(255,250,242,0.72)] p-4 text-sm leading-6">
+          <p className="font-semibold">Next step: {selectedMethod.action}</p>
+          <p className="mt-1 text-[#6b6560]">
+            {method === "bank_transfer"
+              ? "ORIGINO creates the payment reference here and alerts admin for confirmation."
+              : "ORIGINO reserves the package and creates an admin follow-up until this provider is live."}
+          </p>
         </div>
       )}
       {error && <p className="mt-4 rounded-2xl border border-[var(--terracotta)] bg-[rgba(166,93,87,0.08)] p-3 text-sm text-[var(--terracotta)]">{error}</p>}
+      {authRequired && (
+        <p className="mt-4 rounded-2xl border border-[rgba(184,145,58,0.22)] bg-[rgba(245,237,219,0.58)] p-3 text-sm leading-6 text-[#5a5145]">
+          A manufacturer profile is needed before payment can be attached. The selected package stays carried into the next step.
+        </p>
+      )}
       {result && (
         <div className="mt-4 rounded-[22px] border border-[rgba(79,91,58,0.18)] bg-[rgba(232,240,236,0.9)] p-4 text-sm leading-6">
           <p className="font-semibold">{packageName} order reserved</p>
@@ -180,8 +172,16 @@ export default function MarketingCheckoutActions({
         </button>
       ) : (
         <Link className="btn-pill btn-pill-forest mt-5 min-h-[44px] w-full justify-center" href={registerHref}>
-          Create seller account to continue
+          Secure selected package
         </Link>
+      )}
+      {!sellerReady && (
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-2 text-center text-xs leading-5 text-[#6b6560]">
+          <span>Profile details are collected next to attach payment and admin notification.</span>
+          <Link className="font-semibold underline decoration-[#2d4a3e]" href={loginHref}>
+            Sign in
+          </Link>
+        </div>
       )}
     </div>
   );

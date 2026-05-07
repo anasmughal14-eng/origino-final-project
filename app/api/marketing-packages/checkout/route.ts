@@ -3,9 +3,9 @@ import { createSupabaseServerClient } from "@/lib/supabase-server";
 import { createSupabaseServiceClient } from "@/lib/supabase";
 
 const packages = {
-  basic: { priceUsd: 299, deliveryDays: 21 },
-  growth: { priceUsd: 799, deliveryDays: 42 },
-  premium: { priceUsd: 1999, deliveryDays: 70 },
+  basic: { priceUsd: 2500, deliveryDays: 21 },
+  growth: { priceUsd: 7500, deliveryDays: 45 },
+  premium: { priceUsd: 18000, deliveryDays: 60 },
 } as const;
 
 const paymentMethods = new Set(["stripe", "bank_transfer", "jazzcash", "easypaisa"]);
