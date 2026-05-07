@@ -202,13 +202,15 @@ export default function MarketingPackagesPage() {
             return (
             <article id={tier.key} className={`panel-soft relative flex h-full min-w-[82vw] snap-start flex-col overflow-hidden p-4 sm:min-w-[25rem] md:p-7 lg:min-w-0 ${styles.card}`} key={tier.name}>
               <div className={`absolute inset-x-0 top-0 h-1 ${styles.rail}`} />
-              <div className="flex min-h-0 items-start justify-between gap-3 md:min-h-[13.5rem]">
+              <div className="min-h-0 md:min-h-[13.5rem]">
+                <div className="mb-3 hidden min-h-[2rem] justify-end md:flex">
+                  {tier.featured && <span className="badge-patch shrink-0 bg-[rgba(84,98,64,0.1)] text-[0.62rem] text-[#3f4b31] sm:text-[0.7rem]">Most Popular</span>}
+                </div>
                 <div className="min-w-0">
                   <h2 className="text-[1.62rem] leading-none md:text-3xl">{tier.name}</h2>
                   <p className="mt-2 text-base leading-6 text-[#1f1f1d] md:text-lg">{tier.promise}</p>
                   <p className="mt-3 text-sm leading-6 text-[#5a5a54]">{tier.summary}</p>
                 </div>
-                {tier.featured && <span className="badge-patch shrink-0 bg-[rgba(84,98,64,0.1)] text-[0.62rem] text-[#3f4b31] sm:text-[0.7rem]">Most Popular</span>}
               </div>
               <div className={`mt-4 grid overflow-hidden rounded-[18px] border sm:grid-cols-[minmax(0,1.1fr)_minmax(6.75rem,0.9fr)] md:mt-6 md:rounded-[22px] ${styles.metric}`}>
                 <div className="min-w-0 p-3 md:p-4">
